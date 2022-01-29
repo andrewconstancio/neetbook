@@ -1,0 +1,19 @@
+.clicked {
+    color: white;
+}
+
+.unclicked {
+    color: rgb(206, 206, 206);
+}
+
+.center {
+    width: 80rem;
+	margin: 0 auto; 
+}
+
+@media screen and (max-width: 600px) {
+    .center {
+        min-width: 100%; 
+        max-width: 100%; 
+    }
+}
