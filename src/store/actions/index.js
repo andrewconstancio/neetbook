@@ -1,9 +1,16 @@
 export const getBooks = () => {
     return (dispatch, getState, { getFirebase, getFirestore }) => {
-        // const firestore = getFirestore();
-        // const userCollectionRef = firestore.collectioncollection("books");
-        // const data = await firestore.getDocs(userCollectionRef);
-        const data = "yo";
+
+
+        console.log(getFirestore);
+
+        // const userCollectionRef = await getFirebase.firestore.collection("books");
+        // console.log(userCollectionRef);
+        // const data = firestore.getDocs(userCollectionRef);
+        
+        const data = "hey"
+        console.log(data);
+
         dispatch( {type: "GET_BOOKS", payload: data} );
     }
 }

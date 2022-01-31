@@ -1,8 +1,5 @@
 import _ from 'lodash';
 
-// const INTIAL_STATE = {
-//     yo: null
-// };
 export default (state = {}, action) => {
     switch(action.type) {
         case "GET_BOOKS":
