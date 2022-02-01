@@ -13,13 +13,13 @@ import { Provider } from 'react-redux';
 
 import theme from './theme';
 
-const store = createStore(reducers,
-    compose(
-        applyMiddleware(reduxThunk.withExtraArgument( {getFirebase, getFirestore} )),
-        reduxFirestore(config),
-        reactReduxFirebase(config)
-    )    
-)
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(
+    reducers,
+    composeEnhancers(applyMiddleware(reduxThunk))
+);
+
 
 ReactDOM.render(
     <Provider store={store}>
