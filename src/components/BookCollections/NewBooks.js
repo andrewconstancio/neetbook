@@ -68,6 +68,7 @@ class NewBooks extends Component {
 const mapStateToProps = state => {
 
     const books = state.firestore.ordered.books;
+    console.log(state);
     if(!books) {
         return;
     }
@@ -75,8 +76,6 @@ const mapStateToProps = state => {
         return obj.type === "new"
     })
 
-
-    console.log(newBooks);
     return {
         books: newBooks
     };

@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import {
+    Input,
+    Heading,
     FormControl,
     FormLabel,
     FormErrorMessage,
     FormHelperText,
-    Input,
-    Heading,
-    ButtonGroup,
-    Button
   } from '@chakra-ui/react'
 import { Grid, GridItem } from '@chakra-ui/react'
 import { Field, reduxForm } from 'redux-form';
 import './css/NewBookForm.css'
-import { BsFillPlusCircleFill } from "react-icons/bs";
+import FireInput from '../CustomInputs/FileInput'
+import { insertBook } from '../../store/actions';
+import { connect } from 'react-redux';
 
 
 class NewBook extends Component {
@@ -21,66 +21,29 @@ class NewBook extends Component {
         selectedFile: null
     }
 
-    componentDidMount(){
-        this.fileSelector = this.buildFileSelector();
-    }
-
     onSubmit = formValues => {
-        console.log(formValues);
-        console.log("submited");
+        this.props.insertBook(formValues);
     };
 
-    fileSelectedHandler = event => {
-
-        console.log("it got here");
-
-        var reader = new FileReader();
-        var file = event.target.files[0];
-        var url = reader.readAsDataURL(file);
-
-        reader.onloadend = function (e) {
-            this.setState({
-                selectedFile: [reader.result]
-            })
-        }.bind(this);
-        console.log(url) // Would see a path?
-        // TODO: concat files
-    }
-
-    handleFileSelect = (e) => {
-        e.preventDefault();
-        this.fileSelector.click();
-    }
-
-    buildFileSelector() {
-        const fileSelector = document.createElement('input');
-        fileSelector.setAttribute('type', 'file');
-        fileSelector.setAttribute('multiple', 'multiple');
-        fileSelector.setAttribute('onClick', this.fileSelectedHandler);
-        return fileSelector;
-    }
-
-    renderInputImage = ( {input, label, meta} ) => {
-
-        return (
-            <>  
-                <div onClick={this.handleFileSelect} className='containter'>
-                    <BsFillPlusCircleFill className='child plus-sign' />
-                    {/* <input onChange={this.fileSelectedHandler} type="file" name="file" id="file" className='inputfile child'/>
-                    <label htmlFor="file">Choose a file</label> */}
-                </div>
-                {/* <input onChange={this.fileSelectedHandler} type="file" name="file" id="file" className='inputfile'/>
-                <label htmlFor="file">Choose a file</label> */}
-            </>
-        );
-    };
+    renderError({ error, touched }) {
+        if (touched && error) {
+          return (
+            <div className="ui error message">
+              <div className="header">{error}</div>
+            </div>
+          );
+        }
+      }
+    
 
     renderInput = ( {input, label, meta} ) => {
         const className = `field ${input.error && meta.touched ? 'error' : ''}`;
+        console.log(JSON.stringify(meta.error));
         return (
             <div className={className}>
                 <label>{label}</label>
                 <Input onChange={input.onChange} placeholder={label} value={input.value} autoComplete="off" />
+                {this.renderError(meta)}
             </div>
         );
     };
@@ -94,7 +57,7 @@ class NewBook extends Component {
                 >
                     <Grid h='200px' templateRows='repeat(2, 1fr)' templateColumns='repeat(5, 1fr)' gap={4} mt={10}>
                         <GridItem className='container' rowSpan={20} colSpan={2}>
-                            <Field name="coverImage" component={this.renderInputImage} label="coverImage" />
+                            <Field name="coverImage" component={FireInput} label="Cover Image" />
                             <div style={{width: "450px"}} >
                                 <img style={{width: "inherit", borderRadius: "20px"}}  src={this.state.selectedFile} />
                             </div>
@@ -125,20 +88,35 @@ class NewBook extends Component {
 const validate = formValues => {
     const errors = {};
 
-    // if (!formValues.title) {
-    //     console.log("err title");
-    //     errors.title = 'You must enter a title';
-    // }
+    if (!formValues.title) {
+        errors.title = 'You must enter a title';
+    }
 
-    // if (!formValues.description) {
-    //     console.log("err descrition");
-    //     errors.description = 'You must enter a description';
-    // }
+    if (!formValues.description) {
+        errors.description = 'You must enter a description';
+    }
+
+    if (!formValues.author) {
+        errors.description = 'You must enter a author';
+    }
+
+    if (!formValues.year) {
+        errors.description = 'You must enter a year';
+    }
+
+    if (!formValues.coverImage) {
+        errors.description = 'You must enter a Cover Image';
+    }
 
     return errors;
 };
 
-export default reduxForm({
+const formWrapped = reduxForm({
     form: 'NewBook',
     validate
 })(NewBook);
+
+export default connect(
+    null,
+    { insertBook }
+)(formWrapped);

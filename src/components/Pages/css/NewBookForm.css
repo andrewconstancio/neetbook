@@ -1,21 +1,10 @@
 .container {
     /* Setup */
     position: relative;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 20px;
-    background-color: rgba(36, 36, 36, 0.5);
     width: 450px;
     cursor: pointer;
   }
 
-  .container:hover {
-    /* Setup */
-    position: relative;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 20px;
-    background-color: rgba(78, 78, 78, 0.5);
-    width: 450px;
-  }
   
   .child {
     /* Center vertically and horizontally */
