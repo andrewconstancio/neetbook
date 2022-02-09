@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import App from './components/App';
 import { ChakraProvider } from '@chakra-ui/react'
 import { createStore, applyMiddleware, compose } from 'redux';
-import reducers from './store/reducers';
+import reducers from './components/reducers';
 import thunk from 'redux-thunk';
 import {reactReduxFirebase, getFirebase, reduxFirebase } from 'react-redux-firebase';
 import {reduxFirestore, getFirestore } from 'redux-firestore';

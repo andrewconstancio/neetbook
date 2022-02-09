@@ -8,7 +8,8 @@ export const insertBook = formValues => async (dispatch, getState, { getFirebase
         author: formValues.author,
         description: formValues.description,
         title: formValues.title,
-        type: "New",
+        coverImgURL: formValues.coverImage,
+        type: "new",
         year: formValues.year,
         createdAt: new Date()
     }).then(() => {

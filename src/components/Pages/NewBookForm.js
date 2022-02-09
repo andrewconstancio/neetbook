@@ -1,29 +1,54 @@
 import React, { Component } from 'react';
 import {
     Input,
-    Heading,
-    FormControl,
-    FormLabel,
-    FormErrorMessage,
-    FormHelperText,
+    Heading
   } from '@chakra-ui/react'
 import { Grid, GridItem } from '@chakra-ui/react'
 import { Field, reduxForm } from 'redux-form';
 import './css/NewBookForm.css'
-import FireInput from '../CustomInputs/FileInput'
-import { insertBook } from '../../store/actions';
+import FireInput from './FileInput'
+import { insertBook } from '../actions';
 import { connect } from 'react-redux';
+import { storage } from '../../config/firebase-config'
 
 
 class NewBook extends Component {
 
     state = {
-        selectedFile: null
+        selectedFile: null,
+        progress: 0
     }
 
     onSubmit = formValues => {
-        this.props.insertBook(formValues);
+        this.uploadImage(formValues.coverImage, formValues)
     };
+
+    uploadImage(image, formValues) {
+        const uploadTask = storage.ref(`book_covers/${image.name}`).put(image);
+        uploadTask.on(
+            "state_changed",
+            snapshot => {
+                const progress = Math.round(
+                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                );
+                this.setState({progress: progress});
+            },
+            error => {
+                console.log(error);
+            },
+            () => {
+                storage
+                    .ref("book_covers")
+                    .child(image.name)
+                    .getDownloadURL()
+                    .then(url => {
+                        console.log(url)
+                        formValues.coverImage = url;
+                        this.props.insertBook(formValues);
+                    }); 
+            }
+        )
+    }
 
     renderError({ error, touched }) {
         if (touched && error) {
@@ -34,11 +59,9 @@ class NewBook extends Component {
           );
         }
       }
-    
 
     renderInput = ( {input, label, meta} ) => {
         const className = `field ${input.error && meta.touched ? 'error' : ''}`;
-        console.log(JSON.stringify(meta.error));
         return (
             <div className={className}>
                 <label>{label}</label>
@@ -55,12 +78,10 @@ class NewBook extends Component {
                 <form
                     onSubmit={this.props.handleSubmit(this.onSubmit)}
                 >
+                    {/* <progress value={this.state.progress} max="100" /> */}
                     <Grid h='200px' templateRows='repeat(2, 1fr)' templateColumns='repeat(5, 1fr)' gap={4} mt={10}>
                         <GridItem className='container' rowSpan={20} colSpan={2}>
                             <Field name="coverImage" component={FireInput} label="Cover Image" />
-                            <div style={{width: "450px"}} >
-                                <img style={{width: "inherit", borderRadius: "20px"}}  src={this.state.selectedFile} />
-                            </div>
                         </GridItem>
                         <GridItem colSpan={3}>
                             <Field name="title" component={this.renderInput} label="Title" />
@@ -75,7 +96,8 @@ class NewBook extends Component {
                             <Field name="year" component={this.renderInput} label="Year" />
                         </GridItem>
                         <GridItem colSpan={3}>
-                            <button className="ui button primary">Submit</button>
+                            <button className="cancel-bttn">Cancel</button>
+                            <button className="submit-bttn">Submit</button>
                         </GridItem>
                     </Grid>
 
