@@ -3,7 +3,8 @@ import {
     Box,
     Heading,
     Flex,
-    Image
+    Image,
+    SimpleGrid
 } from "@chakra-ui/react";
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
@@ -34,8 +35,6 @@ class NewBooks extends Component {
                     <Flex justify="space-between" mt={3}>
                         {books.map((book) => {
                             return (
-                                // <Box key={book.id} w='100%' h='300px' bg='red.500' style={{borderRadius: "20px"}} mr={5}>
-                                //     <Heading>{book.title}</Heading>
                                     <Image key={book.id} 
                                         src={book.coverImgURL} 
                                         w='240px' 
@@ -43,7 +42,6 @@ class NewBooks extends Component {
                                         alt="yo" 
                                         style={{borderRadius: "20px"}}
                                     />
-                                // {/* </Box> */}
                             )
                         })}
                     </Flex> 
