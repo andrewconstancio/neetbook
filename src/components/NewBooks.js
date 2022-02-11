@@ -9,7 +9,7 @@ import {
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
-import { getBooks } from '../actions';
+import { getBooks } from '../redux/actions';
 import { Oval } from  'react-loader-spinner'
 
 class NewBooks extends Component {

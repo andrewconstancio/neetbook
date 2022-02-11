@@ -1,13 +1,10 @@
 import React from 'react';
 // import { Router, Route, Switch } from 'react-router-dom';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Header from './Header/Header';
-import Home from '../components/Pages/Home'
-import Explore from '../components/Pages/Explore'
-import MyCollection from '../components/Pages/MyCollection'
-import NewBookFrom from './Pages/NewBookForm';
-
-
+import Header from './components/Header';
+import Home from './pages/Home'
+import Explore from './pages/Explore'
+import MyCollection from './pages/MyCollection'
 
 const App = () => {
     return <div >
@@ -17,7 +14,6 @@ const App = () => {
                 <Route path="/" exact component={Home} />
                 <Route path="/explore" exact component={Explore} />
                 <Route path="/mycollection" exact component={MyCollection} />
-                <Route path="/newbook" exact component={NewBookFrom} />
             </Switch>
         </BrowserRouter>
     </div>;

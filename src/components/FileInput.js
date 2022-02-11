@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import CoverImagePreview from './CoverImagePreview';
 import { BsFillPlusCircleFill } from "react-icons/bs";
-import './css/NewBookForm.css';
+import './NewBookForm.css';
 
 export default class FieldFileInput  extends Component{
     constructor(props) {

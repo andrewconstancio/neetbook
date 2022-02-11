@@ -6,8 +6,8 @@ import {
     Image,
     Heading
 } from "@chakra-ui/react"
-import './css/Explore.css'
-import LoadingBook from './LoadingBook';
+import './Explore.css'
+import LoadingBook from '../components/LoadingBook'
 
 export default class Explore extends Component {
 

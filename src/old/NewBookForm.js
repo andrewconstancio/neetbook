@@ -5,11 +5,11 @@ import {
   } from '@chakra-ui/react'
 import { Grid, GridItem } from '@chakra-ui/react'
 import { Field, reduxForm } from 'redux-form';
-import './css/NewBookForm.css'
+import './NewBookForm.css'
 import FireInput from './FileInput'
-import { insertBook } from '../actions';
+import { insertBook } from '../redux/actions';
 import { connect } from 'react-redux';
-import { storage } from '../../config/firebase-config'
+import { storage } from '../config/firebase-config'
 
 
 class NewBook extends Component {
