@@ -1,5 +1,5 @@
 import React from 'react'
-import '../pages/Explore.css'
+import '../pages//explore/Explore.css'
 import {
     Box
 } from "@chakra-ui/react"
