@@ -12,24 +12,21 @@ const BookSection = ( {subject} ) => {
 
     const [data, setData] = useState('');
     const [books, setBooks] = useState(null);
-    const [fetchLimit, setFetchLimit] = useState(100);
+    const [fetchLimit, setFetchLimit] = useState(4);
 
     useEffect(() => {
-        const fetchData = async () => {
-            const response = await OpenLibrary.get(`/subjects/love.json?details=true`, {
+        async function fetchData() {
+            const response = await OpenLibrary.get(`/subjects/${subject}.json?details=true`, {
                 params: {
                     limit: fetchLimit
                 }
             });
+
+            setData(response.data);
+            setBooks(response.data.works);
         }
-
-        console.log(fetchData);
-
         fetchData();
-
-        // setData(response.data);
-        // setBooks(response.data.works);
-    });
+    }, []);
 
     if(!books) {
         return (
@@ -46,7 +43,7 @@ const BookSection = ( {subject} ) => {
 
     return (
         <div>
-            <Heading as='h3' size='lg' mt={5} mb={5}>{subject}</Heading>
+            <Heading as='h3' size='lg' mt={5} mb={5}>{subject.toUpperCase()}</Heading>
             <SimpleGrid columns={4} spacingX='40px' spacingY='20px'>
                 {books.map((book) => {
                     return (
