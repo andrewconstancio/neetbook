@@ -5,6 +5,8 @@ import Header from './components/Header';
 import Home from './pages/home/Home'
 import Explore from './pages/explore/Explore'
 import MyCollection from './pages/collection/MyCollection'
+import AllBooksBySubject from './pages/AllBooksBySubject/AllBooksBySubject'
+import Footer from './components/Footer'
 
 const App = () => {
     return <div >
@@ -14,8 +16,10 @@ const App = () => {
                 <Route path="/" exact component={Home} />
                 <Route path="/explore" exact component={Explore} />
                 <Route path="/mycollection" exact component={MyCollection} />
+                <Route path="/subject/:name" exact component={AllBooksBySubject} />
             </Switch>
-        </BrowserRouter>
+            <Footer webSiteName="NEETBOOK" />
+        </BrowserRouter >
     </div>;
 };
 

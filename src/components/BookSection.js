@@ -1,24 +1,25 @@
 import React, { useState, useEffect } from 'react'
 import OpenLibrary from '../apis/OpenLibrary';
-import LoadingBook from '../components/LoadBookShimmer'
+import LoadingBook from './LoadingBook'
 import {
     Box,
     SimpleGrid,
     Image,
-    Heading
+    Heading,
+    Flex
 } from "@chakra-ui/react"
+import { Link } from 'react-router-dom'
 
-const BookSection = ( {subject} ) => {
+const BookSection = ( {subject, limit} ) => {
 
     const [data, setData] = useState('');
     const [books, setBooks] = useState(null);
-    const [fetchLimit, setFetchLimit] = useState(4);
 
     useEffect(() => {
         async function fetchData() {
             const response = await OpenLibrary.get(`/subjects/${subject}.json?details=true`, {
                 params: {
-                    limit: fetchLimit
+                    limit: limit
                 }
             });
 
@@ -31,9 +32,9 @@ const BookSection = ( {subject} ) => {
     if(!books) {
         return (
             <div className='center'>
-                <Heading as='h3' size='lg' mt={5} mb={5}>Love</Heading>
+                <Heading as='h3' size='lg' mt={5} mb={5}>&nbsp;</Heading>
                 <SimpleGrid columns={4} spacingX='40px' spacingY='20px'>
-                {[...Array(fetchLimit)].map((i) =>
+                {[...Array(limit)].map((i) =>
                     <LoadingBook key={i} />
                 )}
                 </SimpleGrid>
@@ -43,7 +44,11 @@ const BookSection = ( {subject} ) => {
 
     return (
         <div>
-            <Heading as='h3' size='lg' mt={5} mb={5}>{subject.toUpperCase()}</Heading>
+            <Flex justify="space-between"> 
+                <Link to={`/subject/${subject}`}>
+                    <Heading as='h3' size='lg' mt={5} mb={5} style={{cursor: "pointer"}}>{subject.toUpperCase()}</Heading>
+                </Link>
+            </Flex>
             <SimpleGrid columns={4} spacingX='40px' spacingY='20px'>
                 {books.map((book) => {
                     return (

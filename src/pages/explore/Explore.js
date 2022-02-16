@@ -7,9 +7,9 @@ import {
     Heading
 } from "@chakra-ui/react"
 import './Explore.css'
-import LoadingBook from '../../components/LoadBookShimmer'
+import LoadingBook from '../../components/LoadingBook'
 import BookSection from '../../components/BookSection';
-import Footer from '../../components/Footer'
+
 
 export default class Explore extends Component {
 
@@ -17,9 +17,12 @@ export default class Explore extends Component {
         return (
             <div>
                 <div className='center'>
-                    <BookSection subject="love" />
-                    <BookSection subject="sci-fi" />
-                    <BookSection subject="anime" />
+                    <BookSection subject="love" limit={4} />
+                    <BookSection subject="sci-fi" limit={4}/>
+                    <BookSection subject="anime" limit={4}/>
+                    <BookSection subject="pirates" limit={4}/>
+                    <BookSection subject="space" limit={4}/>
+                    <BookSection subject="football" limit={4}/>
                 </div>
             </div>
         )
