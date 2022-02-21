@@ -9,8 +9,10 @@ import {
     Flex
 } from "@chakra-ui/react"
 import { Link } from 'react-router-dom'
+import '../pages/AllBooksBySubject/Book.css'
+import Book from './Book';
 
-const BookSection = ( {subject, limit} ) => {
+const BookSection = ( {subject, limit, pageNumber} ) => {
 
     const [data, setData] = useState('');
     const [books, setBooks] = useState(null);
@@ -18,9 +20,7 @@ const BookSection = ( {subject, limit} ) => {
     useEffect(() => {
         async function fetchData() {
             const response = await OpenLibrary.get(`/subjects/${subject}.json?details=true`, {
-                params: {
-                    limit: limit
-                }
+                limit: 4
             });
 
             setData(response.data);
@@ -41,6 +41,7 @@ const BookSection = ( {subject, limit} ) => {
             </div>
         )
     }
+    
 
     return (
         <div>
@@ -51,16 +52,9 @@ const BookSection = ( {subject, limit} ) => {
             </Flex>
             <SimpleGrid columns={4} spacingX='40px' spacingY='20px'>
                 {books.map((book) => {
+                    console.log(book);
                     return (
-                        <Box key={book.cover_id} >
-                            <Image
-                                src={`https://covers.openlibrary.org/b/id/${book.cover_id}.jpg`}
-                                w='240px' 
-                                h='350px' 
-                                alt="yo" 
-                                style={{borderRadius: "20px"}}
-                            />
-                        </Box>
+                        <Book key={book.cover_id} edition={book.lending_edition} title={book.title} coverId={book.cover_id}></Book>
                     )
                 })
             }

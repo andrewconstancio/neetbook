@@ -35,29 +35,29 @@ class Header extends Component {
                         <Flex  mr={5} mt={1}>
                             <Link to="/" onClick={() => this.setState({home: 1, explore: 0, collection: 0})}>
                                 <Heading as="h1" size="lg" letterSpacing={"tighter"} style={{ color: '#FF004D'}}>
-                                    {this.props.webSiteName}
+                                    {this.props.websitename}
                                 </Heading>
                             </Link>
                         </Flex>
 
                         <Stack direction={{ base: "column", md: "row" }} width={{ base: "full", md: "auto" }} spacing='35px' alignItems="center" mt={{ base: 4, md: 0 }}>
-                            <Link 
+                            {/* <Link 
                                 to="/" 
                                 onClick={() => this.setState({home: 1, explore: 0, collection: 0})}
                                 className={(this.state.home ? 'clicked' : 'unclicked')}
                             > Home
+                            </Link> */}
+                            <Link 
+                                to="/mycollection" 
+                                onClick={() => this.setState({home: 0, explore: 0, collection: 1})}
+                                className={(this.state.collection ? 'clicked' : 'unclicked')}
+                            > My Collection
                             </Link>
                             <Link 
                                 to="/explore" 
                                 onClick={() => this.setState({home: 0, explore: 1, collection: 0})}
                                 className={(this.state.explore ? 'clicked' : 'unclicked')}
                             >Explore
-                            </Link>
-                            <Link 
-                                to="/mycollection" 
-                                onClick={() => this.setState({home: 0, explore: 0, collection: 1})}
-                                className={(this.state.collection ? 'clicked' : 'unclicked')}
-                            > My Collection
                             </Link>
                         </Stack>
                         
