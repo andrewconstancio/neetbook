@@ -33,7 +33,7 @@ const BookSection = ( {subject, limit, pageNumber} ) => {
         return (
             <div className='center'>
                 <Heading as='h3' size='lg' mt={5} mb={5}>&nbsp;</Heading>
-                <SimpleGrid columns={4} spacingX='40px' spacingY='20px'>
+                <SimpleGrid columns={[1, 2, 4]} spacingX='40px' spacingY='20px'>
                 {[...Array(limit)].map((i) =>
                     <LoadingBook key={i} />
                 )}

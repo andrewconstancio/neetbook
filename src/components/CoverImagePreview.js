@@ -1,17 +1,24 @@
 import { useState, useEffect } from 'react';
 import './CoverImagePreview.css'
+import {
+    Box,
+    SimpleGrid,
+    Image,
+    Heading
+} from "@chakra-ui/react"
 
 const CoverImagePreview = ({coverId}) => {
 
     return (
         <div>
-            <div className='cover-image-preview-outer'>
-                <img 
-                    style={{width: "inherit", borderRadius: "20px"}}  
+            <Box alignItems='baseline'>
+                <Image 
+                    style={{borderRadius: "20px"}} 
+                    w={[200, 300, 400]} 
                     src={`https://covers.openlibrary.org/b/id/${coverId}.jpg`}
                     alt="aye" 
                 />
-            </div>
+            </Box>
         </div>
     )
 }
