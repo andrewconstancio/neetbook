@@ -51,14 +51,13 @@ const AllBooksBySubject = (props) => {
             <Heading as='h3' size='lg' mt={5} mb={5}>{props.match.params.name.toUpperCase()}</Heading>
             <SimpleGrid columns={4} spacingX='40px' spacingY='20px'>
                     {books.map((book, index) => {
-                        console.log(book);
                         if(books.length === index + 1) {
                             return (
-                                <Book key={book.cover_id} lastElemRef={lastBookElementRef} bookKey={book.key} title={book.title} coverId={book.cover_id}></Book>
+                                <Book key={book.cover_id} lastElemRef={lastBookElementRef} edition={book.cover_edition_key} title={book.title} bookKey={book.key} coverId={book.cover_id}></Book>
                             )
                         }
                         return (
-                            <Book key={book.cover_id} edition={book.lending_edition} title={book.title} coverId={book.cover_id}></Book>
+                            <Book key={book.cover_id} edition={book.cover_edition_key} title={book.title} bookKey={book.key} coverId={book.cover_id}></Book>
                         )
                     })
                 }

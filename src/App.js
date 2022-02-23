@@ -11,10 +11,11 @@ import Footer from './components/Footer'
 import './App.css'
 
 const App = () => {
+    const webSiteName = "NEETBOOK";
     return <div id="page-container">
         <BrowserRouter>
             <div>
-                <Header websitename="NEETBOOK" />
+                <Header websitename={webSiteName} />
                 <Switch>
                     <Route path="/" exact component={Home} />
                     <Route path="/explore" exact component={Explore} />
@@ -22,7 +23,7 @@ const App = () => {
                     <Route path="/subject/:name" exact component={AllBooksBySubject} />
                     <Route path="/book/:edition" exact component={BookPage} />
                 </Switch>
-                <Footer className="footer" websitename="NEETBOOK" />
+                {/* <Footer className="footer" websitename={webSiteName}  /> */}
             </div>
         </BrowserRouter >
     </div>;

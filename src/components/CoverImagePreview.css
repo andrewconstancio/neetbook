@@ -1,0 +1,9 @@
+.cover-image-preview-outer {
+    width: 100%;
+}
+
+@media only screen and (max-width: 800px) {
+    .cover-image-preview-outer {
+        width: 80%;
+    }
+}

@@ -10,7 +10,6 @@ import './Explore.css'
 import LoadingBook from '../../components/LoadingBook'
 import BookSection from '../../components/BookSection';
 
-
 export default class Explore extends Component {
 
     render() {

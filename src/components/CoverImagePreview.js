@@ -1,11 +1,16 @@
 import { useState, useEffect } from 'react';
+import './CoverImagePreview.css'
 
-const CoverImagePreview = () => {
+const CoverImagePreview = ({coverId}) => {
 
     return (
         <div>
-            <div style={{width: "450px"}} >
-                <img style={{width: "inherit", borderRadius: "20px"}}  src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1555447414l/44767458.jpg" alt="aye" />
+            <div className='cover-image-preview-outer'>
+                <img 
+                    style={{width: "inherit", borderRadius: "20px"}}  
+                    src={`https://covers.openlibrary.org/b/id/${coverId}.jpg`}
+                    alt="aye" 
+                />
             </div>
         </div>
     )

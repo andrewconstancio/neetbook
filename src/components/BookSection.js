@@ -42,7 +42,6 @@ const BookSection = ( {subject, limit, pageNumber} ) => {
         )
     }
     
-
     return (
         <div>
             <Flex justify="space-between"> 
@@ -50,11 +49,10 @@ const BookSection = ( {subject, limit, pageNumber} ) => {
                     <Heading as='h3' size='lg' mt={5} mb={5} style={{cursor: "pointer"}}>{subject.toUpperCase()}</Heading>
                 </Link>
             </Flex>
-            <SimpleGrid columns={4} spacingX='40px' spacingY='20px'>
+            <SimpleGrid columns={[1, 2, 4]} spacingX='40px' spacingY='20px'>
                 {books.map((book) => {
-                    console.log(book);
                     return (
-                        <Book key={book.cover_id} edition={book.lending_edition} title={book.title} coverId={book.cover_id}></Book>
+                        <Book key={book.cover_id} edition={book.cover_edition_key} title={book.title} bookKey={book.key} coverId={book.cover_id}></Book>
                     )
                 })
             }

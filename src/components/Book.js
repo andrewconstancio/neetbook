@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {
     Box,
     Image
@@ -6,10 +6,10 @@ import {
 import '../pages/AllBooksBySubject/Book.css'
 import { Link } from 'react-router-dom'
 
-const Book = ( {coverId, lastElemRef, edition, title} ) => {
+const Book = ( {coverId, lastElemRef, edition, title, bookKey} ) => {
     return (
         <div>
-            <Link to={`/book/${edition}`}>
+            <Link to={{pathname: `/book/${edition}`, state: {bookKey: bookKey} }}>
                 <Box ref={lastElemRef} className='book'>
                     <Image
                         src={`https://covers.openlibrary.org/b/id/${coverId}.jpg`}
