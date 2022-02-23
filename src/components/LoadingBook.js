@@ -7,19 +7,11 @@ import {
 const LoadingBook = ( {total} ) => {
 
     return (
-        <>
-            <Box
-                w={[400, 300, 400]} 
-                h={[450, 350, 450]}  
-            >
-                <div
-                    style={{borderRadius: "20px", backgroundColor: "rgb(59, 59, 59)", width: "inherit", height: "inherit"}}
-                    className="shimmer"
-                >
-                    &nbsp;
-                </div>
+        <div>
+            <Box w={[200, 300, 400]} h={[200, 350, 450]} style={{borderRadius: "20px", backgroundColor: "rgb(59, 59, 59)"}} className="shimmer">
+                &nbsp;
             </Box>
-        </>
+        </div>
     )
 }
 

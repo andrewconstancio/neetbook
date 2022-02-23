@@ -31,9 +31,9 @@ const BookSection = ( {subject, limit, pageNumber} ) => {
 
     if(!books) {
         return (
-            <div className='center'>
+            <div>
                 <Heading as='h3' size='lg' mt={5} mb={5}>&nbsp;</Heading>
-                <SimpleGrid columns={[1, 2, 4]} spacingX='40px' spacingY='20px'>
+                <SimpleGrid columns={{sm: 2, md: 3, lg: 4}} spacingX='40px' spacingY='20px'>
                 {[...Array(limit)].map((i) =>
                     <LoadingBook key={i} />
                 )}
@@ -49,7 +49,7 @@ const BookSection = ( {subject, limit, pageNumber} ) => {
                     <Heading as='h3' size='lg' mt={5} mb={5} style={{cursor: "pointer"}}>{subject.toUpperCase()}</Heading>
                 </Link>
             </Flex>
-            <SimpleGrid columns={[1, 2, 4]} spacingX='40px' spacingY='20px'>
+            <SimpleGrid columns={{sm: 2, md: 3, lg: 4}} spacingX='40px' spacingY='20px'>
                 {books.map((book) => {
                     return (
                         <Book key={book.cover_id} edition={book.cover_edition_key} title={book.title} bookKey={book.key} coverId={book.cover_id}></Book>

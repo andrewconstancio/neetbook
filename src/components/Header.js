@@ -41,12 +41,6 @@ class Header extends Component {
                         </Flex>
 
                         <Stack direction={{ base: "column", md: "row" }} width={{ base: "full", md: "auto" }} spacing='35px' alignItems="center" mt={{ base: 4, md: 0 }}>
-                            {/* <Link 
-                                to="/" 
-                                onClick={() => this.setState({home: 1, explore: 0, collection: 0})}
-                                className={(this.state.home ? 'clicked' : 'unclicked')}
-                            > Home
-                            </Link> */}
                             <Link 
                                 to="/mycollection" 
                                 onClick={() => this.setState({home: 0, explore: 0, collection: 1})}
@@ -67,11 +61,6 @@ class Header extends Component {
 
                         <Box mt={{ base: 4, md: 0 }} mr={5}>
                             <Image borderRadius='full' boxSize='50px' src='https://bit.ly/dan-abramov' alt='Dan Abramov' />
-                            {/* <Link to="newbook">
-                                <Button variant="outline" style={ {border: "none", background: "#7926FF"} }>
-                                    Add Book
-                                </Button>
-                            </Link> */}
                         </Box>
                     </Flex>
                 </Flex>

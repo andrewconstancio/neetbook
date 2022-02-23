@@ -33,8 +33,24 @@ const BookPage = (props) => {
     }
 
     return (
-        <div className='center'>
-            <Box p={4} display={{ md: 'flex' }}>
+        <div className='container'>
+            <Flex
+                direction={['column', 'column', 'column', 'row', 'row']}
+            >
+                <Box flexShrink={0}>
+                    <CoverImagePreview coverId={book.covers[0]} />
+                </Box>
+                <Box mt={{ base: 4, md: 0 }} ml={{ md: 6 }}>
+                    <Text ><h2>{book.title}</h2></Text>
+                    <Text>
+                        <i>Andrew Constancio (2009)</i>
+                    </Text>
+                </Box>
+                <Box flexShrink={0} w={{md: "650px"}} mt={{ base: 4, md: 0 }} ml={{ md: 6 }} align="right">
+                    <Rating style={{textAlign: "center"}} stop={10} />
+                </Box>
+            </Flex>
+            {/* <Box p={4} display={{ md: 'flex' }}>
                 <Box flexShrink={0}>
                     <CoverImagePreview coverId={book.covers[0]} />
                 </Box>
@@ -50,7 +66,7 @@ const BookPage = (props) => {
                         {book.description ? book.description : "This edition doesn't have a description yet."}
                     </Text>
                 </Box>
-            </Box>
+            </Box> */}
         </div>
     )
 }
