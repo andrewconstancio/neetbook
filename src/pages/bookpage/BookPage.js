@@ -11,7 +11,10 @@ import {
     SimpleGrid,
     grid,
     Image,
-    Link
+    Link,
+    Spacer,
+    Button,
+    Textarea
 } from "@chakra-ui/react"
 import CoverImagePreview from '../../components/CoverImagePreview'
 import Rating from 'react-rating';
@@ -34,39 +37,49 @@ const BookPage = (props) => {
 
     return (
         <div className='container'>
-            <Flex direction={['column', 'column', 'column', 'row', 'row']}>
-                <Box flexShrink={0} style={{width: "40%"}}>
+            <Flex direction={['column', 'column', 'column', 'column', 'row']}>
+                <Box flexShrink={0} w={["100%", "100%","100%", "auto", "auto"]} pr={[0, 6]} align="center">
                     <CoverImagePreview coverId={book.covers[0]} />
                 </Box>
-                <Box style={{width: "60%", display: "inline-block"}}>
-                    <Box mt={{ base: 4, md: 0 }} ml={{ md: 6 }}>
-                        <Text ><h2>{book.title}</h2></Text>
+                <Box 
+                    w={["100%", "100%","100%", "100%", "60%"]}
+                >
+                    <Box mt={["15px", "15px", "15px", "15px", "0px"]}>
+                        <Text><b>{book.title}</b></Text>
                         <Text>
                             <i>Andrew Constancio (2009)</i>
                         </Text>
                     </Box>
-                    <Box flexShrink={0} mt={{ base: 4, md: 0 }} ml={{ md: 6 }} align="right">
-                        <Rating style={{textAlign: "center"}} stop={10} />
+                    <Box>
                     </Box>
+                    <Box>
+                        <Text mt={5}>
+                            {book.description ? book.description : "This edition doesn't have a description yet."}
+                        </Text>
+                    </Box>
+                    <Flex direction={['column', 'column', 'column', 'row', 'row']} mt={10}>
+                        <Box>
+                                <Rating stop={10}
+                                    emptySymbol="fa fa-star-o fa-2x medium"
+                                    fullSymbol="fa fa-star fa-2x medium"
+                                    fractions={2}
+                                    style={{color: "#ffd600"}}
+                                    flexShrink={0}
+                                />
+                        </Box>
+                        <Spacer />
+                        <Box mt={["15px", "15px", "15px", "0px", "0px"]}>
+                            <Button colorScheme='teal' size='md' w={{ base: '100%', sm: '100%' }} variant='outline'>
+                                Read
+                            </Button>
+                        </Box>
+                    </Flex>
+                    <Textarea mt={5} placeholder='Your thoughts...' />
+                    <Button colorScheme='pink' size='md' style={{float: "right"}} w={{ base: '100%', sm: '100%' }} mt={15}>
+                        Post
+                    </Button>
                 </Box>
             </Flex>
-            {/* <Box p={4} display={{ md: 'flex' }}>
-                <Box flexShrink={0}>
-                    <CoverImagePreview coverId={book.covers[0]} />
-                </Box>
-                <Box mt={{ base: 4, md: 0 }} ml={{ md: 6 }}>
-                    <Text align={{base: 'center', md: 'left'}}><h2>{book.title}</h2></Text>
-                    <div style={{justifyContent: "center"}} >
-                        <Rating style={{textAlign: "center"}} stop={10} />
-                    </div>
-                    <Text as='h5' size='sm' align={{base: 'center', md: 'left'}}>
-                        <i>Andrew Constancio (2009)</i>
-                    </Text>
-                    <Text mt={5}>
-                        {book.description ? book.description : "This edition doesn't have a description yet."}
-                    </Text>
-                </Box>
-            </Box> */}
         </div>
     )
 }
