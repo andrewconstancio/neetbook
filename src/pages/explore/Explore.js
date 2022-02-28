@@ -6,7 +6,7 @@ export default class Explore extends Component {
 
     render() {
         return (
-                <div class="container">
+                <div className="container">
                     <BookSection subject="love" limit={4} />
                     <BookSection subject="sci-fi" limit={4}/>
                     <BookSection subject="anime" limit={4}/>
