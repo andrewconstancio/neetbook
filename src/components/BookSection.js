@@ -51,9 +51,11 @@ const BookSection = ( {subject, limit, pageNumber} ) => {
             </Flex>
             <SimpleGrid columns={{sm: 2, md: 3, lg: 4}} spacingX='40px' spacingY='20px'>
                 {books.map((book) => {
-                    return (
-                        <Book key={book.cover_id} edition={book.cover_edition_key} title={book.title} bookKey={book.key} coverId={book.cover_id}></Book>
-                    )
+                    if(book.cover_id !== null) {
+                        return (
+                            <Book key={book.cover_edition_key} edition={book.cover_edition_key} title={book.title} bookKey={book.key} coverId={book.cover_id}></Book>
+                        )
+                    }
                 })
             }
             </SimpleGrid>

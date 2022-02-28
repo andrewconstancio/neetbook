@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
     Grid,
     GridItem,
@@ -35,6 +35,8 @@ const BookPage = (props) => {
         return <div>Loading</div>
     }
 
+    console.log(book);
+
     return (
         <div className='container'>
             <Flex direction={['column', 'column', 'column', 'column', 'row']}>
@@ -54,7 +56,7 @@ const BookPage = (props) => {
                     </Box>
                     <Box>
                         <Text mt={5}>
-                            {book.description ? book.description : "This edition doesn't have a description yet."}
+                            {typeof book.description === 'object' ? book.description.value : book.description !== null ? book.description : "This edition doesn't have a description yet."}
                         </Text>
                     </Box>
                     <Flex direction={['column', 'column', 'column', 'row', 'row']} mt={10}>

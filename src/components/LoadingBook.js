@@ -3,13 +3,13 @@ import '../pages//explore/Explore.css'
 import {
     Box
 } from "@chakra-ui/react"
+import '../pages/explore/Explore.css'
 
 const LoadingBook = ( {total} ) => {
 
     return (
-        <div>
-            <Box 
-                className='book shimmer' 
+        <div  className='shimmer'>
+            <Box  
                 style={{borderRadius: "20px", backgroundColor: "rgb(59, 59, 59)"}}
                 h={[450, 350, 450]}  
             >
