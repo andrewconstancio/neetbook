@@ -17,13 +17,16 @@ import {
     Textarea
 } from "@chakra-ui/react"
 import CoverImagePreview from '../../components/CoverImagePreview'
-import Rating from 'react-rating';
 import useBookSingleInfo from '../../Hooks/useBookSingleInfo';
 import './BookPage.css'
+import RatingCustomer from '../../components/RatingCustom'
+import RatingCustom from '../../components/RatingCustom';
+import ReadButton from '../../components/ReadButton';
 
 const BookPage = (props) => {
 
     const { bookKey } = props.location.state;
+    const { bookEditionKey } = props.location.state;
 
     const {
         book,
@@ -35,7 +38,7 @@ const BookPage = (props) => {
         return <div>Loading</div>
     }
 
-    console.log(book);
+    console.log(bookEditionKey)
 
     return (
         <div className='container'>
@@ -49,7 +52,7 @@ const BookPage = (props) => {
                     <Box mt={["15px", "15px", "15px", "15px", "0px"]}>
                         <Text><b>{book.title}</b></Text>
                         <Text>
-                            <i>Andrew Constancio (2009)</i>
+                            <i>Andrew Constancio ({book.first_publish_date})</i>
                         </Text>
                     </Box>
                     <Box>
@@ -61,19 +64,14 @@ const BookPage = (props) => {
                     </Box>
                     <Flex direction={['column', 'column', 'column', 'row', 'row']} mt={10}>
                         <Box>
-                                <Rating stop={10}
-                                    emptySymbol="fa fa-star-o fa-2x medium"
-                                    fullSymbol="fa fa-star fa-2x medium"
-                                    fractions={2}
-                                    style={{color: "#ffd600"}}
-                                    flexShrink={0}
-                                />
+                            <RatingCustom bookEditionKey={bookEditionKey} />
                         </Box>
                         <Spacer />
                         <Box mt={["15px", "15px", "15px", "0px", "0px"]}>
-                            <Button colorScheme='teal' size='md' w={{ base: '100%', sm: '100%' }} variant='outline'>
+                            <ReadButton />
+                            {/* <Button colorScheme='teal' size='md' w={{ base: '100%', sm: '100%' }} variant='outline'>
                                 Read
-                            </Button>
+                            </Button> */}
                         </Box>
                     </Flex>
                     <Textarea mt={5} placeholder='Your thoughts...' />

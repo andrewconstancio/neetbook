@@ -7,9 +7,10 @@ import '../pages/AllBooksBySubject/Book.css'
 import { Link } from 'react-router-dom'
 
 const Book = ( {coverId, lastElemRef, edition, title, bookKey} ) => {
+    console.log("edition: " + edition);
     return (
         <div>
-            <Link to={{pathname: `/book/${edition}`, state: {bookKey: bookKey} }}>
+            <Link to={{pathname: `/book/${edition}`, state: {bookKey: bookKey, bookEditionKey: edition} }}>
                 <Box ref={lastElemRef} className='book'>
                     <Image
                         src={`https://covers.openlibrary.org/b/id/${coverId}.jpg`}

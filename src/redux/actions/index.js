@@ -18,5 +18,21 @@ export const insertBook = formValues => async (dispatch, getState, { getFirebase
     }).catch((err) => {
         dispatch({ type: "INSERT_BOOK_ERROR", payload: err });
     })
-
 };
+
+export const insertRating = formValues => async (dispatch, getState, { getFirebase, getFirestore}) => {
+    // const { userId } = getState().auth;
+    // const response = await streams.post('/streams', { ...formValues, userId });
+
+    const firestore = getFirestore();
+
+    firestore.collection('UserBooksRating').add({
+        rating: formValues.rating
+    }).then(() => {
+        const data = "hey"
+        dispatch({ type: "INSERT_BOOK", payload: data });
+    }).catch((err) => {
+        dispatch({ type: "INSERT_BOOK_ERROR", payload: err });
+    })
+};
+

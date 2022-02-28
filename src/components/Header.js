@@ -55,10 +55,19 @@ const Header = (props) => {
                     alignItems="center"
                     flexGrow={1}
                     mt={{ base: 4, md: 0 }}
+                    spacing='15px'
                     >
-                    <i className="fa fa-heart fa-2x"></i>
-                    <i className="fa fa-wpexplorer fa-2x"></i>
-                    <i className="fa fa-magnifying-glass fa-2x"></i>
+                    <Link 
+                        to="/mycollection" 
+                    > 
+                        <i className="fa fa-heart fa-lg"></i>
+                    </Link>
+                    <Link 
+                        to="/explore" 
+                    > 
+                        <i className="fa fa-compass fa-lg"></i>
+                    </Link>
+                    <i className="fa fa-magnifying-glass"></i>
                 </Stack>
 
 
@@ -84,7 +93,7 @@ const Header = (props) => {
 
                 <Box 
                     mt={{ base: 4, md: 0 }} mt={1} mr={5} ml={5} flexGrow={1} 
-                    // display={{ base: isOpen ? "block" : "none", md: "flex" }}
+                    display={{ base: "none", md: "flex" }}
                 >
                     <Input variant='filled'  style={{ backgroundColor : "#232323"}}  placeholder='Search...' size='md' />
                 </Box>

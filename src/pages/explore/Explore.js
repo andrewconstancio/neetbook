@@ -7,7 +7,7 @@ export default class Explore extends Component {
     render() {
         return (
                 <div className="container">
-                    <BookSection subject="manga" limit={4} />
+                    {/* <BookSection subject="manga" limit={4} /> */}
                     <BookSection subject="love" limit={4} />
                     <BookSection subject="sci-fi" limit={4}/>
                     <BookSection subject="anime" limit={4}/>
