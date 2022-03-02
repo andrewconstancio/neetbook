@@ -27,5 +27,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
+export const query = firebase.firestore().query;
+export const where = firebase.firestore().where;
 
 export default firebase;
