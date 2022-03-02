@@ -8,7 +8,7 @@ import reducers from './redux/reducers';
 import thunk from 'redux-thunk';
 import {reactReduxFirebase, getFirebase, reduxFirebase } from 'react-redux-firebase';
 import {reduxFirestore, getFirestore } from 'redux-firestore';
-import config from './config/firebase-config'
+import firebase from './config/firebase-config'
 import { Provider } from 'react-redux';
 
 import theme from './theme';
@@ -19,8 +19,8 @@ const store = createStore(
     reducers,
     composeEnhancers(
         applyMiddleware(thunk.withExtraArgument({getFirebase, getFirestore})),
-        reduxFirestore(config),
-        reduxFirebase(config)
+        reduxFirestore(firebase),
+        reduxFirebase(firebase)
     )
 );
 
@@ -29,6 +29,7 @@ ReactDOM.render(
         <ChakraProvider theme={theme}>
             <App />
         </ChakraProvider>
-    </Provider>,
+    </Provider>
+    ,
     document.querySelector('#root')
 )

@@ -1,30 +1,31 @@
 import React from "react";
 import {
-  Box,
-  Stack,
-  Heading,
-  Flex,
-  Text,
-  Button,
-  useDisclosure,
-  Image,
-  Input
+    Box,
+    Stack,
+    Heading,
+    Flex,
+    Text,
+    Button,
+    useDisclosure,
+    Image,
+    Input
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
 import './Header.css'
+import { auth } from '../config/firebase-config'
 
-// Note: This code could be better,
-// so I'd recommend you to understand how I solved and you could write yours better :)
-// Good luck! 🍀
-
-// Update: Check these awesome headers from Choc UI 👇
-// https://choc-ui.tech/docs/elements/headers
 const Header = (props) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const handleToggle = () => (isOpen ? onClose() : onOpen());
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const handleToggle = () => (isOpen ? onClose() : onOpen());
 
-  return (
+
+    const signOut = () => {
+        console.log(auth.currentUser);
+        auth.signOut();
+    }
+
+    return (
         <Flex
             bg="#161616" 
             color="white" 
@@ -102,7 +103,7 @@ const Header = (props) => {
                     // display={{ base: isOpen ? "block" : "none", md: "block" }}
                     mt={{ base: 4, md: 0 }}
                 >
-                    <Image borderRadius='full' boxSize='50px' src='https://bit.ly/dan-abramov' alt='Dan Abramov' />
+                    <Image borderRadius='full' boxSize='50px' onClick={signOut} src={auth.currentUser.photoURL} alt={auth.currentUser.displayName} />
                 </Box>
             </Flex>
         </Flex>

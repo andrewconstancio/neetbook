@@ -9,10 +9,21 @@ import AllBooksBySubject from './pages/AllBooksBySubject/AllBooksBySubject'
 import BookPage from './pages/bookpage/BookPage';
 import Footer from './components/Footer'
 import './App.css'
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { useCollectionData } from 'react-firebase-hooks/firestore';
+import SignUp from './pages/SignIn/SignIn';
+import firebase, { auth } from './config/firebase-config'
 
 
 const App = () => {
     const webSiteName = "NEETBOOK";
+    const bgColor = ""
+    const [user] = useAuthState(auth);
+
+    if(!user) {
+        return <SignUp websitename={webSiteName} />
+    }
+
     return <div id="page-container">
         <BrowserRouter>
             <div>
