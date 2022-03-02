@@ -31,17 +31,14 @@ const RatingCustom = ( {bookEditionKey} ) => {
 
     const handleRatingChange = async value => {
 
-        await firestore.setDoc(firestore.doc(db, "cities", "LA"), {
-            name: "Los Angeles",
-            state: "CA",
-            country: "USA"
-        });
 
-        // let document = await firestore
-        // .collection("UserBookRatings")
-        // .where("uid", "==", auth.currentUser.uid)
-        // .where("bookEditionKey", "==", bookEditionKey)
-        // .get()
+        let document = await firestore
+        .collection("UserBookRatings")
+        .where("uid", "==", auth.currentUser.uid)
+        .where("bookEditionKey", "==", bookEditionKey)
+        .get()
+
+        console.log(document.docs[0])
 
         // if(document.empty) {
         //     firestore.collection('UserBookRatings').add({
