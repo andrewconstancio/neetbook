@@ -6,90 +6,62 @@ import {
 import { auth, firestore } from '../config/firebase-config';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 
-const RatingCustom = ( {bookEditionKey} ) => {
+const RatingCustom = (props) => {
 
-    const [ratingChanged, setRatingChanged] = useState(false);
-    const [ratingValue, setRatingValue] = useState(0);
+    // const handleRatingChange = async value => {
 
-    useEffect(() => {
+    //     try {
 
-        async function fetchData() {
-            let doc = await firestore
-            .collection("UserBookRatings")
-            .where("uid", "==", auth.currentUser.uid)
-            .where("bookEditionKey", "==", bookEditionKey)
-            .get()
+    //         let document = await firestore
+    //         .collection("UserBookRatings")
+    //         .where("uid", "==", auth.currentUser.uid)
+    //         .where("bookEditionKey", "==", props.bookEditionKey)
+    //         .get()
 
-            if(doc.docs[0]) {
-                setRatingChanged(true);
-                setRatingValue(doc.docs[0].data().rating);
-            }
-        }
+    //         if(!document.empty) {
+    //             firestore.collection('UserBookRatings').doc(document.docs[0].id).set({
+    //                 rating: value,
+    //                 bookEditionKey: props.bookEditionKey,
+    //                 uid: auth.currentUser.uid,
+    //                 modifiedAt: new Date()
+    //             }, {merge: true})
+    //         } else {
+    //             firestore.collection('UserBookRatings').add({
+    //                 rating: value,
+    //                 bookEditionKey: props.bookEditionKey,
+    //                 uid: auth.currentUser.uid,
+    //                 createdAt: new Date()
+    //             })
+    //         }
 
-        fetchData();
-    }, []);
+    //         props.setRatingChanged(true);
+    //         props.setRatingValue(value)
 
-    const handleRatingChange = async value => {
+    //     } catch(err) {
+    //         console.log("err" + err);
+    //     }
 
-
-        let document = await firestore
-        .collection("UserBookRatings")
-        .where("uid", "==", auth.currentUser.uid)
-        .where("bookEditionKey", "==", bookEditionKey)
-        .get()
-
-        console.log(document.docs[0])
-
-        // if(document.empty) {
-        //     firestore.collection('UserBookRatings').add({
-        //         rating: value,
-        //         bookEditionKey: bookEditionKey,
-        //         uid: auth.currentUser.uid,
-        //         createdAt: new Date()
-        //     },{merge: true}).then(() => {
-        //         setRatingChanged(true);
-        //         setRatingValue(value)
-        //     }).catch((err) => {
-        //         setRatingChanged(false);
-        //         setRatingValue(0)
-        //     })
-        // } else {
-        //     console.log(document.ref);
-        // }
-        
-        // firestore.collection('UserBookRatings').add({
-        //     rating: value,
-        //     bookEditionKey: bookEditionKey,
-        //     uid: auth.currentUser.uid,
-        //     createdAt: new Date()
-        // },{merge: true}).then(() => {
-        //     setRatingChanged(true);
-        //     setRatingValue(value)
-        // }).catch((err) => {
-        //     setRatingChanged(false);
-        //     setRatingValue(0)
-        // })
-    }
+    // }
 
     const uncheckRating = () =>{
 
         firestore
         .collection('UserBookRatings')
         .where("uid", "==", auth.currentUser.uid)
-        .where("bookEditionKey", "==", bookEditionKey)
+        .where("bookEditionKey", "==", props.bookEditionKey)
         .onSnapshot((docs) => {
             docs.docs[0].ref.delete()
         })
 
-        setRatingChanged(false);
-        setRatingValue(0)
+        props.setRatingChanged(false);
+        props.setRatingValue(0)
     }
 
     return (
         <div>
             <Box align="center">
                 <i 
-                    style={{display: ratingChanged ? "inline-block" : "none", marginRight: "10px"}} 
+                    style={{display: props.ratingChanged ? "inline-block" : "none", marginRight: "10px"}} 
                     p={5} 
                     className="fa-solid fa-xmark fa-lg"
                     onClick={uncheckRating}
@@ -98,10 +70,10 @@ const RatingCustom = ( {bookEditionKey} ) => {
                     emptySymbol="fa fa-star-o fa-xl medium"
                     fullSymbol="fa fa-star fa-xl medium"
                     fractions={2}
-                    style={{color: ratingChanged ? "#ffd600" : "white"}}
+                    style={{color: props.ratingChanged ? "#ffd600" : "white"}}
                     flexShrink={0}
-                    onChange={handleRatingChange} 
-                    initialRating={ratingValue}
+                    onChange={props.handleChange} 
+                    initialRating={props.ratingValue}
                 />
             </Box>
         </div>

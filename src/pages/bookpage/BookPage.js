@@ -1,17 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {
-    Grid,
-    GridItem,
-    Heading,
     Flex,
     Box,
     Text,
-    Center,
-    Square,
-    SimpleGrid,
-    grid,
-    Image,
-    Link,
     Spacer,
     Button,
     Textarea
@@ -19,26 +10,66 @@ import {
 import CoverImagePreview from '../../components/CoverImagePreview'
 import useBookSingleInfo from '../../Hooks/useBookSingleInfo';
 import './BookPage.css'
-import RatingCustomer from '../../components/RatingCustom'
 import RatingCustom from '../../components/RatingCustom';
 import ReadButton from '../../components/ReadButton';
+import useBookUserInfo from '../../Hooks/useBookUserInfo';
+import { auth, firestore } from '../../config/firebase-config';
 
 const BookPage = (props) => {
 
     const { bookKey } = props.location.state;
     const { bookEditionKey } = props.location.state;
 
+
     const {
         book,
         error,
         loading
-    } = useBookSingleInfo(bookKey);
+    } = useBookSingleInfo(bookKey, bookEditionKey);
+
+    const {
+        ratingChanged,
+        ratingValue,
+        hasRead,
+        setRatingChanged,
+        setRatingValue,
+        setHasRead
+    } = useBookUserInfo(bookKey, bookEditionKey);
 
     if(!book) {
         return <div>Loading</div>
     }
 
-    console.log(bookEditionKey)
+    const handleChange = async () => {
+        
+        try {
+
+            let read = hasRead ? false : true
+            let document = await firestore
+            .collection("UserBookRatings")
+            .where("uid", "==", auth.currentUser.uid)
+            .where("bookEditionKey", "==", bookEditionKey)
+            .get()
+
+            if(!document.empty) {
+                firestore.collection('UserBookRatings').doc(document.docs[0].id).set({
+                    read: read,
+                    modifiedAt: new Date()
+                }, {merge: true})
+            } else {
+                firestore.collection('UserBookRatings').add({
+                    read: read,
+                    bookEditionKey: bookEditionKey,
+                    uid: auth.currentUser.uid,
+                    createdAt: new Date()
+                })
+            }
+            setHasRead(read);
+        } catch(err) {
+            console.log("err" + err);
+        }
+    }
+
 
     return (
         <div className='container'>
@@ -64,15 +95,21 @@ const BookPage = (props) => {
                     </Box>
                     <Flex direction={['column', 'column', 'column', 'row', 'row']} mt={10}>
                         <Box>
-                            <RatingCustom bookEditionKey={bookEditionKey} />
+                            <RatingCustom 
+                                ratingValue={ratingValue} 
+                                ratingChanged={ratingChanged} 
+                                bookEditionKey={bookEditionKey} 
+                                handleChange={handleChange}
+                            />
                         </Box>
                         <Spacer />
                         <Box mt={["15px", "15px", "15px", "0px", "0px"]}>
-                            <ReadButton />
-                            {/* <Button colorScheme='teal' size='md' w={{ base: '100%', sm: '100%' }} variant='outline'>
-                                Read
-                            </Button> */}
-                        </Box>
+                            <ReadButton 
+                                bookEditionKey={bookEditionKey} 
+                                hasRead={hasRead}
+                                handleChange={handleChange}
+                            />
+                        </Box>   
                     </Flex>
                     <Textarea mt={5} placeholder='Your thoughts...' />
                     <Button colorScheme='pink' size='md' style={{float: "right"}} w={{ base: '100%', sm: '100%' }} mt={15}>

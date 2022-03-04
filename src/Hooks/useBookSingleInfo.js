@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
 import OpenLibrary from '../apis/OpenLibrary';
 import axios from 'axios';
+import { auth, firestore } from '../config/firebase-config';
 
-export default function useBookSingleInfo(bookKey) {
+
+export default function useBookSingleInfo(bookKey, bookEditionKey) {
     const [book, setBook] = useState(null)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(false)
