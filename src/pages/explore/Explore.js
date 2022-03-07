@@ -10,7 +10,7 @@ export default class Explore extends Component {
                     {/* <BookSection subject="manga" limit={4} /> */}
                     <BookSection subject="love" limit={4} />
                     <BookSection subject="sci-fi" limit={4}/>
-                    <BookSection subject="anime" limit={4}/>
+                    <BookSection subject="manga" limit={4}/>
                     <BookSection subject="pirates" limit={4}/>
                     <BookSection subject="space" limit={4}/>
                     <BookSection subject="football" limit={4}/>

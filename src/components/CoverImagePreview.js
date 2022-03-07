@@ -14,7 +14,7 @@ const CoverImagePreview = ({coverId}) => {
             <Box alignItems='baseline'>
                 <Image 
                     style={{borderRadius: "20px"}} 
-                    w={["90%", "90%", 400]} 
+                    w={["90%", "90%", 225]} 
                     src={`https://covers.openlibrary.org/b/id/${coverId}.jpg`}
                     alt="aye" 
                 />

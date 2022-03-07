@@ -65,7 +65,7 @@ const NotesInput = ( {bookEditionKey} ) => {
     if(hasNotes) {
         return (
             <>
-                <NotesInputView handleOnClick={handleOnClick} currentValue={notesRef.current.value} />
+                <NotesInputView handleOnClick={handleOnClick} currentValue={notesRef.current.value} setHasNotes={setHasNotes}/>
             </>
         )
     }
