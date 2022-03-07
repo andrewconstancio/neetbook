@@ -4,16 +4,13 @@ import {
     Box,
     Text,
     Spacer,
-    Button,
-    Textarea
 } from "@chakra-ui/react"
 import CoverImagePreview from '../../components/CoverImagePreview'
 import useBookSingleInfo from '../../Hooks/useBookSingleInfo';
 import './BookPage.css'
-import RatingCustom from '../../components/RatingCustom';
-import ReadButton from '../../components/ReadButton';
-import useBookUserInfo from '../../Hooks/useBookUserInfo';
-import { auth, firestore } from '../../config/firebase-config';
+import RatingInput from '../../components/RatingInput';
+import ReadButtonInput from '../../components/ReadButtonInput';
+import NotesInput from '../../components/NotesInput';
 
 const BookPage = (props) => {
 
@@ -27,47 +24,8 @@ const BookPage = (props) => {
         loading
     } = useBookSingleInfo(bookKey, bookEditionKey);
 
-    const {
-        ratingChanged,
-        ratingValue,
-        hasRead,
-        setRatingChanged,
-        setRatingValue,
-        setHasRead
-    } = useBookUserInfo(bookKey, bookEditionKey);
-
     if(!book) {
         return <div>Loading</div>
-    }
-
-    const handleChange = async () => {
-        
-        try {
-
-            let read = hasRead ? false : true
-            let document = await firestore
-            .collection("UserBookRatings")
-            .where("uid", "==", auth.currentUser.uid)
-            .where("bookEditionKey", "==", bookEditionKey)
-            .get()
-
-            if(!document.empty) {
-                firestore.collection('UserBookRatings').doc(document.docs[0].id).set({
-                    read: read,
-                    modifiedAt: new Date()
-                }, {merge: true})
-            } else {
-                firestore.collection('UserBookRatings').add({
-                    read: read,
-                    bookEditionKey: bookEditionKey,
-                    uid: auth.currentUser.uid,
-                    createdAt: new Date()
-                })
-            }
-            setHasRead(read);
-        } catch(err) {
-            console.log("err" + err);
-        }
     }
 
 
@@ -95,26 +53,14 @@ const BookPage = (props) => {
                     </Box>
                     <Flex direction={['column', 'column', 'column', 'row', 'row']} mt={10}>
                         <Box>
-                            <RatingCustom 
-                                ratingValue={ratingValue} 
-                                ratingChanged={ratingChanged} 
-                                bookEditionKey={bookEditionKey} 
-                                handleChange={handleChange}
-                            />
+                            <RatingInput bookEditionKey={bookEditionKey} />
                         </Box>
                         <Spacer />
                         <Box mt={["15px", "15px", "15px", "0px", "0px"]}>
-                            <ReadButton 
-                                bookEditionKey={bookEditionKey} 
-                                hasRead={hasRead}
-                                handleChange={handleChange}
-                            />
-                        </Box>   
+                            <ReadButtonInput bookEditionKey={bookEditionKey} />
+                        </Box>
                     </Flex>
-                    <Textarea mt={5} placeholder='Your thoughts...' />
-                    <Button colorScheme='pink' size='md' style={{float: "right"}} w={{ base: '100%', sm: '100%' }} mt={15}>
-                        Post
-                    </Button>
+                    <NotesInput bookEditionKey={bookEditionKey} />
                 </Box>
             </Flex>
         </div>

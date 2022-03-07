@@ -4,7 +4,7 @@ import { auth, firestore } from '../config/firebase-config';
 export default function useBookUserInfo(bookKey, bookEditionKey) {
     const [ratingChanged, setRatingChanged] = useState(false);
     const [ratingValue, setRatingValue] = useState(0);
-    const [hasRead, setHasRead] = useState(false);
+
 
     useEffect(() => {
 
@@ -16,9 +16,11 @@ export default function useBookUserInfo(bookKey, bookEditionKey) {
             .get()
 
             if(doc.docs[0]) {
-                setRatingValue(doc.docs[0].data().rating)
+                if(doc.docs[0].data().rating) {
+                    setRatingValue(doc.docs[0].data().rating)
+                    setRatingChanged(true)
+                }
                 setHasRead(doc.docs[0].data().read)
-                setRatingChanged(true)
             }
         }
 

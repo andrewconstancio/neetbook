@@ -4,8 +4,26 @@ import {
 } from "@chakra-ui/react"
 import { auth, firestore } from '../config/firebase-config';
 
-const ReadButton = ( {bookEditionKey, hasRead, setHasRead, handleChange} ) => {
+const ReadButton = ( {bookEditionKey} ) => {
 
+    const [hasRead, setHasRead] = useState(false);
+
+    useEffect(() => {
+
+        async function fetchData() {
+            let doc = await firestore
+            .collection("UserBookRead")
+            .where("uid", "==", auth.currentUser.uid)
+            .where("bookEditionKey", "==", bookEditionKey)
+            .get()
+
+            if(doc.docs[0]) {
+                setHasRead(true);
+            }
+        }
+
+        fetchData();
+    }, []);
 
     const handleOnClick = async () => {
 
@@ -13,18 +31,18 @@ const ReadButton = ( {bookEditionKey, hasRead, setHasRead, handleChange} ) => {
 
             let read = hasRead ? false : true
             let document = await firestore
-            .collection("UserBookRatings")
+            .collection("UserBookRead")
             .where("uid", "==", auth.currentUser.uid)
             .where("bookEditionKey", "==", bookEditionKey)
             .get()
 
             if(!document.empty) {
-                firestore.collection('UserBookRatings').doc(document.docs[0].id).set({
+                firestore.collection('UserBookRead').doc(document.docs[0].id).set({
                     read: read,
                     modifiedAt: new Date()
                 }, {merge: true})
             } else {
-                firestore.collection('UserBookRatings').add({
+                firestore.collection('UserBookRead').add({
                     read: read,
                     bookEditionKey: bookEditionKey,
                     uid: auth.currentUser.uid,
@@ -39,7 +57,7 @@ const ReadButton = ( {bookEditionKey, hasRead, setHasRead, handleChange} ) => {
 
     return (
         <>
-            <Button onClick={handleChange} colorScheme={hasRead ? "teal" : "grey"} size='md' w={{ base: '100%', sm: '100%' }} variant={hasRead ? "solid" : "outline"}>
+            <Button onClick={handleOnClick} colorScheme={hasRead ? "teal" : "grey"} size='md' w={{ base: '100%', sm: '100%' }} variant={hasRead ? "solid" : "outline"}>
                 <i className="fa-solid fa-book-open"></i>
                 &nbsp;&nbsp;Read
             </Button>
