@@ -18,7 +18,6 @@ const BookPage = (props) => {
     const { bookKey } = props.location.state;
     const { bookEditionKey } = props.location.state;
 
-
     const {
         book,
         error,
@@ -31,11 +30,11 @@ const BookPage = (props) => {
 
     return (
         <div className='container'>
-            <Flex direction={['column', 'column', 'column', 'column', 'row']}>
+            <Flex direction={['column', 'column', 'column', 'row', 'row']}>
                 <Box flexShrink={0} w={["100%", "100%","100%", "auto", "30%"]} pr={[0, 6]} align="center">
                     <CoverImagePreview coverId={book.covers[0]} />
                     <RatingInput bookEditionKey={bookEditionKey} />
-                    {/* <Author authorKey={book.authors[0].author.key} /> */}
+                    <ReadButtonInput bookEditionKey={bookEditionKey} />
                 </Box>
                 <Box 
                     w={["100%", "100%","100%", "100%", "70%"]}
@@ -59,7 +58,7 @@ const BookPage = (props) => {
                         </Box>
                         <Spacer />
                         <Box mt={["15px", "15px", "15px", "0px", "0px"]}>
-                            <ReadButtonInput bookEditionKey={bookEditionKey} />
+                            {/* <ReadButtonInput bookEditionKey={bookEditionKey} /> */}
                         </Box>
                     </Flex>
                     <NotesInput bookEditionKey={bookEditionKey} />

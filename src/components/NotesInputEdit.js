@@ -12,7 +12,7 @@ const NotesInputEdit = ( {notesRef, handleOnClick} ) => {
                 mt={5} 
                 placeholder='Your thoughts...' 
                 ref={notesRef}
-            />
+            >{notesRef.current}</Textarea>
             <Button onClick={handleOnClick} colorScheme='pink' size='md' style={{float: "right"}} w={{ base: '100%', sm: '100%' }} mt={15}>
                 Post
             </Button>

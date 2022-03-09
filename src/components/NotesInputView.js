@@ -15,16 +15,13 @@ const NotesInputView = ( {currentValue, setHasNotes} ) => {
                         alt={auth.currentUser.displayName} 
                     />
                 </Box>
-                <Box
-                    width={"90%"}
-                    >
-                    "<i>{currentValue}</i>"
+                <Box width={"90%"}>
+                    {currentValue}
                 </Box>
                 <Box>
                     <i className="fa-solid fa-pen"
                         onClick={(() => setHasNotes(false))}
-                    >
-                     
+                    > 
                     </i>
                 </Box>
             </HStack>

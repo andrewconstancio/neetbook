@@ -8,22 +8,26 @@ import NotesInputEdit from './NotesInputEdit';
 import NotesInputView from './NotesInputView';
 
 const NotesInput = ( {bookEditionKey} ) => {
+    const [loading, setLoading] = useState(true);
     const notesRef = useRef('');
     const [hasNotes, setHasNotes] = useState(false);
 
     useEffect(() => {
 
         async function fetchData() {
-            let doc = await firestore
+            await firestore
             .collection("UserBookNotes")
             .where("uid", "==", auth.currentUser.uid)
             .where("bookEditionKey", "==", bookEditionKey)
             .get()
-
-            if(doc.docs[0]) {
-                notesRef.current.value = doc.docs[0].data().notes;
-                setHasNotes(true);
-            }
+            .then(res => {
+                if(res.docs[0]) {
+                    var note = res.docs[0].data().notes
+                    notesRef.current = note;
+                    setHasNotes(true);
+                } 
+                setLoading(false)
+            })
         }
 
         fetchData();
@@ -46,7 +50,7 @@ const NotesInput = ( {bookEditionKey} ) => {
         
         if(!document.empty) {
             firestore.collection('UserBookNotes').doc(document.docs[0].id).set({
-                notes: notes,
+                notes: notes,   
                 modifiedAt: new Date()
             }, {merge: true})
         } else {
@@ -62,10 +66,14 @@ const NotesInput = ( {bookEditionKey} ) => {
         setHasNotes(true);
     }
 
+    if(loading){
+        return <></>
+    }
+
     if(hasNotes) {
         return (
             <>
-                <NotesInputView handleOnClick={handleOnClick} currentValue={notesRef.current.value} setHasNotes={setHasNotes}/>
+                <NotesInputView handleOnClick={handleOnClick} currentValue={notesRef.current} setHasNotes={setHasNotes}/>
             </>
         )
     }
