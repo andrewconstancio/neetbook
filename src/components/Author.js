@@ -27,8 +27,6 @@ const Author = ( {authorKey} ) => {
         fetchData();
     }, []);
 
-    console.log(authorInfo)
-
     if(!authorInfo) {
         return (
             <></>
@@ -36,22 +34,9 @@ const Author = ( {authorKey} ) => {
     }
 
     return (
-        <Stack w={225} mt={5}>
-            <Box >
-                <Image 
-                    borderRadius='full' 
-                    style={{width: "55px", height: "55px", display: "inline-block", float: "left"}}
-                    src={`https://covers.openlibrary.org/b/id/${authorInfo.photos[0]}.jpg`}
-                    alt="hey"
-                />
-                <Text style={{float: "right", marginTop: "15px"}}><b>{authorInfo.name}</b></Text>
-            </Box>
-            <Box w={250} align="left">
-                <Text fontSize='sm'>
-                    {authorInfo.bio}
-                </Text>
-            </Box>
-        </Stack>
+        <Text>
+            <i>{authorInfo.name}</i>
+        </Text>
     )
 }
 

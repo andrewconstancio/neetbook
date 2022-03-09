@@ -29,6 +29,7 @@ const Header = (props) => {
         <Flex
             bg="#161616" 
             color="white" 
+            className="sticky"
         >
             <Flex 
                 className="center"

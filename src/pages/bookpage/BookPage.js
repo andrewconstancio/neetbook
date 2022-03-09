@@ -28,22 +28,26 @@ const BookPage = (props) => {
         return <div>Loading</div>
     }
 
+    console.log(book.subjects.slice(0, 7))
+
     return (
         <div className='container'>
             <Flex direction={['column', 'column', 'column', 'row', 'row']}>
-                <Box flexShrink={0} w={["100%", "100%","100%", "auto", "30%"]} pr={[0, 6]} align="center">
+                <Box 
+                    flexShrink={0} 
+                    w={["100%", "100%","100%", "auto", "30%"]} 
+                    pr={[0, 6]} 
+                    align="center" 
+                    className="column-1"
+                >
                     <CoverImagePreview coverId={book.covers[0]} />
                     <RatingInput bookEditionKey={bookEditionKey} />
                     <ReadButtonInput bookEditionKey={bookEditionKey} />
                 </Box>
-                <Box 
-                    w={["100%", "100%","100%", "100%", "70%"]}
-                >
+                <Box w={["100%", "100%","100%", "100%", "70%"]} className="column-2">
                     <Box mt={["15px", "15px", "15px", "15px", "0px"]}>
                         <Text><b>{book.title}</b></Text>
-                        <Text>
-                            <i>Andrew Constancio ({book.first_publish_date})</i>
-                        </Text>
+                        <Author authorKey={book.authors[0].author.key} />
                     </Box>
                     <Box>
                     </Box>
