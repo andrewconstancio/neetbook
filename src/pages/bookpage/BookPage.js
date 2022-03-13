@@ -10,8 +10,9 @@ import useBookSingleInfo from '../../Hooks/useBookSingleInfo';
 import './BookPage.css'
 import RatingInput from '../../components/RatingInput';
 import ReadButtonInput from '../../components/ReadButtonInput';
-import NotesInput from '../../components/NotesInput';
 import Author from '../../components/Author';
+import SubjectButton from '../../components/SubjectButton';
+import CommentMain from '../../components/Comments/CommentMain';
 
 const BookPage = (props) => {
 
@@ -28,8 +29,6 @@ const BookPage = (props) => {
         return <div>Loading</div>
     }
 
-    console.log(book.subjects.slice(0, 7))
-
     return (
         <div className='container'>
             <Flex direction={['column', 'column', 'column', 'row', 'row']}>
@@ -40,9 +39,11 @@ const BookPage = (props) => {
                     align="center" 
                     className="column-1"
                 >
-                    <CoverImagePreview coverId={book.covers[0]} />
-                    <RatingInput bookEditionKey={bookEditionKey} />
-                    <ReadButtonInput bookEditionKey={bookEditionKey} />
+                    <Box className="sticky-left-column">
+                        <CoverImagePreview coverId={book.covers[0]} />
+                        <RatingInput bookEditionKey={bookEditionKey} />
+                        <ReadButtonInput bookEditionKey={bookEditionKey} />
+                    </Box>
                 </Box>
                 <Box w={["100%", "100%","100%", "100%", "70%"]} className="column-2">
                     <Box mt={["15px", "15px", "15px", "15px", "0px"]}>
@@ -55,17 +56,13 @@ const BookPage = (props) => {
                         <Text mt={5} fontSize='sm'>
                             {typeof book.description === 'object' ? book.description.value : book.description !== null ? book.description : "This edition doesn't have a description yet."}
                         </Text>
+                        {book.subjects.slice(0, 7).map((subject) => {
+                            return (
+                                <SubjectButton key={subject} subject={subject} />
+                            )
+                        })}
                     </Box>
-                    <Flex direction={['column', 'column', 'column', 'row', 'row']} mt={10}>
-                        <Box>
-                            {/* <RatingInput bookEditionKey={bookEditionKey} /> */}
-                        </Box>
-                        <Spacer />
-                        <Box mt={["15px", "15px", "15px", "0px", "0px"]}>
-                            {/* <ReadButtonInput bookEditionKey={bookEditionKey} /> */}
-                        </Box>
-                    </Flex>
-                    <NotesInput bookEditionKey={bookEditionKey} />
+                    <CommentMain bookEditionKey={bookEditionKey} />
                 </Box>
             </Flex>
         </div>

@@ -1,11 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react'
-import {
-    Button,
-    Textarea
-} from "@chakra-ui/react"
 import { auth, firestore } from '../config/firebase-config';
 import NotesInputEdit from './NotesInputEdit';
-import NotesInputView from './NotesInputView';
+import Comment from './Comments/Comment';
 
 const NotesInput = ( {bookEditionKey} ) => {
     const [loading, setLoading] = useState(true);
@@ -73,7 +69,7 @@ const NotesInput = ( {bookEditionKey} ) => {
     if(hasNotes) {
         return (
             <>
-                <NotesInputView handleOnClick={handleOnClick} currentValue={notesRef.current} setHasNotes={setHasNotes}/>
+                <Comment handleOnClick={handleOnClick} currentValue={notesRef.current} setHasNotes={setHasNotes}/>
             </>
         )
     }

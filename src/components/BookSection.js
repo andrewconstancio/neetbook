@@ -2,9 +2,7 @@ import React, { useState, useEffect } from 'react'
 import OpenLibrary from '../apis/OpenLibrary';
 import LoadingBook from './LoadingBook'
 import {
-    Box,
     SimpleGrid,
-    Image,
     Heading,
     Flex
 } from "@chakra-ui/react"

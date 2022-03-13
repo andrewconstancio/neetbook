@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 // import { Router, Route, Switch } from 'react-router-dom';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Header from './components/Header';
@@ -11,8 +11,9 @@ import Footer from './components/Footer'
 import './App.css'
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
-import SignUp from './pages/SignIn/SignIn';
-import firebase, { auth } from './config/firebase-config'
+import SignIn from './pages/SignIn/SignIn';
+import firebase, { auth, firestore } from './config/firebase-config'
+import CreateUserProfile from './pages/CreateUserProfile/CreateUserProfile';
 
 
 const App = () => {
@@ -30,6 +31,8 @@ const App = () => {
                 <Header websitename={webSiteName} />
                 <Switch>
                     <Route path="/" exact component={Home} />
+                    <Route path="/signin" exact component={SignIn} />
+                    <Route path="/createprofile" exact component={CreateUserProfile} />
                     <Route path="/explore" exact component={Explore} />
                     <Route path="/mycollection" exact component={MyCollection} />
                     <Route path="/subject/:name" exact component={AllBooksBySubject} />
@@ -41,4 +44,4 @@ const App = () => {
     </div>;
 };
 
-export default App;
+export default App;   
