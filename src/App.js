@@ -10,9 +10,8 @@ import BookPage from './pages/bookpage/BookPage';
 import Footer from './components/Footer'
 import './App.css'
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useCollectionData } from 'react-firebase-hooks/firestore';
 import SignIn from './pages/SignIn/SignIn';
-import firebase, { auth, firestore } from './config/firebase-config'
+import { auth } from './config/firebase-config'
 import CreateUserProfile from './pages/CreateUserProfile/CreateUserProfile';
 
 
@@ -22,7 +21,7 @@ const App = () => {
     const [user] = useAuthState(auth);
 
     if(!user) {
-        return <SignUp websitename={webSiteName} />
+        return <SignIn websitename={webSiteName} />
     }
 
     return <div id="page-container">
@@ -44,4 +43,4 @@ const App = () => {
     </div>;
 };
 
-export default App;   
+export default App;
