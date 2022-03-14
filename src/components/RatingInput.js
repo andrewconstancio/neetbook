@@ -6,16 +6,14 @@ import {
 import { auth, firestore } from '../config/firebase-config';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 
-const RatingCustom = ( {bookEditionKey} ) => {
+const RatingCustom = ( {bookEditionKey, setHasRead} ) => {
 
     const [loading, setLoading] = useState(true);
     const [ratingChanged, setRatingChanged] = useState(false);
     const [ratingValue, setRatingValue] = useState(0);
 
     useEffect(() => {
-
         setLoading(true);
-
         async function fetchData() {
             await firestore
             .collection("UserBookRatings")

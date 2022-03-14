@@ -12,7 +12,7 @@ import './App.css'
 import { useAuthState } from 'react-firebase-hooks/auth';
 import SignIn from './pages/SignIn/SignIn';
 import { auth } from './config/firebase-config'
-import CreateUserProfile from './pages/CreateUserProfile/CreateUserProfile';
+// import CreateUserProfile from './pages/CreateUserProfile/CreateUserProfile';
 
 
 const App = () => {
@@ -28,7 +28,7 @@ const App = () => {
                     <Route exact path="/">
                         {user ? <Route path="/" exact component={Home} /> : <SignIn websitename={webSiteName} />}
                     </Route>
-                    <Route path="/createprofile" exact component={CreateUserProfile} />
+                    {/* <Route path="/createprofile" exact component={CreateUserProfile} /> */}
                     <Route path="/explore" exact component={Explore} />
                     <Route path="/mycollection" exact component={MyCollection} />
                     <Route path="/subject/:name" exact component={AllBooksBySubject} />

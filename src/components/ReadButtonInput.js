@@ -5,11 +5,10 @@ import {
 import { auth, firestore } from '../config/firebase-config';
 import '../pages/explore/Explore.css'
 
-const ReadButton = ( {bookEditionKey} ) => {
+const ReadButton = ( {bookEditionKey, hasRead, setHasRead} ) => {
 
 
     const [loading, setLoading] = useState(false);
-    const [hasRead, setHasRead] = useState(false);
     const [wantsToRead, setWantsToRead] = useState(false);
 
     useEffect(() => {
@@ -33,6 +32,7 @@ const ReadButton = ( {bookEditionKey} ) => {
 
         fetchData();
     }, []);
+    
 
     const checkButtonValRead = () => {
         let read = hasRead ? false : true
@@ -46,13 +46,11 @@ const ReadButton = ( {bookEditionKey} ) => {
     const checkButtonValWantToRead = () => {
         let wantRead = wantsToRead ? false : true
 
-
         setHasRead(false);
         setWantsToRead(wantRead);
 
         handleOnClick(false, wantRead);
     }
-
 
     const handleOnClick = async (read, wantRead) => {
 

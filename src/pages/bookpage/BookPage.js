@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
     Flex,
     Box,
@@ -18,6 +18,7 @@ const BookPage = (props) => {
 
     const { bookKey } = props.location.state;
     const { bookEditionKey } = props.location.state;
+    const [hasRead, setHasRead] = useState(false);
 
     const {
         book,
@@ -41,8 +42,8 @@ const BookPage = (props) => {
                 >
                     <Box className="sticky-left-column">
                         <CoverImagePreview coverId={book.covers[0]} />
-                        <RatingInput bookEditionKey={bookEditionKey} />
-                        <ReadButtonInput bookEditionKey={bookEditionKey} />
+                        <RatingInput bookEditionKey={bookEditionKey} hasRead={hasRead} setHasRead={setHasRead} />
+                        <ReadButtonInput bookEditionKey={bookEditionKey} hasRead={hasRead} setHasRead={setHasRead}  />
                     </Box>
                 </Box>
                 <Box w={["100%", "100%","100%", "100%", "70%"]} className="column-2">
