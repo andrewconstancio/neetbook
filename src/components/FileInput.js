@@ -9,8 +9,6 @@ export default class FieldFileInput  extends Component{
         this.onChange = this.onChange.bind(this)
     }
 
-    state = {
-    }
 
     onChange(e) {
         const { input: { onChange } } = this.props
@@ -38,7 +36,7 @@ export default class FieldFileInput  extends Component{
                     style={{display: "none"}}
                 />
             </div>
-            <div onClick={this.triggerInputChange} className="" className="choose-image-outer" style={{display: this.state.fileSelected ? "none" : "block"}}>
+            <div onClick={this.triggerInputChange} className="choose-image-outer" style={{display: this.state.fileSelected ? "none" : "block"}}>
                 <BsFillPlusCircleFill className="plus-sign" />
             </div>
             <CoverImagePreview onClick={this.triggerInputChange} file={this.state.fileSelected} />

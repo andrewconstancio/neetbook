@@ -1,17 +1,36 @@
 import { Image, Box, Stack, Text } from '@chakra-ui/react'
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import './Comment.css';
-import { auth } from '../../config/firebase-config';
+import { auth, firestore } from '../../config/firebase-config';
 
-const Comment = ( {value, setHasNotes} ) => {
+const Comment = ( {value, setHasNotes, uid} ) => {
+
+    const [profileURL, setProfileURL] = useState('');
+    const [name, setName] = useState('');
+
+    useEffect(() => {
+        async function fetchData() {
+            const document = firestore
+            .collection("users")
+            .doc(uid)
+
+            document.get()
+            .then((docSnapshot) => {
+                setProfileURL(docSnapshot.data().profileURLGoogle);
+                setName(docSnapshot.data().name);
+            })
+        }
+        if(uid) fetchData();
+    }, [uid]);
+
     return (
         <div className='view-outer-container'>
             <Stack direction={['row']} spacing='15px'>
                 <Box style={{maxWidth: "50px", minWidth: "50px"}}>
                     <Image 
                         borderRadius='full' 
-                        src={auth.currentUser.photoURL} 
-                        alt={auth.currentUser.displayName} 
+                        src={profileURL} 
+                        alt={name} 
                     />
                 </Box>
                 <Box w="90%">

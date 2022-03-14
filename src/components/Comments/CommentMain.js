@@ -30,7 +30,7 @@ const CommentMain = ( {bookEditionKey} ) => {
             <Heading as='h5' size='md' mt={5} mb={5} style={{cursor: "pointer"}}>Comments</Heading>
             {comments.map((com) => {
                 return (
-                    <Comment key={com.data().uid} bookEditionKey={bookEditionKey} value={com.data().notes} />
+                    <Comment key={com.data().uid} uid={com.data().uid} bookEditionKey={bookEditionKey} value={com.data().notes} />
                 )
             })}
         </div>
