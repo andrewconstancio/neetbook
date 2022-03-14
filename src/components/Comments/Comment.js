@@ -55,12 +55,16 @@ const Comment = ( {value, setHasNotes, uid} ) => {
                                 <PopoverTrigger>
                                     <i style={{float: "right", marginTop: "4px", opacity: "0.5"}} className="fa-solid fa-ellipsis-vertical"></i>
                                 </PopoverTrigger>
-                                <PopoverContent color='white' bg='blue.800' >
-                                    <PopoverArrow />
-                                    <PopoverCloseButton />
+                                <PopoverContent color='white' bg='#282828' style={{border: "none"}}  >
                                     <PopoverBody>
-                                        <i className="fa-solid fa-trash-can"></i>
-                                        <Text>Delete</Text>
+                                        <HStack>
+                                            <Box>
+                                                <i className="fa-solid fa-trash-can"></i>
+                                            </Box>
+                                            <Box>
+                                                <Text>Delete</Text>
+                                            </Box>
+                                        </HStack>
                                     </PopoverBody>
                                 </PopoverContent>
                             </Popover>

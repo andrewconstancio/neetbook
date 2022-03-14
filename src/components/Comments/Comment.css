@@ -3,3 +3,5 @@
     margin-top: 15px;
     border-radius: 5px;
 }
+
+:focus {outline:0 !important;}
