@@ -44,7 +44,7 @@ const CommentNew = ({bookEditionKey, profileURL, getComments}) => {
                 <hr />
                 <Box w="90%">
                     <Textarea size="sm" focusBorderColor="none" border="none" placeholder='Your thoughts...' ref={notesRef}></Textarea>
-                    <Button onClick={handleOnClick} colorScheme='pink' size='md' style={{float: "right"}} w={{ base: '100%', md: '10%' }} mt={15}>
+                    <Button onClick={handleOnClick} colorScheme='pink' size='md' style={{float: "right"}} w={{ base: '100%', sm: '10%' }} mt={15}>
                         Post
                     </Button>
                 </Box>

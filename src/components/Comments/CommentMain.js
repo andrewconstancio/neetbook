@@ -18,8 +18,7 @@ const CommentMain = ( {bookEditionKey} ) => {
     }, []);
 
     const getComments = () => {
-
-        console.log("it got here")
+        
         async function fetchData() {
             await firestore
             .collection("UserBookNotes")
@@ -39,9 +38,9 @@ const CommentMain = ( {bookEditionKey} ) => {
             <Heading as='h5' size='md' mt={5} mb={5} style={{cursor: "pointer"}}>Comments</Heading>
             <CommentNew profileURL={auth.currentUser.photoURL} bookEditionKey={bookEditionKey} getComments={getComments} />
             <hr style={{opacity: "0.3"}} />
-            {comments.map((com) => {
+            {comments.map((com, i) => {
                 return (
-                    <Comment key={com.data().uid} uid={com.data().uid} bookEditionKey={bookEditionKey} value={com.data().notes} />
+                    <Comment key={i} uid={com.data().uid} bookEditionKey={bookEditionKey} value={com.data().notes} />
                 )
             })}
         </div>

@@ -1,4 +1,18 @@
-import { Image, Box, Stack, Text } from '@chakra-ui/react'
+import { Image, 
+        Box, 
+        Stack, 
+        Text, 
+        HStack,
+        Popover,
+        PopoverTrigger,
+        PopoverContent,
+        PopoverHeader,
+        PopoverBody,
+        PopoverFooter,
+        PopoverArrow,
+        PopoverCloseButton,
+        PopoverAnchor,
+} from '@chakra-ui/react'
 import React, {useEffect, useState} from 'react'
 import './Comment.css';
 import { auth, firestore } from '../../config/firebase-config';
@@ -36,19 +50,36 @@ const Comment = ( {value, setHasNotes, uid} ) => {
                 <Box w="90%">
                     <Stack>
                         <Box>
-                            <Text>{auth.currentUser.displayName}</Text>
+                            <Text style={{display: "inline"}}>{auth.currentUser.displayName}</Text>
+                            <Popover>
+                                <PopoverTrigger>
+                                    <i style={{float: "right", marginTop: "4px", opacity: "0.5"}} className="fa-solid fa-ellipsis-vertical"></i>
+                                </PopoverTrigger>
+                                <PopoverContent color='white' bg='blue.800' >
+                                    <PopoverArrow />
+                                    <PopoverCloseButton />
+                                    <PopoverBody>
+                                        <i className="fa-solid fa-trash-can"></i>
+                                        <Text>Delete</Text>
+                                    </PopoverBody>
+                                </PopoverContent>
+                            </Popover>
                         </Box>
                         <Box>
                             {value}
                         </Box>
+                        <Box>
+                            {/* <HStack spacing={15}>
+                                <Box>
+                                    <i class="fa-solid fa-thumbs-up"></i>
+                                </Box>
+                                <Box>
+                                    <i class="fa-solid fa-thumbs-down"></i>
+                                </Box>
+                            </HStack> */}
+                        </Box>
                     </Stack>
                 </Box>
-                {/* <Box>
-                    <i className="fa-solid fa-pen"
-                        onClick={(() => setHasNotes(false))}
-                    > 
-                    </i>
-                </Box> */}
             </Stack>
         </div>
     )
