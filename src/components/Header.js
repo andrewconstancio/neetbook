@@ -20,7 +20,6 @@ const Header = (props) => {
 
 
     const signOut = () => {
-        console.log(auth.currentUser);
         auth.signOut();
     }
 

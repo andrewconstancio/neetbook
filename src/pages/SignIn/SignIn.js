@@ -4,9 +4,10 @@ import { useAuth } from '../../contexts/AuthContext'
 import { Logo } from '../../components/Logo'
 import firebase, {auth} from '../../config/firebase-config'
 import CreateUserProfile from  '../CreateUserProfile/CreateUserProfile'
-import { useHistory } from 'react-router-dom'
+import { useHistory, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
-const SignUp = ({websitename}) => {
+const SignIn = ({websitename}) => {
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
     const history = useHistory();
@@ -15,12 +16,16 @@ const SignUp = ({websitename}) => {
         const provider = new firebase.auth.GoogleAuthProvider();
         firebase.auth().signInWithPopup(provider)
         .then((re) => {
-            history.push('/createprofile')
+            userAccountCreated(re.user.uid)
         })
         .catch((err) => {
             console.log(err);
         }) 
     }
+
+    const userAccountCreated = (uid) => {
+        history.push('/createprofile')
+    } 
 
     return (
         <Flex height="100vh" alignItems="center" justifyContent="center">
@@ -34,4 +39,4 @@ const SignUp = ({websitename}) => {
     )
 }
 
-export default SignUp
+export default SignIn

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 // import { Router, Route, Switch } from 'react-router-dom';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import Header from './components/Header';
 import Home from './pages/home/Home'
 import Explore from './pages/explore/Explore'
@@ -20,17 +20,14 @@ const App = () => {
     const bgColor = ""
     const [user] = useAuthState(auth);
 
-    if(!user) {
-        return <SignIn websitename={webSiteName} />
-    }
-
     return <div id="page-container">
         <BrowserRouter>
             <div>
-                <Header websitename={webSiteName} />
+                {user && <Header websitename={webSiteName} />}
                 <Switch>
-                    <Route path="/" exact component={Home} />
-                    <Route path="/signin" exact component={SignIn} />
+                    <Route exact path="/">
+                        {user ? <Route path="/" exact component={Home} /> : <SignIn websitename={webSiteName} />}
+                    </Route>
                     <Route path="/createprofile" exact component={CreateUserProfile} />
                     <Route path="/explore" exact component={Explore} />
                     <Route path="/mycollection" exact component={MyCollection} />
