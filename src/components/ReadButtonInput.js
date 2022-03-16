@@ -3,7 +3,7 @@ import {
     Button
 } from "@chakra-ui/react"
 import { auth, firestore } from '../config/firebase-config';
-import '../pages/explore/Explore.css'
+import '../pages/Explore/Explore.css'
 
 const ReadButton = ( {bookEditionKey, hasRead, setHasRead} ) => {
 

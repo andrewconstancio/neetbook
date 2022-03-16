@@ -1,23 +1,13 @@
 import { Image, 
         Box, 
         Stack, 
-        Text, 
-        HStack,
-        Popover,
-        PopoverTrigger,
-        PopoverContent,
-        PopoverHeader,
-        PopoverBody,
-        PopoverFooter,
-        PopoverArrow,
-        PopoverCloseButton,
-        PopoverAnchor,
+        Text
 } from '@chakra-ui/react'
 import React, {useEffect, useState} from 'react'
 import './Comment.css';
 import { auth, firestore } from '../../config/firebase-config';
-
-const Comment = ( {value, setHasNotes, uid} ) => {
+import CommentActionsPopover from './CommentActionsPopover';
+const Comment = ( {value, setHasNotes, uid, docRef, getComments} ) => {
 
     const [profileURL, setProfileURL] = useState('');
     const [name, setName] = useState('');
@@ -51,36 +41,10 @@ const Comment = ( {value, setHasNotes, uid} ) => {
                     <Stack>
                         <Box>
                             <Text style={{display: "inline"}}>{auth.currentUser.displayName}</Text>
-                            <Popover>
-                                <PopoverTrigger>
-                                    <i style={{float: "right", marginTop: "4px", opacity: "0.5"}} className="fa-solid fa-ellipsis-vertical"></i>
-                                </PopoverTrigger>
-                                <PopoverContent color='white' bg='#282828' style={{border: "none"}}  >
-                                    <PopoverBody>
-                                        <HStack>
-                                            <Box>
-                                                <i className="fa-solid fa-trash-can"></i>
-                                            </Box>
-                                            <Box>
-                                                <Text>Delete</Text>
-                                            </Box>
-                                        </HStack>
-                                    </PopoverBody>
-                                </PopoverContent>
-                            </Popover>
+                            <CommentActionsPopover uid={uid} docRef={docRef} getComments={getComments} />
                         </Box>
                         <Box>
                             {value}
-                        </Box>
-                        <Box>
-                            {/* <HStack spacing={15}>
-                                <Box>
-                                    <i class="fa-solid fa-thumbs-up"></i>
-                                </Box>
-                                <Box>
-                                    <i class="fa-solid fa-thumbs-down"></i>
-                                </Box>
-                            </HStack> */}
                         </Box>
                     </Stack>
                 </Box>

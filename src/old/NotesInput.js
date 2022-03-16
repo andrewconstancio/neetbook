@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react'
 import { auth, firestore } from '../config/firebase-config';
 import NotesInputEdit from './NotesInputEdit';
-import Comment from './Comments/Comment';
+import Comment from '../components/Comments/Comment';
 
 const NotesInput = ( {bookEditionKey} ) => {
     const [loading, setLoading] = useState(true);

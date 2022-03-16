@@ -1,5 +1,5 @@
 import React, {useState, useEffect } from 'react'
-import NotesInput from '../../components/NotesInput';
+import NotesInput from '../../old/NotesInput';
 import {
     Heading,
     Button,
@@ -7,7 +7,8 @@ import {
 } from "@chakra-ui/react"
 import Comment from './Comment';
 import {auth, firestore } from '../../config/firebase-config';
-import CommentNew from './CommentNew';
+import { TailSpin } from  'react-loader-spinner'
+import '../loader.css'
 
 const CommentMain = ( {bookEditionKey} ) => {
     const [loading, setLoading] = useState(true);
@@ -18,6 +19,8 @@ const CommentMain = ( {bookEditionKey} ) => {
     }, []);
 
     const getComments = () => {
+
+        setLoading(true);
         
         async function fetchData() {
             await firestore
@@ -27,20 +30,28 @@ const CommentMain = ( {bookEditionKey} ) => {
             .get()
             .then(res => {
                 setComments([...res.docs])
+                setLoading(false);
             })
         }
     
         fetchData();
     }
 
+    if(!loading) {
+        return (
+            <div className='outer-container'>
+                <div className='inner-container'>
+                    <TailSpin color="rgb(255, 0, 77)" height={40} width={40} />
+                </div>
+            </div>
+        )
+    }
+
     return (
         <div>
-            <Heading as='h5' size='md' mt={5} mb={5} style={{cursor: "pointer"}}>Comments</Heading>
-            <CommentNew profileURL={auth.currentUser.photoURL} bookEditionKey={bookEditionKey} getComments={getComments} />
-            <hr style={{opacity: "0.3"}} />
             {comments.map((com, i) => {
                 return (
-                    <Comment key={i} uid={com.data().uid} bookEditionKey={bookEditionKey} value={com.data().notes} />
+                    <Comment key={i} uid={com.data().uid} bookEditionKey={bookEditionKey} docRef={com.ref} getComments={getComments} value={com.data().notes} />
                 )
             })}
         </div>

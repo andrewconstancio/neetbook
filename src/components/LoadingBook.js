@@ -1,9 +1,9 @@
 import React from 'react'
-import '../pages//explore/Explore.css'
+import '../pages/Explore/Explore.css'
 import {
     Box
 } from "@chakra-ui/react"
-import '../pages/explore/Explore.css'
+import '../pages/Explore/Explore.css'
 
 const LoadingBook = ( {total} ) => {
 

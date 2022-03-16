@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 // import { Router, Route, Switch } from 'react-router-dom';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
-import Header from './components/Header';
-import Home from './pages/home/Home'
-import Explore from './pages/explore/Explore'
-import MyCollection from './pages/collection/MyCollection'
+import Header from './components/Header/Header';
+import Home from './pages/Home/Home'
+import Explore from './pages/Explore/Explore'
+import MyCollection from './pages/Collection/MyCollection'
 import AllBooksBySubject from './pages/AllBooksBySubject/AllBooksBySubject'
-import BookPage from './pages/bookpage/BookPage';
+import BookPage from './pages/BookPage/BookPage';
 import Footer from './components/Footer'
 import './App.css'
 import { useAuthState } from 'react-firebase-hooks/auth';

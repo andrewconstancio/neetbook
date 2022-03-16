@@ -13,7 +13,7 @@ import {
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
 import './Header.css'
-import { auth } from '../config/firebase-config'
+import { auth } from '../../config/firebase-config'
 const Header = (props) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const handleToggle = () => (isOpen ? onClose() : onOpen());

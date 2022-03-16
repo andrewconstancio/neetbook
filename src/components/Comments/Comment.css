@@ -4,4 +4,23 @@
     border-radius: 5px;
 }
 
-:focus {outline:0 !important;}
+.comment-action-item{
+    padding: 5px;
+}
+
+.comment-action-item:hover {
+    background-color: rgb(61, 61, 61);
+    cursor: pointer;
+    padding: 5px;
+}
+
+.popover-body {
+    padding: 10px 0px 10px 0px !important;
+}
+
+.action-comment {
+    float: right;
+    margin-top: 4px;
+    opacity: 0.5;
+    cursor: pointer
+}
