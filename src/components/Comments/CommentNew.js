@@ -7,8 +7,9 @@ import {
     Image
 } from "@chakra-ui/react"
 import { auth, firestore } from '../../config/firebase-config';
+import { getComments } from '../../Helper/GetComments'
 
-const CommentNew = ({bookEditionKey, profileURL, getComments}) => {
+const CommentNew = ({bookEditionKey, profileURL}) => {
 
     const notesRef = useRef('');
 
@@ -28,7 +29,7 @@ const CommentNew = ({bookEditionKey, profileURL, getComments}) => {
             createdAt: new Date()
         })
 
-        getComments();
+        getComments(bookEditionKey);
     }
 
     return (
