@@ -1,19 +1,28 @@
 import { Image, 
         Box, 
         Stack, 
-        Text
+        Text,
+        HStack
 } from '@chakra-ui/react'
 import React, {useEffect, useState} from 'react'
 import './Comment.css';
 import { auth, firestore } from '../../config/firebase-config';
 import CommentActionsPopover from './CommentActionsPopover';
-const Comment = ( {value, setHasNotes, uid, docRef, getComments} ) => {
+import LikeButton from './LikeButton';
+
+const Comment = ( {bookEditionKey, value, uid, docRef, getComments} ) => {
 
     const [profileURL, setProfileURL] = useState('');
+    const [loading, setLoading] = useState(true);
     const [name, setName] = useState('');
+    // const [dislikes, setDislikes] = useState(0);
+    // const [userHasDisliked, setUserHasDisliked] = useState(false);
 
     useEffect(() => {
         async function fetchData() {
+
+            setLoading(true)
+
             const document = firestore
             .collection("users")
             .doc(uid)
@@ -22,10 +31,69 @@ const Comment = ( {value, setHasNotes, uid, docRef, getComments} ) => {
             .then((docSnapshot) => {
                 setProfileURL(docSnapshot.data().profileURLGoogle);
                 setName(docSnapshot.data().name);
+                setLoading(false)
             })
         }
-        if(uid) fetchData();
+        if(uid) {
+            // fetchDislikeData();
+            fetchData();
+        } 
     }, [uid]);
+
+    // const fetchDislikeData = async () => {
+
+    //     setLoading(true)
+
+    //     const document = firestore
+    //     .collection("UserBookDislikes")
+    //     .where("bookEditionKey", "==", bookEditionKey)
+    //     .where("commentID", "==", docRef.id)
+    //     document.get()
+    //     .then((docSnapshot) => {
+    //         setDislikes(docSnapshot.docs.length);
+    //         fetchUserHasDisliked();
+    //         setLoading(false)
+    //     })
+    // }
+
+    const fetchUserHasDisliked = async () => {
+        setLoading(true)
+        
+        const document = firestore
+        .collection("UserBookDislikes")
+        .where("bookEditionKey", "==", bookEditionKey)
+        .where("commentID", "==", docRef.id)
+        .where("uid", "==", auth.currentUser.uid)
+        document.get()
+
+        .then((docSnapshot) => {
+            if(!docSnapshot.empty) {
+                setUserHasDisliked(true)
+                setLoading(false)
+            }
+        })
+    }
+
+
+
+    // const handleDislike = () => {
+    //     firestore.collection('UserBookDislikes').add({
+    //         commentID: docRef.id,
+    //         uid: auth.currentUser.uid,
+    //         bookEditionKey: bookEditionKey,
+    //         createdAt: new Date()
+    //     })
+        
+    //     fetchDislikeData();
+    // }
+
+    if(loading) {
+        return (
+            <></>
+        )
+    }
+
+    console.log("HEREEE");
 
     return (
         <div className='view-outer-container'>
@@ -46,6 +114,22 @@ const Comment = ( {value, setHasNotes, uid, docRef, getComments} ) => {
                         <Box>
                             {value}
                         </Box>
+                        {/* <Box>
+                            <HStack spacing={4}>
+                                <Box>
+                                    <LikeButton docRef={docRef} currUID={auth.currentUser.uid} bookEditionKey={bookEditionKey} />
+                                </Box>
+                                <Box>
+                                    {!userHasDisliked ? (
+                                        <i onClick={handleDislike} className="fa-regular fa-thumbs-down like-button"></i>
+                                    ) : (
+                                        <i className="fa-solid fa-thumbs-down like-button"></i>
+                                    )}
+
+                                    <Text style={{display: "inline"}} fontSize='xs'>{dislikes > 0 ? dislikes : ''}</Text>
+                                </Box>
+                            </HStack>
+                        </Box> */}
                     </Stack>
                 </Box>
             </Stack>

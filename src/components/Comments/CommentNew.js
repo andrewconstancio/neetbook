@@ -7,9 +7,10 @@ import {
     Image
 } from "@chakra-ui/react"
 import { auth, firestore } from '../../config/firebase-config';
-import { getComments } from '../../Helper/GetComments'
+import getComments from '../../Hooks/useGetComments'
+import ResizeTextarea from "react-textarea-autosize";
 
-const CommentNew = ({bookEditionKey, profileURL}) => {
+const CommentNew = ({bookEditionKey, profileURL, getComments}) => {
 
     const notesRef = useRef('');
 
@@ -29,7 +30,9 @@ const CommentNew = ({bookEditionKey, profileURL}) => {
             createdAt: new Date()
         })
 
-        getComments(bookEditionKey);
+        notesRef.current.value = '';
+
+        getComments(1);
     }
 
     return (
@@ -44,12 +47,21 @@ const CommentNew = ({bookEditionKey, profileURL}) => {
                 </Box>
                 <hr />
                 <Box w="90%">
-                    <Textarea size="sm" focusBorderColor="none" border="none" placeholder='Your thoughts...' ref={notesRef}></Textarea>
+                    <Textarea 
+                        size="sm" 
+                        focusBorderColor="none" 
+                        border="none" 
+                        resize="none"
+                        placeholder='Your thoughts...' 
+                        as={ResizeTextarea}
+                        overflow="hidden"
+                        ref={notesRef}></Textarea>
                     <Button onClick={handleOnClick} colorScheme='pink' size='md' style={{float: "right"}} w={{ base: '100%', sm: '10%' }} mt={15}>
                         Post
                     </Button>
                 </Box>
             </Stack>
+            <hr style={{marginTop: "20px", opacity: "0.3"}} />
         </div>
     )
 }

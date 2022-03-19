@@ -24,7 +24,7 @@ const CommentActionsPopover = ( {uid, docRef, getComments} ) => {
 
     const handleDelete = () => {
         docRef.delete();
-        getComments();
+        getComments(0);
     }
 
     const handleReport = () => {
