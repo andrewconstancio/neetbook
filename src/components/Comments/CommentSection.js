@@ -38,6 +38,14 @@ const CommentSection = ({currUserPhotoURL, bookEditionKey}) => {
         fetchData();
     }
 
+    if(loading) {
+        return (
+            <>
+                <Loader /> 
+            </>
+        )
+    }
+
     return (
         <>
             <Heading as='h5' size='md' mt={5} mb={5} style={{cursor: "pointer"}}>Notes</Heading>

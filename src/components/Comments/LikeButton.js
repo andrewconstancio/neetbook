@@ -7,8 +7,8 @@ import { firestore } from '../../config/firebase-config';
 const LikeButton = ( {docRef, currUID, bookEditionKey} ) => {
 
     const [userHasLiked, setUserHasLiked] = useState(false);
-    // const [likes, setLikes] = useState(0);
-    
+    const [likes, setLikes] = useState(0);
+
     const handleLike = () => {
 
         firestore.collection('UserBookLikes').add({
@@ -17,11 +17,12 @@ const LikeButton = ( {docRef, currUID, bookEditionKey} ) => {
             bookEditionKey: bookEditionKey,
             createdAt: new Date()
         })
-        fetchLikeData();
+        
+        setLikes(likes + 1);
+        setUserHasLiked(true);
     }
 
-    const fetchLikeData = async () => {
-
+    useEffect(() => {
         const document = firestore
         .collection("UserBookLikes")
         .where("bookEditionKey", "==", bookEditionKey)
@@ -33,12 +34,9 @@ const LikeButton = ( {docRef, currUID, bookEditionKey} ) => {
                     setUserHasLiked(true)
                 }
             }) 
-            // setLikes(docSnapshot.docs.length);
+            setLikes(docSnapshot.docs.length);
         })
-    }
-
-    console.log("userHasLiked: " + userHasLiked);
-    console.log("docRef: " + docRef.id);
+    }, [])
 
     return (
         <>
@@ -48,7 +46,7 @@ const LikeButton = ( {docRef, currUID, bookEditionKey} ) => {
                 <i className="fa-solid fa-thumbs-up like-button"></i>
             )}
 
-            {/* <Text style={{display: "inline"}} fontSize='xs'>{likes > 0 ? likes : ''}</Text> */}
+            <Text style={{display: "inline"}} fontSize='xs'>{likes > 0 ? likes : ''}</Text>
         </>
     )
 }

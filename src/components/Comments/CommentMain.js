@@ -11,6 +11,7 @@ const CommentMain = ( {bookEditionKey, comments, getComments} ) => {
     return (
         <div>
             {comments.map((com, i) => {
+                console.log("MAPPED: " + i)
                 return (
                     <Comment key={i} uid={com.data().uid} bookEditionKey={bookEditionKey} docRef={com.ref} getComments={getComments} value={com.data().notes} />
                 )
@@ -18,5 +19,6 @@ const CommentMain = ( {bookEditionKey, comments, getComments} ) => {
         </div>
     )
 }
+
 
 export default CommentMain

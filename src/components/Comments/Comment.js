@@ -114,12 +114,12 @@ const Comment = ( {bookEditionKey, value, uid, docRef, getComments} ) => {
                         <Box>
                             {value}
                         </Box>
-                        {/* <Box>
+                        <Box>
                             <HStack spacing={4}>
                                 <Box>
                                     <LikeButton docRef={docRef} currUID={auth.currentUser.uid} bookEditionKey={bookEditionKey} />
                                 </Box>
-                                <Box>
+                                {/* <Box>
                                     {!userHasDisliked ? (
                                         <i onClick={handleDislike} className="fa-regular fa-thumbs-down like-button"></i>
                                     ) : (
@@ -127,9 +127,9 @@ const Comment = ( {bookEditionKey, value, uid, docRef, getComments} ) => {
                                     )}
 
                                     <Text style={{display: "inline"}} fontSize='xs'>{dislikes > 0 ? dislikes : ''}</Text>
-                                </Box>
+                                </Box> */}
                             </HStack>
-                        </Box> */}
+                        </Box>
                     </Stack>
                 </Box>
             </Stack>
