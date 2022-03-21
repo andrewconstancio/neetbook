@@ -5,22 +5,24 @@ import {
     Heading,
     Flex,
     Text,
-    Button,
     useDisclosure,
     Image,
     Input
 } from "@chakra-ui/react";
-import { HamburgerIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
 import './Header.css'
 import { auth } from '../../config/firebase-config'
+import { useSelector } from 'react-redux';
+
 const Header = (props) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const handleToggle = () => (isOpen ? onClose() : onOpen());
+    const currentUser = useSelector((state) => state.auth.user);
 
 
     const signOut = () => {
-        auth.signOut();
+        console.log(currentUser);
+        currentUser.signOut();
+        // auth.signOut();
     }
 
     return (
@@ -92,7 +94,7 @@ const Header = (props) => {
                 </Stack>
 
                 <Box 
-                    mt={{ base: 4, md: 0 }} mt={1} mr={5} ml={5} flexGrow={1} 
+                    mt={{ base: 4, md: 0 }} mr={5} ml={5} flexGrow={1} 
                     display={{ base: "none", md: "flex" }}
                 >
                     <Input variant='filled'  style={{ backgroundColor : "#232323"}}  placeholder='Search...' size='md' />
@@ -102,7 +104,7 @@ const Header = (props) => {
                     // display={{ base: isOpen ? "block" : "none", md: "block" }}
                     mt={{ base: 4, md: 0 }}
                 >
-                    <Image borderRadius='full' boxSize='50px' onClick={signOut} src={auth.currentUser.photoURL} alt={auth.currentUser.displayName} />
+                    <Image borderRadius='full' boxSize='50px' onClick={signOut} src={currentUser.photoURL} alt={currentUser.displayName} />
                 </Box>
             </Flex>
         </Flex>

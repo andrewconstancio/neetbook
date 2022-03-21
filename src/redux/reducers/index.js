@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
-import booksReducer from './booksReducer';
 import { reducer as formReducer } from 'redux-form';
 import { firestoreReducer } from 'redux-firestore';
-import userBookRatingInfo from './userBookRatingInfo';
+import commentsReducer from './commentsReducer';
+import authReducer from './authReducer';
 
 export default combineReducers({
-    homePage: booksReducer,
-    userBookInfo: userBookRatingInfo,
     form: formReducer,
-    firestore: firestoreReducer
+    firestore: firestoreReducer,
+    comments: commentsReducer,
+    auth: authReducer
 });

@@ -9,10 +9,13 @@ import AllBooksBySubject from './pages/AllBooksBySubject/AllBooksBySubject'
 import BookPage from './pages/BookPage/BookPage';
 import Footer from './components/Footer'
 import './App.css'
-import { useAuthState } from 'react-firebase-hooks/auth';
 import SignIn from './pages/SignIn/SignIn';
-import { auth } from './config/firebase-config'
 // import CreateUserProfile from './pages/CreateUserProfile/CreateUserProfile';
+import { useSelector, useDispatch } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { actionCreators } from './redux'
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from './config/firebase-config'
 
 
 const App = () => {
@@ -26,7 +29,7 @@ const App = () => {
                 {user && <Header websitename={webSiteName} />}
                 <Switch>
                     <Route exact path="/">
-                        {user ? <Route path="/" exact component={Home} /> : <SignIn websitename={webSiteName} />}
+                        {user ? <Route path="/" exact component={Explore} /> : <SignIn websitename={webSiteName} />}
                     </Route>
                     {/* <Route path="/createprofile" exact component={CreateUserProfile} /> */}
                     <Route path="/explore" exact component={Explore} />

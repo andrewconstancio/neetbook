@@ -17,6 +17,7 @@ const CoverImagePreview = ({coverId}) => {
                     w={["90%", "90%", 225]} 
                     src={`https://covers.openlibrary.org/b/id/${coverId}.jpg`}
                     alt="aye" 
+                    className='cover-preview'
                 />
             </Box>
         </div>

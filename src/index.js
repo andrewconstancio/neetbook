@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
 import App from './App';
 import { ChakraProvider } from '@chakra-ui/react'
 import { createStore, applyMiddleware, compose } from 'redux';
@@ -10,7 +9,6 @@ import {reactReduxFirebase, getFirebase, reduxFirebase } from 'react-redux-fireb
 import {reduxFirestore, getFirestore } from 'redux-firestore';
 import firebase from './config/firebase-config'
 import { Provider } from 'react-redux';
-
 import theme from './theme';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

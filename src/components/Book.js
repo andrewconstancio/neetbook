@@ -5,6 +5,7 @@ import {
 } from "@chakra-ui/react"
 import '../pages/AllBooksBySubject/Book.css'
 import { Link } from 'react-router-dom'
+import './CoverImagePreview.css'
 
 const Book = ( {coverId, lastElemRef, edition, title, bookKey} ) => {
     return (
@@ -17,6 +18,7 @@ const Book = ( {coverId, lastElemRef, edition, title, bookKey} ) => {
                         w={[400, "auto", "auto"]} 
                         alt={title} 
                         style={{borderRadius: "20px"}}
+                        className="cover-preview"
                     />
                 </Box>
             </Link>

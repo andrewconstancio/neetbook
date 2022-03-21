@@ -19,8 +19,6 @@ const CommentSection = ({currUserPhotoURL, bookEditionKey}) => {
 
     const getComments = (showLoader) => {
 
-        console.log("showLoader: " + showLoader);
-
         if(showLoader) setLoading(true);
         
         async function fetchData() {
