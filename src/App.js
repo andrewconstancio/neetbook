@@ -17,7 +17,6 @@ import { actionCreators } from './redux'
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from './config/firebase-config'
 
-
 const App = () => {
     const webSiteName = "NEETBOOK";
     const bgColor = ""

@@ -1,17 +1,20 @@
-import { SIGN_IN, SIGN_OUT, SET_USER } from "../actions/types";
+import { 
+    SIGN_IN_GOOGLE, 
+    SIGN_IN_SUCCESS,
+    SIGN_IN_ERROR
+} from "../actions/types";
 
 const INITIAL_STATE = {
-    user: null
+    isSignedIn: false,
+    msg: ""
 };
 
 export default (state = INITIAL_STATE, action) => {
     switch(action.type) {
-        case SIGN_IN: 
-            return { ...state, user: user  };
-        case SIGN_OUT:
-            return { ...state, user: user  };
-        case SET_USER:
-            return { ...state, user: action.payload };
+        case SIGN_IN_SUCCESS:
+            return { ...state, isSignedIn: true, msg: action.payload  };
+        case SIGN_IN_ERROR:
+            return { ...state, isSignedIn: false, msg: action.payload};
         default: 
             return state;
     }

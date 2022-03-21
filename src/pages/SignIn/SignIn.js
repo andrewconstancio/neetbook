@@ -12,57 +12,7 @@ const SignIn = ({websitename}) => {
     const [loading, setLoading] = useState(false)
     const history = useHistory();
     const dispatch = useDispatch();
-    const { setUser } = bindActionCreators(actionCreators, dispatch)
-
-
-    const signInWithGoogle = () => {
-        const provider = new firebase.auth.GoogleAuthProvider();
-        firebase.auth().signInWithPopup(provider)
-        .then((re) => {
-            userAccountCreated(re.user.uid)
-        })
-        .catch((err) => {
-            console.log(err);
-        }) 
-    }
-
-    const setUserProfileImage = async (document) => {
-        await document.set({
-            name: auth.currentUser.displayName,
-            profileURLGoogle: auth.currentUser.photoURL,
-            createdAt: new Date()
-        })
-    }
-
-    const updateUserProfileImage = async (document) => {
-        await document.set({
-            profileURLGoogle: auth.currentUser.photoURL
-        })
-    }
-
-    const userAccountCreated = async (uid) => {
-        const document = firestore
-        .collection("users")
-        .doc(uid)
-
-        await document.get()
-        .then((docSnapshot)  =>  {
-            if (!docSnapshot.exists) {
-                setUserProfileImage(document);
-            } else if(docSnapshot.data().profileURLGoogle !== auth.currentUser.photoURL) {
-                updateUserProfileImage(document);
-            }
-        });
-
-        const userObj = {
-            uid: auth.currentUser.uid, 
-            displayName: auth.currentUser.displayName,
-            photoURL: auth.currentUser.photoURL,
-            signOut: auth.signOut
-        }
-
-        setUser(userObj)
-    } 
+    const { signInWithGoogle } = bindActionCreators(actionCreators, dispatch)
 
     return (
         <Flex height="100vh" alignItems="center" justifyContent="center">
