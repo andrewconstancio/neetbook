@@ -54,6 +54,11 @@ const ReadButton = ( {bookEditionKey, hasRead, setHasRead} ) => {
     const handleOnClick = async (read, wantRead, currReading) => {
 
         try {
+
+            setHasRead(read);
+            setWantsToRead(wantRead);
+            setCurrentlyReading(currReading);
+
             let document = await firestore
             .collection("UserBookRead")
             .where("uid", "==", auth.currentUser.uid)
@@ -78,13 +83,6 @@ const ReadButton = ( {bookEditionKey, hasRead, setHasRead} ) => {
                 })
             }
 
-            console.log("read: " + read);
-            console.log("wantRead: " + wantRead);
-            console.log("currReading" + currReading);
-
-            setHasRead(read);
-            setWantsToRead(wantRead);
-            setWantsToRead(currReading);
         } catch(err) {
             console.log("err" + err);
         }
@@ -93,6 +91,9 @@ const ReadButton = ( {bookEditionKey, hasRead, setHasRead} ) => {
     if(loading) {
         return (
             <>
+                <Button bg="#282828" className="shimmer" mt={5} size='md' w={{ base: '100%' }}>
+                    &nbsp;&nbsp;
+                </Button>
                 <Button bg="#282828" className="shimmer" mt={5} size='md' w={{ base: '100%' }}>
                     &nbsp;&nbsp;
                 </Button>
