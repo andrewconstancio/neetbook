@@ -4,8 +4,6 @@ import  'firebase/compat/firestore';
 import { getFirestore }  from '@firebase/firestore';
 import 'firebase/compat/storage'; 
 
-console.log(process.env.REACT_APP_FIREBASE_API_KEY);
-
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
     authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
