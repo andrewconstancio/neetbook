@@ -10,6 +10,7 @@ const ReadButton = ( {bookEditionKey, hasRead, setHasRead} ) => {
 
     const [loading, setLoading] = useState(false);
     const [wantsToRead, setWantsToRead] = useState(false);
+    const [currentlyReading, setCurrentlyReading] = useState(false);
 
     useEffect(() => {
 
@@ -25,6 +26,7 @@ const ReadButton = ( {bookEditionKey, hasRead, setHasRead} ) => {
                 if(res.docs[0]) {
                     setHasRead(res.docs[0].data().read);
                     setWantsToRead(res.docs[0].data().wantsToRead);
+                    setCurrentlyReading(res.docs[0].data().currentlyReading);
                 }
                 setLoading(false)
             })
@@ -36,23 +38,20 @@ const ReadButton = ( {bookEditionKey, hasRead, setHasRead} ) => {
 
     const checkButtonValRead = () => {
         let read = hasRead ? false : true
-
-        setHasRead(read);
-        setWantsToRead(false);
-
-        handleOnClick(read, false);
+        handleOnClick(read, false, false);
     }
 
     const checkButtonValWantToRead = () => {
         let wantRead = wantsToRead ? false : true
-
-        setHasRead(false);
-        setWantsToRead(wantRead);
-
-        handleOnClick(false, wantRead);
+        handleOnClick(false, wantRead, false);
     }
 
-    const handleOnClick = async (read, wantRead) => {
+    const checkButtonValCurrentlyReading = () => {
+        let currReading = currentlyReading ? false : true
+        handleOnClick(false, false, currReading);
+    }
+
+    const handleOnClick = async (read, wantRead, currReading) => {
 
         try {
             let document = await firestore
@@ -65,20 +64,27 @@ const ReadButton = ( {bookEditionKey, hasRead, setHasRead} ) => {
                 firestore.collection('UserBookRead').doc(document.docs[0].id).set({
                     read: read,
                     wantsToRead: wantRead,
+                    currentlyReading: currReading,
                     modifiedAt: new Date()
                 }, {merge: true})
             } else {
                 firestore.collection('UserBookRead').add({
                     read: read,
                     wantsToRead: wantRead,
+                    currentlyReading: currReading,
                     bookEditionKey: bookEditionKey,
                     uid: auth.currentUser.uid,
                     createdAt: new Date()
                 })
             }
 
+            console.log("read: " + read);
+            console.log("wantRead: " + wantRead);
+            console.log("currReading" + currReading);
+
             setHasRead(read);
             setWantsToRead(wantRead);
+            setWantsToRead(currReading);
         } catch(err) {
             console.log("err" + err);
         }
@@ -107,6 +113,11 @@ const ReadButton = ( {bookEditionKey, hasRead, setHasRead} ) => {
             <Button onClick={checkButtonValWantToRead} colorScheme={wantsToRead ? "orange" : "grey"} mt={5} size='md' w={{ base: '100%' }} variant={wantsToRead ? "solid" : "outline"}>
                 <i className="fa-solid fa-check" style={{display: wantsToRead ? "block" : "none"}}></i>
                 &nbsp;&nbsp;Want to Read
+            </Button>
+
+            <Button onClick={checkButtonValCurrentlyReading} colorScheme={currentlyReading ? "whiteAlpha" : "grey"} mt={5} size='md' w={{ base: '100%' }} variant={currentlyReading ? "solid" : "outline"}>
+                <i className="fa-solid fa-check" style={{display: currentlyReading ? "block" : "none"}}></i>
+                &nbsp;&nbsp;Currently Reading
             </Button>
         </>
     )
