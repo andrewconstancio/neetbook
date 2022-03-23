@@ -1,54 +1,105 @@
-import React, { useState,  useEffect } from 'react'
+import React, { useState,  useEffect, useRef } from 'react'
 import {
-    Heading
+    Heading,
+    Button,
+    Textarea,
+    Stack,
+    Box,
+    Image
 } from "@chakra-ui/react"
-import CommentMain from './CommentMain';
-import CommentNew from './CommentNew';
 import Loader from '../loader';
 import {auth, firestore } from '../../config/firebase-config';
-
+import ResizeTextarea from "react-textarea-autosize";
+import Comment from './Comment';
 
 const CommentSection = ({currUserPhotoURL, bookEditionKey}) => {
 
     const [loading, setLoading] = useState(true);
     const [comments, setComments] = useState([]);
+    const notesRef = useRef('');
 
     useEffect(() => {
-        getComments(1);
+        firestore
+        .collection("UserBookComments")
+        .where("bookEditionKey", "==", bookEditionKey)
+        .orderBy('createdAt', 'desc')
+        .onSnapshot((snapshot) => {
+            setComments(
+                snapshot.docs.map((doc) => ({
+                    id: doc.id,
+                    data: doc.data(),
+                    ref: doc.ref
+                }))
+            )
+        });
     }, []);
 
-    const getComments = (showLoader) => {
+    const handleOnClick = async () => {
+        const notes = notesRef.current.value;
 
-        if(showLoader) setLoading(true);
-        
-        async function fetchData() {
-            await firestore
-            .collection("UserBookNotes")
-            .where("bookEditionKey", "==", bookEditionKey)
-            .orderBy('createdAt', 'desc')
-            .get()
-            .then(res => {
-                setComments([...res.docs])
-                setLoading(false);
-            })
+        if(!notes.trim()) {
+            alert("no notes");
+            return
         }
-    
-        fetchData();
-    }
 
-    if(loading) {
-        return (
-            <>
-                <Loader /> 
-            </>
-        )
+        firestore.collection('UserBookComments').add({
+            notes: notes,
+            bookEditionKey: bookEditionKey,
+            uid: auth.currentUser.uid,
+            displayName: auth.currentUser.displayName,
+            profileURL: auth.currentUser.photoURL,
+            likeCount: 0,
+            dislikeCount: 0,
+            createdAt: new Date()
+        })
+        notesRef.current.value = '';
     }
 
     return (
         <>
             <Heading as='h5' size='md' mt={5} mb={5} style={{cursor: "pointer"}}>Notes</Heading>
-            {loading ? <Loader /> : <CommentNew profileURL={currUserPhotoURL} getComments={getComments} bookEditionKey={bookEditionKey} />}
-            <CommentMain comments={comments} getComments={getComments} bookEditionKey={bookEditionKey} />
+            <div style={{padding: "5px", marginBottom: "15px"}}>
+                <Stack direction={['row']} spacing='15px'>
+                    <Box style={{maxWidth: "50px", minWidth: "50px"}}>
+                        <Image 
+                            borderRadius='full' 
+                            src={currUserPhotoURL} 
+                            alt={"yo"} 
+                        />
+                    </Box>
+                    <hr />
+                    <Box w="90%">
+                        <Textarea 
+                            size="sm" 
+                            focusBorderColor="none" 
+                            border="none" 
+                            resize="none"
+                            placeholder='Your thoughts...' 
+                            as={ResizeTextarea}
+                            overflow="hidden"
+                            ref={notesRef}></Textarea>
+                        <Button onClick={handleOnClick} colorScheme='pink' size='md' style={{float: "right"}} w={{ base: '100%', sm: '10%' }} mt={15}>
+                            Post
+                        </Button>
+                    </Box>
+                </Stack>
+                <hr style={{marginTop: "20px", opacity: "0.3"}} />
+            </div>
+            {comments.map(({id, ref, data: { notes, profileURL, displayName, likeCount, dislikeCount }}) => {
+                return(
+                    <Comment 
+                        key={id}
+                        notes={notes}
+                        profileURL={profileURL}
+                        displayName={displayName}
+                        docRef={ref}
+                        uid={auth.currentUser.uid}
+                        bookEditionKey={bookEditionKey}
+                        likeCount={likeCount}
+                        dislikeCount={dislikeCount}
+                    />
+                )
+            })}
         </>
     )
 }

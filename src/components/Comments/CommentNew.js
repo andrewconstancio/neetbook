@@ -9,6 +9,7 @@ import {
 import { auth, firestore } from '../../config/firebase-config';
 import getComments from '../../Hooks/useGetComments'
 import ResizeTextarea from "react-textarea-autosize";
+import Comment from './Comment';
 
 const CommentNew = ({bookEditionKey, profileURL, getComments}) => {
 
@@ -17,22 +18,19 @@ const CommentNew = ({bookEditionKey, profileURL, getComments}) => {
     const handleOnClick = async () => {
 
         const notes = notesRef.current.value;
-
         if(!notes.trim()) {
             alert("no notes");
             return
         }
-
         firestore.collection('UserBookNotes').add({
             notes: notes,
             bookEditionKey: bookEditionKey,
             uid: auth.currentUser.uid,
             createdAt: new Date()
         })
-
         notesRef.current.value = '';
-
         getComments(1);
+
     }
 
     return (
@@ -62,6 +60,7 @@ const CommentNew = ({bookEditionKey, profileURL, getComments}) => {
                 </Box>
             </Stack>
             <hr style={{marginTop: "20px", opacity: "0.3"}} />
+
         </div>
     )
 }

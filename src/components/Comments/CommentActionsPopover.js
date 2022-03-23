@@ -16,7 +16,7 @@ import {
 import './Comment.css'
 import { auth } from '../../config/firebase-config';
 
-const CommentActionsPopover = ( {uid, docRef, getComments} ) => {
+const CommentActionsPopover = ( {uid, docRef} ) => {
 
     const handleEdit = () => {
         console.log("edit");
@@ -24,7 +24,6 @@ const CommentActionsPopover = ( {uid, docRef, getComments} ) => {
 
     const handleDelete = () => {
         docRef.delete();
-        getComments(0);
     }
 
     const handleReport = () => {
