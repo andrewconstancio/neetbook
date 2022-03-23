@@ -5,18 +5,21 @@ import {
     Textarea,
     Stack,
     Box,
-    Image
+    Image,
+    Avatar
 } from "@chakra-ui/react"
 import Loader from '../loader';
-import {auth, firestore } from '../../config/firebase-config';
+import {firestore } from '../../config/firebase-config';
 import ResizeTextarea from "react-textarea-autosize";
 import Comment from './Comment';
+import { useSelector } from 'react-redux';
 
-const CommentSection = ({currUserPhotoURL, bookEditionKey}) => {
+const CommentSection = ({ bookEditionKey}) => {
 
     const [loading, setLoading] = useState(true);
     const [comments, setComments] = useState([]);
     const notesRef = useRef('');
+    const user = useSelector((state) => state.auth.user);
 
     useEffect(() => {
         firestore
@@ -45,9 +48,9 @@ const CommentSection = ({currUserPhotoURL, bookEditionKey}) => {
         firestore.collection('UserBookComments').add({
             notes: notes,
             bookEditionKey: bookEditionKey,
-            uid: auth.currentUser.uid,
-            displayName: auth.currentUser.displayName,
-            profileURL: auth.currentUser.photoURL,
+            uid: user.uid,
+            displayName: user.displayName,
+            profileURL: user.photoURL,
             likeCount: 0,
             dislikeCount: 0,
             createdAt: new Date()
@@ -61,11 +64,7 @@ const CommentSection = ({currUserPhotoURL, bookEditionKey}) => {
             <div style={{padding: "5px", marginBottom: "15px"}}>
                 <Stack direction={['row']} spacing='15px'>
                     <Box style={{maxWidth: "50px", minWidth: "50px"}}>
-                        <Image 
-                            borderRadius='full' 
-                            src={currUserPhotoURL} 
-                            alt={"yo"} 
-                        />
+                        <Avatar src={user.photoURL} name={user.displayName}  />
                     </Box>
                     <hr />
                     <Box w="90%">
@@ -93,7 +92,6 @@ const CommentSection = ({currUserPhotoURL, bookEditionKey}) => {
                         profileURL={profileURL}
                         displayName={displayName}
                         docRef={ref}
-                        uid={auth.currentUser.uid}
                         bookEditionKey={bookEditionKey}
                         likeCount={likeCount}
                         dislikeCount={dislikeCount}

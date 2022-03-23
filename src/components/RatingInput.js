@@ -4,20 +4,21 @@ import {
     Box
 } from "@chakra-ui/react";
 import { auth, firestore } from '../config/firebase-config';
-import { useCollectionData } from 'react-firebase-hooks/firestore';
+import { useSelector } from 'react-redux';
 
 const RatingCustom = ( {bookEditionKey, setHasRead} ) => {
 
     const [loading, setLoading] = useState(true);
     const [ratingChanged, setRatingChanged] = useState(false);
     const [ratingValue, setRatingValue] = useState(0);
+    const user = useSelector((state) => state.auth.user);
 
     useEffect(() => {
         setLoading(true);
         async function fetchData() {
             await firestore
             .collection("UserBookRatings")
-            .where("uid", "==", auth.currentUser.uid)
+            .where("uid", "==", user.uid)
             .where("bookEditionKey", "==", bookEditionKey)
             .get()
             .then(res =>{
@@ -38,7 +39,7 @@ const RatingCustom = ( {bookEditionKey, setHasRead} ) => {
 
             let document = await firestore
             .collection("UserBookRatings")
-            .where("uid", "==", auth.currentUser.uid)
+            .where("uid", "==", user.uid)
             .where("bookEditionKey", "==", bookEditionKey)
             .get()
 
@@ -46,14 +47,14 @@ const RatingCustom = ( {bookEditionKey, setHasRead} ) => {
                 firestore.collection('UserBookRatings').doc(document.docs[0].id).set({
                     rating: value,
                     bookEditionKey: bookEditionKey,
-                    uid: auth.currentUser.uid,
+                    uid: user.uid,
                     modifiedAt: new Date()
                 }, {merge: true})
             } else {
                 firestore.collection('UserBookRatings').add({
                     rating: value,
                     bookEditionKey: bookEditionKey,
-                    uid: auth.currentUser.uid,
+                    uid: user.uid,
                     createdAt: new Date()
                 })
             }
@@ -71,7 +72,7 @@ const RatingCustom = ( {bookEditionKey, setHasRead} ) => {
 
         firestore
         .collection('UserBookRatings')
-        .where("uid", "==", auth.currentUser.uid)
+        .where("uid", "==", user.uid)
         .where("bookEditionKey", "==", bookEditionKey)
         .onSnapshot((docs) => {
             docs.docs[0].ref.delete()

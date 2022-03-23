@@ -4,6 +4,7 @@ import {
 } from "@chakra-ui/react"
 import { auth, firestore } from '../config/firebase-config';
 import '../pages/Explore/Explore.css'
+import { useSelector } from 'react-redux';
 
 const ReadButton = ( {bookEditionKey, hasRead, setHasRead} ) => {
 
@@ -11,6 +12,7 @@ const ReadButton = ( {bookEditionKey, hasRead, setHasRead} ) => {
     const [loading, setLoading] = useState(false);
     const [wantsToRead, setWantsToRead] = useState(false);
     const [currentlyReading, setCurrentlyReading] = useState(false);
+    const user = useSelector((state) => state.auth.user);
 
     useEffect(() => {
 
@@ -19,7 +21,7 @@ const ReadButton = ( {bookEditionKey, hasRead, setHasRead} ) => {
         async function fetchData() {
             let doc = await firestore
             .collection("UserBookRead")
-            .where("uid", "==", auth.currentUser.uid)
+            .where("uid", "==", user.uid)
             .where("bookEditionKey", "==", bookEditionKey)
             .get()
             .then(res => {
@@ -61,7 +63,7 @@ const ReadButton = ( {bookEditionKey, hasRead, setHasRead} ) => {
 
             let document = await firestore
             .collection("UserBookRead")
-            .where("uid", "==", auth.currentUser.uid)
+            .where("uid", "==", user.uid)
             .where("bookEditionKey", "==", bookEditionKey)
             .get()
 
@@ -78,7 +80,7 @@ const ReadButton = ( {bookEditionKey, hasRead, setHasRead} ) => {
                     wantsToRead: wantRead,
                     currentlyReading: currReading,
                     bookEditionKey: bookEditionKey,
-                    uid: auth.currentUser.uid,
+                    uid: user.uid,
                     createdAt: new Date()
                 })
             }

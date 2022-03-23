@@ -3,8 +3,6 @@ import {
     Flex,
     Box,
     Text,
-    Spacer,
-    Heading
 } from "@chakra-ui/react"
 import CoverImagePreview from '../../components/CoverImagePreview'
 import useBookSingleInfo from '../../Hooks/useBookSingleInfo';
@@ -14,7 +12,6 @@ import ReadButtonInput from '../../components/ReadButtonInput';
 import Author from '../../components/Author';
 import SubjectButton from '../../components/SubjectButton';
 import CommentSection from '../../components/Comments/CommentSection';
-import { auth } from '../../config/firebase-config';
 
 const BookPage = (props) => {
 
@@ -65,7 +62,7 @@ const BookPage = (props) => {
                             )
                         })}
                     </Box>
-                    <CommentSection currUserPhotoURL={auth.currentUser.photoURL} bookEditionKey={bookEditionKey} />
+                    <CommentSection bookEditionKey={bookEditionKey} />
                 </Box>
             </Flex>
         </div>

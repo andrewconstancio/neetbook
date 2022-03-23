@@ -8,10 +8,15 @@ export const signInWithGoogle = () => async (dispatch, getState, { getFirebase, 
 
     const firebase = getFirebase();
     const provider = new firebase.auth.GoogleAuthProvider();
-    
     firebase.auth().signInWithPopup(provider)
     .then((re) => {
-        dispatch(checkProfileImage(re.user.uid))
+        const user = {
+                displayName: re.user.displayName, 
+                photoURL: re.user.photoURL, 
+                uid: re.user.uid,
+                email: re.user.email
+            }
+        dispatch(checkProfileImage(user, re.user.uid))
     })
     .catch((err) => {
         dispatch({
@@ -21,7 +26,7 @@ export const signInWithGoogle = () => async (dispatch, getState, { getFirebase, 
     }) 
 };
 
-export const checkProfileImage = (uid) => async (dispatch, getState, { getFirebase, getFirestore}) => {
+export const checkProfileImage = (user, uid) => async (dispatch, getState, { getFirebase, getFirestore}) => {
 
     const firestore = getFirestore();
     const document = firestore
@@ -31,13 +36,13 @@ export const checkProfileImage = (uid) => async (dispatch, getState, { getFireba
     await document.get()
     .then((docSnapshot)  =>  {
         if (!docSnapshot.exists) {
-            dispatch(setUserProfileImage(document));
+            dispatch(setUserProfileImage(user, document));
         } else if(docSnapshot.data().profileURLGoogle !== auth.currentUser.photoURL) {
-            dispatch(updateUserProfileImage(document));
+            dispatch(updateUserProfileImage(user, document));
         }
         dispatch({
             type: SIGN_IN_SUCCESS, 
-            payload: "Your were successfuly signed in!"
+            payload: user
         })
     }).catch(() => {
         dispatch({
@@ -47,7 +52,7 @@ export const checkProfileImage = (uid) => async (dispatch, getState, { getFireba
     })
 };
 
-export const setUserProfileImage = (doc) => async (dispatch, getState, { getFirebase, getFirestore}) => {
+export const setUserProfileImage = (user, doc) => async (dispatch, getState, { getFirebase, getFirestore}) => {
     await doc.set({
         name: auth.currentUser.displayName,
         profileURLGoogle: auth.currentUser.photoURL,
@@ -55,7 +60,7 @@ export const setUserProfileImage = (doc) => async (dispatch, getState, { getFire
     }).then(() => {
         dispatch({
             type: SIGN_IN_SUCCESS, 
-            payload: "Your were successfuly signed in!"
+            payload: user
         })
     }).catch(() =>{
         dispatch({
@@ -71,7 +76,7 @@ export const updateUserProfileImage = (doc) => async (dispatch, getState, { getF
     }).then(() => {
         dispatch({
             type: SIGN_IN_SUCCESS, 
-            payload: "Your were successfuly signed in!"
+            payload: user
         })
     }).catch(() =>{
         dispatch({

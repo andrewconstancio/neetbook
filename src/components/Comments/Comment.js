@@ -1,31 +1,27 @@
-import { Image, 
-        Box, 
+import { Box, 
         Stack, 
         Text,
-        HStack
+        HStack,
+        Avatar
 } from '@chakra-ui/react'
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import './Comment.css';
-import { auth, firestore } from '../../config/firebase-config';
 import CommentActionsPopover from './CommentActionsPopover';
 import LikeButton from './LikeButton';
+import DislikeButton from './DislikeButton';
 
-const Comment = ( {notes, profileURL, displayName, docRef, uid, bookEditionKey, likeCount, dislikeCount} ) => {
+const Comment = ( {notes, profileURL, displayName, docRef, bookEditionKey, likeCount, dislikeCount} ) => {
     return (
         <div className='view-outer-container'>
             <Stack direction={['row']} spacing='15px'>
                 <Box style={{maxWidth: "50px", minWidth: "50px"}}>
-                    <Image 
-                        borderRadius='full' 
-                        src={profileURL} 
-                        alt={displayName} 
-                    />
+                    <Avatar src={profileURL} name={displayName}  />
                 </Box>
                 <Box w="90%">
                     <Stack>
                         <Box>
                             <Text style={{display: "inline"}}>{displayName}</Text>
-                            <CommentActionsPopover uid={uid} docRef={docRef} />
+                            <CommentActionsPopover docRef={docRef} />
                         </Box>
                         <Box>
                             {notes}
@@ -33,8 +29,11 @@ const Comment = ( {notes, profileURL, displayName, docRef, uid, bookEditionKey, 
                         <Box>
                             <HStack spacing={4}>
                                 <Box>
-                                    <LikeButton docRef={docRef} likeCount={likeCount} currUID={uid} bookEditionKey={bookEditionKey} />
+                                    <LikeButton docRef={docRef} likeCount={likeCount} bookEditionKey={bookEditionKey} />
                                 </Box>
+                                {/* <Box>
+                                    <DislikeButton docRef={docRef} dislikeCount={dislikeCount} bookEditionKey={bookEditionKey} />
+                                </Box> */}
                             </HStack>
                         </Box>
                     </Stack>

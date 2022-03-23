@@ -10,23 +10,33 @@ import {reduxFirestore, getFirestore } from 'redux-firestore';
 import firebase from './config/firebase-config'
 import { Provider } from 'react-redux';
 import theme from './theme';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import { PersistGate } from 'redux-persist/integration/react';
 
+const persistConfig = {
+    key: 'main-root',
+    storage
+}
+const persistedReducer = persistReducer(persistConfig, reducers);
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
 const store = createStore(
-    reducers,
+    persistedReducer,
     composeEnhancers(
         applyMiddleware(thunk.withExtraArgument({getFirebase, getFirestore})),
         reduxFirestore(firebase),
         reduxFirebase(firebase)
     )
 );
+const Persistor = persistStore(store)
 
 ReactDOM.render(
     <Provider store={store}>
-        <ChakraProvider theme={theme}>
-            <App />
-        </ChakraProvider>
+        <PersistGate loading={null} persistor={Persistor}>
+            <ChakraProvider theme={theme}>
+                <App />
+            </ChakraProvider>
+        </PersistGate>
     </Provider>
     ,
     document.querySelector('#root')

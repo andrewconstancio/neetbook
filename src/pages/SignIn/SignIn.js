@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react'
-import { Button, Flex, Stack, Input} from '@chakra-ui/react'
+import React, { useEffect, useState, useRef } from 'react'
+import { Button, Box, HStack, Heading, Flex, Stack, Input, Text} from '@chakra-ui/react'
 import { Logo } from '../../components/Logo'
 import firebase, {auth, firestore} from '../../config/firebase-config'
 import { useHistory, Redirect } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators } from '../../redux'
+import { Link, useNavigate } from 'react-router-dom'
+import './SignIn.css'
 
 const SignIn = ({websitename}) => {
     const [error, setError] = useState('')
@@ -16,24 +18,19 @@ const SignIn = ({websitename}) => {
 
     return (
         <Flex height="100vh" alignItems="center" justifyContent="center">
-            <Flex>
-                <Stack align="center">
+            <Flex direction="column" p={12} rounded={6}>
+                <Box align="center">
                     <Logo websitename={websitename}  />
-                    <Input placeholder='Email' size='md' />
-                    <Input placeholder='Password' size='md' />
-                    <Button colorScheme='teal' size='md'>
-                        Sign In
-                    </Button>
-                    <hr style={{marginTop: "20px"}} />
-                    <Button 
+                </Box>
+                <Button 
                         onClick={signInWithGoogle} 
                         disabled={loading} 
-                        colorScheme="pink" mb={1}
+                        mb={1}
+                        color="black"
                     ><i className="fa-brands fa-google"></i>&nbsp;&nbsp;Sign in With Google
-                    </Button>
-                </Stack>
+                </Button>
             </Flex>
-        </Flex> 
+        </Flex>
     )
 }
 

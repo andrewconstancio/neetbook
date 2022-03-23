@@ -7,7 +7,8 @@ import {
     Text,
     useDisclosure,
     Image,
-    Input
+    Input,
+    Avatar
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import './Header.css'
@@ -16,8 +17,7 @@ import { useSelector } from 'react-redux';
 
 const Header = (props) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const currentUser = useSelector((state) => state.auth.user);
-
+    const user = useSelector((state) => state.auth.user);
 
     const signOut = () => {
         auth.signOut();
@@ -95,10 +95,9 @@ const Header = (props) => {
                 </Box>
 
                 <Box
-                    // display={{ base: isOpen ? "block" : "none", md: "block" }}
                     mt={{ base: 4, md: 0 }}
                 >
-                    <Image borderRadius='full' boxSize='50px' onClick={signOut} src={auth.currentUser.photoURL} alt={auth.currentUser.displayName} />
+                    <Avatar name={user.displayName} onClick={signOut} boxSize='50px' src={user.photoURL} />
                 </Box>
             </Flex>
         </Flex>

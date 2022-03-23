@@ -5,16 +5,16 @@ import {
 } from "../actions/types";
 
 const INITIAL_STATE = {
-    isSignedIn: false,
+    user: null,
     msg: ""
 };
 
 export default (state = INITIAL_STATE, action) => {
     switch(action.type) {
         case SIGN_IN_SUCCESS:
-            return { ...state, isSignedIn: true, msg: action.payload  };
+            return { ...state, user: action.payload, msg: "Success"  };
         case SIGN_IN_ERROR:
-            return { ...state, isSignedIn: false, msg: action.payload};
+            return { ...state, user: null, msg: action.payload};
         default: 
             return state;
     }
