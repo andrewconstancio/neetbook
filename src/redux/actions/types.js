@@ -6,3 +6,5 @@ export const SET_USER = 'SET_USER';
 export const SIGN_IN_CHECK_PROFILE_IMAGE = 'SIGN_IN_CHECK_PROFILE_IMAGE';
 export const SIGN_IN_SUCCESS = 'SIGN_IN_SUCCESS';
 export const SIGN_IN_ERROR = 'SIGN_IN_ERROR';
+
+export const FETCH_COMMENTS = 'FETCH_COMMENTS';

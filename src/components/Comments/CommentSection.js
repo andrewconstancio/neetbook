@@ -12,30 +12,39 @@ import Loader from '../loader';
 import {firestore } from '../../config/firebase-config';
 import ResizeTextarea from "react-textarea-autosize";
 import Comment from './Comment';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { actionCreators } from '../../redux'
 
 const CommentSection = ({ bookEditionKey}) => {
 
     const [loading, setLoading] = useState(true);
-    const [comments, setComments] = useState([]);
+    // const [comments, setComments] = useState([]);
     const notesRef = useRef('');
     const user = useSelector((state) => state.auth.user);
+    const dispatch = useDispatch();
+    const { fetchComments } = bindActionCreators(actionCreators, dispatch);
+    const comments = useSelector((state) => state.comments)
 
     useEffect(() => {
-        firestore
-        .collection("UserBookComments")
-        .where("bookEditionKey", "==", bookEditionKey)
-        .orderBy('createdAt', 'desc')
-        .onSnapshot((snapshot) => {
-            setComments(
-                snapshot.docs.map((doc) => ({
-                    id: doc.id,
-                    data: doc.data(),
-                    ref: doc.ref
-                }))
-            )
-        });
+        fetchComments(bookEditionKey);
+        // firestore
+        // .collection("UserBookComments")
+        // .where("bookEditionKey", "==", bookEditionKey)
+        // .orderBy('createdAt', 'desc')
+        // .onSnapshot((snapshot) => {
+        //     setComments(
+        //         snapshot.docs.map((doc) => ({
+        //             id: doc.id,
+        //             data: doc.data(),
+        //             ref: doc.ref
+        //         }))
+        //     )
+        // });
     }, []);
+
+    // console.log(comments.map((com) => {console.log(com)}));
+    console.log(comments);
 
     const handleOnClick = async () => {
         const notes = notesRef.current.value;
