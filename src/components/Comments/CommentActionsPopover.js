@@ -6,40 +6,40 @@ import {
     Popover,
     PopoverTrigger,
     PopoverContent,
-    PopoverHeader,
-    PopoverBody,
-    PopoverFooter,
-    PopoverArrow,
-    PopoverCloseButton,
-    PopoverAnchor,
+    PopoverBody
 } from '@chakra-ui/react'
 import './Comment.css'
-import { auth } from '../../config/firebase-config';
+import { useSelector } from 'react-redux';
+import { firestore } from '../../config/firebase-config';
 
-const CommentActionsPopover = ( {uid, docRef} ) => {
+const CommentActionsPopover = ( {commentDocID, commentUID, docRef} ) => {
+    const user = useSelector((state) => state.auth.user);
 
-    const handleEdit = () => {
-        console.log("edit");
-    }
 
     const handleDelete = () => {
         docRef.delete();
     }
 
     const handleReport = () => {
-        console.log("report");
+        firestore
+        .collection('UserBookCommentReported')
+        .add({
+            reportedDocID: commentDocID,
+            reporterUID: user.uid,
+            createdAt: new Date()
+        })
     }
 
     return (
         <>
-            <Popover>
+            <Popover closeOnBlur={false}>
                 <PopoverTrigger>
                     <i className="fa-solid fa-ellipsis-vertical action-comment"></i>
                 </PopoverTrigger>
-                { (uid == auth.currentUser.uid) ? (
-                    <PopoverContent color='white' bg='#282828' style={{border: "none"}}  >
+                { (commentUID == user.uid) ? (
+                    <PopoverContent color='white' bg='#282828' style={{border: "none", width: "125px"}}  >
                         <PopoverBody className="popover-body">
-                            <Box onClick={handleEdit} className="comment-action-item">
+                            {/* <Box onClick={handleEdit} className="comment-action-item">
                                 <HStack>
                                     <Box>
                                         <i className="fa-solid fa-pen"></i>
@@ -48,7 +48,7 @@ const CommentActionsPopover = ( {uid, docRef} ) => {
                                         <Text>Edit</Text>
                                     </Box>
                                 </HStack>
-                            </Box>
+                            </Box> */}
                             <Box onClick={handleDelete} className="comment-action-item">
                                 <HStack>
                                     <Box>
@@ -62,7 +62,7 @@ const CommentActionsPopover = ( {uid, docRef} ) => {
                         </PopoverBody>
                     </PopoverContent>
             ) : (
-                <PopoverContent color='white' bg='#282828' style={{border: "none"}}  >
+                <PopoverContent color='white' bg='#282828' style={{border: "none", width: "125px"}}  >
                 <PopoverBody className="popover-body">
                         <Box onClick={handleReport} className="comment-action-item">
                             <HStack>
@@ -70,7 +70,7 @@ const CommentActionsPopover = ( {uid, docRef} ) => {
                                     <i className="fa-solid fa-flag"></i>
                                 </Box>
                                 <Box>
-                                    <Text>Report</Text>
+                                    <span>Report</span>
                                 </Box>
                             </HStack>
                         </Box>
