@@ -1,0 +1,30 @@
+.user-info {
+    padding: 15px;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.fa {
+    margin-left: 25px;
+}
+
+.nav-selction {
+    height: 45px;
+}
+
+.nav-items-outer {
+    background-color: #1d1d1d;
+    padding-top: 15px;
+    padding-bottom: 140px;
+    border-radius: 30px;
+}
+
+.nav-selction:hover {
+    background-color: #2e2e2e;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.fa-right {
+    margin-right: 15px;
+}

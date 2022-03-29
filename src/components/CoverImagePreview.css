@@ -10,7 +10,19 @@
 
 .cover-preview {
     -webkit-box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0); 
-    box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0)
-    /* -webkit-box-shadow: 5px 5px 0px 0px #289FED, 10px 10px 0px 0px #5FB8FF, 15px 15px 0px 0px #A1D8FF, 20px 20px 0px 0px #CAE6FF, 5px 5px 15px 5px rgba(0,0,0,0); 
-    box-shadow: 3px 3px 0px 0px #289FED, 6px 6px 0px 0px #5FB8FF, 9px 9px 0px 0px #A1D8FF, 12px 12px 0px 0px #CAE6FF, 5px 5px 15px 5px rgba(0,0,0,0);        */
+    box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
+    transition: box-shadow 0.3s;
+}
+
+.cover-preview:hover { 
+    -webkit-box-shadow: 2px 2px 0px 0px #ed9828, 5px 5px 0px 0px #ebb773, 7px 7px 0px 0px #c97fcf, 10px 10px 0px 0px #d8bf97, 5px 5px 15px 5px rgba(0,0,0,0);
+    box-shadow: 2px 2px 0px 0px #ed9828, 5px 5px 0px 0px #ebb773, 7px 7px 0px 0px #c97fcf, 10px 10px 0px 0px #d8bf97, 5px 5px 15px 5px rgba(0,0,0,0);    
+    margin-top: -1px;
+    margin-left: -1px;
+}
+
+.cover-preview-page {
+    -webkit-box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0); 
+    box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
+    transition: box-shadow 0.3s;
 }

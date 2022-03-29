@@ -14,8 +14,10 @@ const Book = ( {coverId, lastElemRef, edition, title, bookKey} ) => {
                 <Box ref={lastElemRef} className='book'>
                     <Image
                         src={`https://covers.openlibrary.org/b/id/${coverId}.jpg`}
-                        h={[450, 400, 400]}  
-                        w={[400, 250, 250]} 
+                        h={[300, 400, 300]}  
+                        w={[175, 250, 175]} 
+                        // h={[300, 400, 400]}  
+                        // w={[175, 250, 250]} 
                         alt={title} 
                         style={{borderRadius: "20px"}}
                         className="cover-preview"

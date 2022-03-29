@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom'
 import '../pages/AllBooksBySubject/Book.css'
 import Book from './Book';
 
+
 const BookSection = ( {subject, limit, pageNumber} ) => {
 
     const [data, setData] = useState('');
@@ -47,7 +48,7 @@ const BookSection = ( {subject, limit, pageNumber} ) => {
                     <Heading as='h3' size='lg' mt={5} mb={5} style={{cursor: "pointer"}}>{subject.toUpperCase()}</Heading>
                 </Link>
             </Flex>
-            <SimpleGrid columns={{sm: 2, md: 3, lg: 4}} spacingX='40px' spacingY='20px'>
+            <SimpleGrid columns={{base: 2, sm: 2, md: 3, lg: 4}} spacingX='40px' spacingY='20px'>
                 {books.map((book) => {
                     if(book.cover_id !== null) {
                         return (

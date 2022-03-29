@@ -4,83 +4,32 @@ import {
     Box
 } from "@chakra-ui/react";
 import { auth, firestore } from '../config/firebase-config';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { actionCreators } from '../redux';
 
-const RatingCustom = ( {bookEditionKey, setHasRead} ) => {
+const RatingCustom = () => {
 
     const [loading, setLoading] = useState(true);
-    const [ratingChanged, setRatingChanged] = useState(false);
-    const [ratingValue, setRatingValue] = useState(0);
-    const user = useSelector((state) => state.auth.user);
+    const rating = useSelector((state) => state.readRating.rating);
+    const ratingChanged = useSelector((state) => state.readRating.ratingChanged);
+    const bookKey = useSelector((state) => state.book.bookKey);
+    const dispatch = useDispatch();
+    const { fetchRating, handleRatingChange, uncheckRating } = bindActionCreators(actionCreators, dispatch);
 
     useEffect(() => {
-        setLoading(true);
-        async function fetchData() {
-            await firestore
-            .collection("UserBookRatings")
-            .where("uid", "==", user.uid)
-            .where("bookEditionKey", "==", bookEditionKey)
-            .get()
-            .then(res =>{
-                if(res.docs[0]) {
-                    setRatingChanged(true);
-                    setRatingValue(res.docs[0].data().rating);
-                }
-                setLoading(false);
-            })
-        }
-
-        fetchData();
+        console.log("USE EFFECT");
+        fetchRating();
     }, []);
 
-    const handleRatingChange = async value => {
 
-        try {
+    // if(!ratingChanged || !rating) {
+    //     return (
+    //         <></>
+    //     )
+    // }
 
-            let document = await firestore
-            .collection("UserBookRatings")
-            .where("uid", "==", user.uid)
-            .where("bookEditionKey", "==", bookEditionKey)
-            .get()
-
-            if(!document.empty) {
-                firestore.collection('UserBookRatings').doc(document.docs[0].id).set({
-                    rating: value,
-                    bookEditionKey: bookEditionKey,
-                    uid: user.uid,
-                    modifiedAt: new Date()
-                }, {merge: true})
-            } else {
-                firestore.collection('UserBookRatings').add({
-                    rating: value,
-                    bookEditionKey: bookEditionKey,
-                    uid: user.uid,
-                    createdAt: new Date()
-                })
-            }
-
-            setRatingChanged(true);
-            setRatingValue(value)
-
-        } catch(err) {
-            console.log("err" + err);
-        }
-
-    }
-
-    const uncheckRating = () =>{
-
-        firestore
-        .collection('UserBookRatings')
-        .where("uid", "==", user.uid)
-        .where("bookEditionKey", "==", bookEditionKey)
-        .onSnapshot((docs) => {
-            docs.docs[0].ref.delete()
-        })
-
-        setRatingChanged(false);
-        setRatingValue(0)
-    }
+    console.log("ratingChanged: " + ratingChanged);
 
     return (
         <>
@@ -98,7 +47,7 @@ const RatingCustom = ( {bookEditionKey, setHasRead} ) => {
                     style={{color: ratingChanged ? "#ffd600" : "white"}}
                     flexShrink={0}
                     onChange={handleRatingChange} 
-                    initialRating={ratingValue}
+                    initialRating={rating}
                 />
             </Box>
         </>

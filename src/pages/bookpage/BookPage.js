@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
     Flex,
     Box,
@@ -12,18 +12,31 @@ import ReadButtonInput from '../../components/ReadButtonInput';
 import Author from '../../components/Author';
 import SubjectButton from '../../components/SubjectButton';
 import CommentSection from '../../components/Comments/CommentSection';
+import { useDispatch } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { actionCreators } from '../../redux';
+import { Redirect } from 'react-router-dom';
+
 
 const BookPage = (props) => {
 
     const { bookKey } = props.location.state;
     const { bookEditionKey } = props.location.state;
     const [hasRead, setHasRead] = useState(false);
+    const dispatch = useDispatch();
+    const { putBookKeyInState } = bindActionCreators(actionCreators, dispatch);
+
 
     const {
         book,
         error,
         loading
     } = useBookSingleInfo(bookKey, bookEditionKey);
+
+    useEffect(() => {
+        putBookKeyInState(bookEditionKey);
+    }, [])
+
 
     if(!book) {
         return <div>Loading</div>
@@ -40,7 +53,7 @@ const BookPage = (props) => {
                     className="column-1"
                 >
                     <Box className="sticky-left-column">
-                        <CoverImagePreview coverId={book.covers[0]} />
+                        <CoverImagePreview coverId={book.covers[0]} classType="cover-preview-page" />
                         <RatingInput bookEditionKey={bookEditionKey} hasRead={hasRead} setHasRead={setHasRead} />
                         <ReadButtonInput bookEditionKey={bookEditionKey} hasRead={hasRead} setHasRead={setHasRead}  />
                     </Box>

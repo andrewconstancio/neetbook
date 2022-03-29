@@ -1,0 +1,20 @@
+
+@media only screen and (max-width: 650px) {
+    .lower {
+        float: left;
+    }
+}
+
+.sticky-left-column-home {
+    position: sticky;
+    top: 140px;
+    height: 550px;
+    width: 300px;
+    color: white;
+    background-color: #222222;
+    border-radius: 30px;
+    margin-top: 26px;
+    text-align: left;
+    -webkit-box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0); 
+    box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
+}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import Header from './components/Header/Header';
+import Home from './pages/Home/Home';
 import Explore from './pages/Explore/Explore'
 import MyCollection from './pages/Collection/MyCollection'
 import AllBooksBySubject from './pages/AllBooksBySubject/AllBooksBySubject'
@@ -22,7 +23,7 @@ const App = () => {
                 {user && curr_user && <Header websitename={webSiteName} />}
                 <Switch>
                     <Route exact path="/">
-                        {user && curr_user ? <Route path="/" exact component={Explore} /> : <SignIn websitename={webSiteName} />}
+                        {user && curr_user ? <Route path="/" exact component={Home} /> : <SignIn websitename={webSiteName} />}
                     </Route>
                     <Route path="/explore" exact component={Explore} />
                     <Route path="/mycollection" exact component={MyCollection} />

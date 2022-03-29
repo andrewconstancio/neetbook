@@ -19,41 +19,36 @@ import { actionCreators } from '../../redux'
 const CommentSection = ({ bookEditionKey}) => {
 
     const [loading, setLoading] = useState(true);
-    // const [comments, setComments] = useState([]);
+    const [comments, setComments] = useState([]);
     const notesRef = useRef('');
+    const [notes, setNotes] = useState('');
     const user = useSelector((state) => state.auth.user);
     const dispatch = useDispatch();
-    const { fetchComments } = bindActionCreators(actionCreators, dispatch);
-    const comments = useSelector((state) => state.comments)
+    // const { fetchComments } = bindActionCreators(actionCreators, dispatch);
+    // const comments = useSelector((state) => state.comments.comments)
 
     useEffect(() => {
-        fetchComments(bookEditionKey);
-        // firestore
-        // .collection("UserBookComments")
-        // .where("bookEditionKey", "==", bookEditionKey)
-        // .orderBy('createdAt', 'desc')
-        // .onSnapshot((snapshot) => {
-        //     setComments(
-        //         snapshot.docs.map((doc) => ({
-        //             id: doc.id,
-        //             data: doc.data(),
-        //             ref: doc.ref
-        //         }))
-        //     )
-        // });
+        // fetchComments(bookEditionKey);
+        firestore
+        .collection("UserBookComments")
+        .where("bookEditionKey", "==", bookEditionKey)
+        .orderBy('createdAt', 'desc')
+        .onSnapshot((snapshot) => {
+            setComments(
+                snapshot.docs.map((doc) => ({
+                    id: doc.id,
+                    data: doc.data(),
+                    ref: doc.ref
+                }))
+            )
+        });
     }, []);
 
-    // console.log(comments.map((com) => {console.log(com)}));
-    console.log(comments);
-
     const handleOnClick = async () => {
-        const notes = notesRef.current.value;
-
         if(!notes.trim()) {
             alert("no notes");
             return
         }
-
         firestore.collection('UserBookComments').add({
             notes: notes,
             bookEditionKey: bookEditionKey,
@@ -64,7 +59,7 @@ const CommentSection = ({ bookEditionKey}) => {
             dislikeCount: 0,
             createdAt: new Date()
         })
-        notesRef.current.value = '';
+        setNotes('');
     }
 
     return (
@@ -85,8 +80,19 @@ const CommentSection = ({ bookEditionKey}) => {
                             placeholder='Your thoughts...' 
                             as={ResizeTextarea}
                             overflow="hidden"
-                            ref={notesRef}></Textarea>
-                        <Button onClick={handleOnClick} colorScheme='pink' size='md' style={{float: "right"}} w={{ base: '100%', sm: '10%' }} mt={15}>
+                            value={notes}
+                            onChange={(e) => setNotes(e.target.value)}
+                            // ref={notesRef}
+                            ></Textarea>
+                        <Button 
+                            onClick={handleOnClick} 
+                            colorScheme='pink' 
+                            size='md' 
+                            style={{float: "right"}} 
+                            w={{ base: '100%', sm: '10%' }} 
+                            mt={15}
+                            disabled={notes.length==0 || notes.trim() == ''}
+                        >
                             Post
                         </Button>
                     </Box>

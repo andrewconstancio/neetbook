@@ -39,7 +39,7 @@ export default class FieldFileInput  extends Component{
             <div onClick={this.triggerInputChange} className="choose-image-outer" style={{display: this.state.fileSelected ? "none" : "block"}}>
                 <BsFillPlusCircleFill className="plus-sign" />
             </div>
-            <CoverImagePreview onClick={this.triggerInputChange} file={this.state.fileSelected} />
+            <CoverImagePreview onClick={this.triggerInputChange} classType="cover-preview" file={this.state.fileSelected} />
         </div>
         )
     }

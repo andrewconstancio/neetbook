@@ -36,16 +36,16 @@ const AllBooksBySubject = (props) => {
     if(!books) {
         return (
             <div className='center'>
-                <Heading as='h3' size='lg' mt={5} mb={5}>&nbsp;</Heading>
+            <Heading as='h3' size='lg' mt={5} mb={5}>{props.match.params.name.toUpperCase()}</Heading>
                 <SimpleGrid columns={4} spacingX='40px' spacingY='20px'>
-                {[...Array(4)].map((i) =>
+                {[...Array(8)].map((i) =>
                     <LoadingBook key={i} />
                 )}
                 </SimpleGrid>
             </div>
         )
     }
-    
+
     return (
         <div className="center">
             <Heading as='h3' size='lg' mt={5} mb={5}>{props.match.params.name.toUpperCase()}</Heading>
@@ -61,8 +61,12 @@ const AllBooksBySubject = (props) => {
                         )
                     })
                 }
-                <div style={{display: loading ? "block" : "none", left: "50%"}} >
-                    <Oval color="#161616" height={80} width={80} />
+                <div style={{display: loading ? "block" : "none"}} >
+                <SimpleGrid columns={4} spacingX='40px' spacingY='20px'>
+                    {[...Array(8)].map((i) =>
+                        <LoadingBook key={i} />
+                    )}
+                    </SimpleGrid>
                 </div>
             </SimpleGrid>
         </div>
