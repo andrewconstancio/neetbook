@@ -56,7 +56,7 @@ const BookSection = ( {subject, limit, pageNumber} ) => {
                         )
                     }
                 })
-            }
+                }
             </SimpleGrid>
         </div>
     )
