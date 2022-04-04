@@ -3,14 +3,32 @@ import {
     Flex,
     Box,
     Text,
-    Heading
+    Heading,
+    HStack
 } from "@chakra-ui/react"
+import useGetSearchResults from '../../Hooks/useGetSearchResults';
 
 const Search = ( {term} ) => {
+
+    const {
+        results,
+        error,
+        loading
+    } = useGetSearchResults(term);
+
     return (
         <>
-            <Heading size="md" colorScheme='blue' >Search: </Heading>
-            <Heading size="lg">{term}</Heading>
+            <HStack>
+                <Box>
+                    <Text size="md" >Search: </Text>
+                </Box>
+                <Box>
+                    <Text size="md" ><b>{term}</b></Text>
+                </Box>
+            </HStack>
+            <Box>
+                {JSON.stringify(results)}
+            </Box>
         </>
     )
 }

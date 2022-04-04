@@ -21,7 +21,6 @@ const Comment = ( {notes, profileURL, displayName, commentDocID, commentUID, doc
                     <Stack>
                         <Box>
                             <Text style={{display: "inline"}}>{displayName}</Text>
-                            <Text style={{display: "inline"}}>{createdAt}</Text>
                             <CommentActionsPopover commentDocID={commentDocID} commentUID={commentUID} docRef={docRef} />
                         </Box>
                         <Box>
