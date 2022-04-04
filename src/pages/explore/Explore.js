@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import './Explore.css'
 import BookSection from '../../components/BookSection';
+import PopularBookSlider from '../../components/PopularBookSlider'
+import PopularAuthorSlider from '../../components/PopularAuthorSlider';
 
-export default class Explore extends Component {
-
-    render() {
-        return (
-                <div className="container">
-                    {/* <BookSection subject="manga" limit={4} /> */}
-                    <BookSection subject="love" limit={4} />
-                    <BookSection subject="sci-fi" limit={4}/>
-                    <BookSection subject="manga" limit={4}/>
-                    <BookSection subject="pirates" limit={4}/>
-                    <BookSection subject="space" limit={4}/>
-                    <BookSection subject="football" limit={4}/>
-                </div>
-        )
-    }
+const Explore = () => {
+    return (
+        <>
+            <PopularBookSlider />
+            <PopularAuthorSlider />
+            <BookSection subject={"space"} />
+            <BookSection subject={"self-help"} />
+            <BookSection subject={"business"} />
+            <BookSection subject={"fitness"} />
+        </>
+    )
 }
+
+export default Explore

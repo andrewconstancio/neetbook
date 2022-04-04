@@ -43,8 +43,6 @@ const BookPage = (props) => {
         return <div>Loading</div>
     }
 
-    console.log(book);
-
     return (
         <div className='container'>
             <Flex direction={['column', 'column', 'column', 'row', 'row']}>

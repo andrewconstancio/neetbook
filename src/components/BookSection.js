@@ -64,9 +64,6 @@ const BookSection = ( {subject, limit, pageNumber} ) => {
             const response = await OpenLibrary.get(`/subjects/${subject}.json?details=true`, {
                 limit: 20
             });
-
-            console.log(response.data.works);
-
             setData(response.data);
             setBooks(response.data.works);
         }
@@ -97,7 +94,13 @@ const BookSection = ( {subject, limit, pageNumber} ) => {
                 {books.map((book) => {
                     if(book.cover_id !== null) {
                         return (
-                            <Book key={book.cover_edition_key} edition={book.cover_edition_key} title={book.title} bookKey={book.key} coverId={book.cover_id}></Book>
+                            <Book 
+                                key={book.cover_edition_key} 
+                                edition={book.cover_edition_key} 
+                                title={book.title} 
+                                bookKey={book.key} 
+                                coverId={book.cover_id}
+                            />
                         )
                     }
                 })

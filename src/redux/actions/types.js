@@ -13,3 +13,4 @@ export const PUT_BOOK_KEY_IN_STATE = 'PUT_BOOK_KEY_IN_STATE';
 export const CLEAR_RATING = 'CLEAR_RATING';
 export const FETCH_RATING = 'CLEAR_RATING';
 export const FETCH_TRENDING_BOOKS = 'FETCH_TRENDING_BOOKS';
+export const SEARCH = 'SEARCH';

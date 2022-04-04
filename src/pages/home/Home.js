@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import {
     Flex,
     Box,
@@ -7,15 +7,27 @@ import {
 } from "@chakra-ui/react"
 import './Home.css'
 import OpenLibrary from '../../apis/OpenLibrary';
-import BookSection from '../../components/BookSection';
 import ProfileSideBar from '../../components/ProfileSideBar/ProfileSideBar';
 // import HorizontalGallery from 'react-dynamic-carousel';
-import PopularBookSlider from '../../components/PopularBookSlider'
-import PopularAuthorSlider from '../../components/PopularAuthorSlider';
-import Search from '../../components/Search';
+import SearchInput from '../../components/SearchInput';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { actionCreators } from '../../redux';
+import Explore from '../Explore/Explore';
+
 
 
 const Home = () => {
+
+    const searchTerm = useSelector((state) => state.search.term);
+    const dispatch = useDispatch();
+    const { clearSearch } = bindActionCreators(actionCreators, dispatch);
+
+    useEffect(() => {
+        clearSearch();
+    }, [])
+
 
     return (
         <div className='container'>
@@ -36,14 +48,13 @@ const Home = () => {
                         <Heading as='h3' size='lg' mt={5} mb={5} style={{cursor: "pointer"}}>Explore</Heading>
                     </Flex>
                     <Flex>
-                        <Search />
+                        <SearchInput searchTerm={searchTerm} />
                     </Flex>
-                    <PopularBookSlider />
-                    <PopularAuthorSlider />
-                    <BookSection subject={"space"} />
-                    <BookSection subject={"self-help"} />
-                    <BookSection subject={"business"} />
-                    <BookSection subject={"fitness"} />
+                    {searchTerm ? (
+                        <h1>Search</h1>
+                    ) : (
+                        <Explore />
+                    )}
                 </Box>
             </Flex>
         </div>

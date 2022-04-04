@@ -5,6 +5,7 @@ import commentsReducer from './commentsReducer';
 import authReducer from './authReducer';
 import readRatingReducer from './readRatingReducer'
 import bookReducer from './bookReducer';
+import seachReducer from './searchReducer';
 
 export default combineReducers({
     form: formReducer,
@@ -12,5 +13,6 @@ export default combineReducers({
     comments: commentsReducer,
     auth: authReducer,
     readRating: readRatingReducer,
-    book: bookReducer
+    book: bookReducer,
+    search: seachReducer
 });

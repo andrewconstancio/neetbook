@@ -67,7 +67,6 @@ const PopularBookSlider = () => {
             </Flex>
             <Slider {...settings}>
                 {books.map((book) => {
-                    console.log(book);
                     if(book.covers[0] !== null) {
                         var coverEditionKey = book.key.slice(7);
                         return (
