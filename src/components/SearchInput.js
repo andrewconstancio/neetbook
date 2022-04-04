@@ -11,12 +11,14 @@ import { actionCreators } from '../redux';
 
 const Search = ( {searchTerm} ) => {
     const dispatch = useDispatch();
-    const { search } = bindActionCreators(actionCreators, dispatch);
+    const { search, clearSearch } = bindActionCreators(actionCreators, dispatch);
 
     const handleSearchChange = (e) => {
         const term = e.target.value;
         if(term.length > 3) {
             search(term);
+        } else {
+            clearSearch();
         }
     }
 
@@ -25,7 +27,7 @@ const Search = ( {searchTerm} ) => {
             <Input 
                 variant='filled' 
                 size='lg'  
-                placeholder='Search...' 
+                placeholder='Search a Book, Author, Subject... ' 
                 style={{marginTop: "15px", marginBottom: "30px"}} 
                 onKeyUp={handleSearchChange}
             />

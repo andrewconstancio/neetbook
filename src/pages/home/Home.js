@@ -15,6 +15,7 @@ import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators } from '../../redux';
 import Explore from '../Explore/Explore';
+import Search from '../Search/Search';
 
 
 
@@ -27,6 +28,8 @@ const Home = () => {
     useEffect(() => {
         clearSearch();
     }, [])
+
+    console.log(searchTerm);
 
 
     return (
@@ -51,7 +54,7 @@ const Home = () => {
                         <SearchInput searchTerm={searchTerm} />
                     </Flex>
                     {searchTerm ? (
-                        <h1>Search</h1>
+                        <Search term={searchTerm} />
                     ) : (
                         <Explore />
                     )}

@@ -99,7 +99,7 @@ const CommentSection = ({ bookEditionKey}) => {
                 </Stack>
                 <hr style={{marginTop: "20px", opacity: "0.3"}} />
             </div>
-            {comments.map(({id, ref, data: {uid, notes, profileURL, displayName, likeCount, dislikeCount }}) => {
+            {comments.map(({id, ref, data: {uid, notes, profileURL, displayName, likeCount, dislikeCount, createdAt }}) => {
                 return(
                     <Comment 
                         key={id}
@@ -112,6 +112,7 @@ const CommentSection = ({ bookEditionKey}) => {
                         bookEditionKey={bookEditionKey}
                         likeCount={likeCount}
                         dislikeCount={dislikeCount}
+                        createdAt={createdAt}
                     />
                 )
             })}
