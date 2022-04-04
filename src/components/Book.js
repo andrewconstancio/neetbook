@@ -8,9 +8,10 @@ import { Link } from 'react-router-dom'
 import './CoverImagePreview.css'
 
 const Book = ( {coverId, lastElemRef, edition, title, bookKey} ) => {
+
     return (
         <>
-            <Link to={{pathname: `/book/${edition}`, state: {bookKey: bookKey, bookEditionKey: edition} }}>
+            <Link to={{pathname: `/book/${edition}`, state: {bookKey: bookKey, bookEditionKey: edition, coverId: coverId} }}>
                 <Box ref={lastElemRef} className='book'>
                     <Image
                         src={`https://covers.openlibrary.org/b/id/${coverId}.jpg`}

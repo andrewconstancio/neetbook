@@ -8,30 +8,9 @@ import {
     Heading,
     Flex
 } from "@chakra-ui/react"
-import OpenLibrary from '../apis/OpenLibrary';
+import useGetPopularBooks from "../Hooks/useGetPopularBooks";
 
-const SimpleSlider = () => {
-
-    const [data, setData] = useState('');
-    const [books, setBooks] = useState(null);
-
-    useEffect(() => {
-        async function fetchData() {
-            const response = await OpenLibrary.get(`/subjects/space.json?details=true`, {
-                limit: 20
-            });
-
-            setData(response.data);
-            setBooks(response.data.works);
-        }
-        fetchData();
-    }, []);
-
-    if(!books) {
-        return (
-            <></>
-        )
-    }
+const PopularBookSlider = () => {
 
     var settings = {
         dots: false,
@@ -69,27 +48,35 @@ const SimpleSlider = () => {
         ]
     };
 
+    const {
+        loading, 
+        books,
+        error
+    } = useGetPopularBooks();
+
+    if(loading) {
+        return (
+            <></>
+        )
+    }
+
     return (
         <>
-            <Flex justify="space-between"> 
-                <Heading as='h3' size='lg' mt={5} mb={5} style={{cursor: "pointer"}}>Explore</Heading>
-            </Flex>
-            <Flex>
-                <Input variant='filled' size='lg'  placeholder='Search...' style={{marginTop: "15px", marginBottom: "30px"}} />
-            </Flex>
             <Flex justify="space-between"> 
                 <Heading as='h5' size='lg' mt={5} mb={5} style={{cursor: "pointer"}}>Popular</Heading>
             </Flex>
             <Slider {...settings}>
                 {books.map((book) => {
-                    if(book.cover_id !== null) {
+                    console.log(book);
+                    if(book.covers[0] !== null) {
+                        var coverEditionKey = book.key.slice(7);
                         return (
                             <Book 
-                                key={book.cover_edition_key} 
-                                edition={book.cover_edition_key} 
-                                title={book.title} 
-                                bookKey={book.key} 
-                                coverId={book.cover_id}
+                                key={coverEditionKey} 
+                                edition={coverEditionKey}
+                                title={book.title}  
+                                bookKey={book.works[0].key}
+                                coverId={book.covers[0]}
                             />
                         )
                     }
@@ -100,4 +87,4 @@ const SimpleSlider = () => {
     )
 }
 
-export default SimpleSlider
+export default PopularBookSlider

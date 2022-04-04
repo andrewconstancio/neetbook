@@ -22,6 +22,7 @@ const BookPage = (props) => {
 
     const { bookKey } = props.location.state;
     const { bookEditionKey } = props.location.state;
+    const { coverId } = props.location.state;
     const [hasRead, setHasRead] = useState(false);
     const dispatch = useDispatch();
     const { putBookKeyInState } = bindActionCreators(actionCreators, dispatch);
@@ -42,6 +43,8 @@ const BookPage = (props) => {
         return <div>Loading</div>
     }
 
+    console.log(book);
+
     return (
         <div className='container'>
             <Flex direction={['column', 'column', 'column', 'row', 'row']}>
@@ -53,7 +56,7 @@ const BookPage = (props) => {
                     className="column-1"
                 >
                     <Box className="sticky-left-column">
-                        <CoverImagePreview coverId={book.covers[0]} classType="cover-preview-page" />
+                        <CoverImagePreview coverId={coverId} classType="cover-preview-page" />
                         <RatingInput bookEditionKey={bookEditionKey} hasRead={hasRead} setHasRead={setHasRead} />
                         <ReadButtonInput bookEditionKey={bookEditionKey} hasRead={hasRead} setHasRead={setHasRead}  />
                     </Box>

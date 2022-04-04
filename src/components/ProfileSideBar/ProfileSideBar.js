@@ -29,7 +29,7 @@ const ProfileSideBar = () => {
                 </Box>
             </Stack>
             <Stack className="nav-items-outer" style={{marginTop: "40px"}}>
-                <Box>
+                <Box style={{marginTop: "15px"}}>
                     <HStack className='nav-selction'>
                         <Box><i className="fa fa-solid fa-house"></i></Box>
                         <Box style={{width: "90%"}}><Text>Explore</Text></Box>
