@@ -20,13 +20,22 @@ const Search = ( {term} ) => {
     } = useGetSearchResults(term);
 
 
-    if(!results) {
+
+    if(loading) {
         return (
             <SimpleGrid columns={{sm: 2, md: 3, lg: 4}} spacingX='20px' spacingY='20px'>
                 {[...Array(40)].map((i) =>
                     <LoadingBook key={i} />
                 )}
             </SimpleGrid>
+        )
+    }
+
+    if(!results) {
+        return (
+            <div>
+                <Heading>No Results</Heading>
+            </div>
         )
     }
 
@@ -42,6 +51,12 @@ const Search = ( {term} ) => {
             </HStack>
             <Box>
                 <BookGrid books={results} />
+                {/* {results.map((doc) =>{
+                    return (
+                        <>{doc.title}<br/></>
+                    )
+                })
+                } */}
             </Box>
         </>
     )

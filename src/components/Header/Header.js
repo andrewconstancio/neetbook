@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
     Box,
     Stack,
@@ -13,12 +13,23 @@ import {
 import { Link } from "react-router-dom";
 import './Header.css'
 import { auth } from '../../config/firebase-config'
-import { useSelector } from 'react-redux';
 import { Logo } from '../Logo'
+import {useSelector, useDispatch } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { actionCreators } from '../../redux';
 
 const Header = (props) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const user = useSelector((state) => state.auth.user);
+    const dispatch = useDispatch();
+    const page = useSelector((state) => state.page.page);
+    const [pageLocal, setPageLocal] = useState(page ? page : 'explore');
+    const { setPage } = bindActionCreators(actionCreators, dispatch);
+
+    useEffect(() => {
+        setPage(pageLocal);
+    }, [pageLocal])
+
 
     const signOut = () => {
         auth.signOut();
@@ -49,37 +60,30 @@ const Header = (props) => {
                     </Link>
                 </Flex>
 
-                {/* <Stack
+                <Stack
                     direction={{ base: "row"}}
-                    display={{ base: "block", md: "none" }}
+                    // display={{ base: "block", md: "none" }}
                     width={{ base: "auto"}}
                     alignItems="center"
                     flexGrow={1}
                     mt={{ base: 4, md: 0 }}
-                    spacing='15px'
+                    spacing='20px'
                     >
-                    <Link 
-                        to="/mycollection" 
-                    > 
-                        <i className="fa fa-heart fa-lg"></i>
-                    </Link>
-                    <Link 
-                        to="/explore" 
-                    > 
-                        <i className="fa fa-compass fa-lg"></i>
-                    </Link>
-                    <i className="fa fa-magnifying-glass"></i>
+                    <i onClick={() => setPageLocal('explore')} className="fa fa-solid fa-house"></i>
+                    <i onClick={() => setPageLocal('currentlyreading')} className="fa fa-solid fa-book"></i>
+                    <i onClick={() => setPageLocal('wanttoread')} className="fa fa-regular fa-heart"></i>
+                    <i  onClick={() => setPageLocal('read')}className="fa fa-solid fa-check"></i>
                 </Stack>
 
 
-                <Stack
+                {/* <Stack
                     direction={{ base: "column", md: "row" }}
                     display={{ base: isOpen ? "block" : "none", md: "flex" }}
                     width={{ base: "full", md: "auto" }}
                     alignItems="center"
                     flexGrow={1}
                     mt={{ base: 4, md: 0 }}
-                    >
+                >
                     <Link 
                         to="/mycollection" 
                     > 

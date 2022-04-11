@@ -13,7 +13,7 @@ export default function useBookSubjectSearch(subject, offset) {
         setError(false)
         let cancel
         async function fetchData() {
-            await OpenLibrary.get(`/subjects/${subject}.json?details=true`, {
+            await OpenLibrary.get(`/subjects/${subject.split(' ').join('_')}.json?details=true`, {
                 params: { offset: offset },
                 cancelToken: new axios.CancelToken(c => cancel = c)
             }).then(res => {

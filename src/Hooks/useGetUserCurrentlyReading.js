@@ -20,19 +20,14 @@ export default function useGetUserCurrentlyReading() {
         .where("currentlyReading", "==", true)
         .orderBy('createdAt', 'desc')
         .onSnapshot( async (snapshot) => {
-
-            console.log();
-
             const bookArr = [];
             const request = snapshot.docs.map( async (doc) => {
-                console.log(doc.data().bookEditionKey);
                 const url = `books/${doc.data().bookEditionKey}.json`;
                 return OpenLibrary.get(url).then(res => {
                     bookArr.push(res.data);
                     // bookArr.push({bookEditionKey: doc.data().bookEditionKey, data: res.data});
                 });
             })
-
             await Promise.all(request);
             setBooks(bookArr);
             setLoading(false);

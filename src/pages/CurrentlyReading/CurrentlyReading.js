@@ -16,8 +16,8 @@ const CurrentlyReading = () => {
         books
     } = useGetUserCurrentlyReading();
 
-    if(!loading) {
-        console.log(books);
+    if(loading) {
+        console.log("loading");
     }
 
     return (
@@ -25,9 +25,8 @@ const CurrentlyReading = () => {
             <Flex justify="space-between"> 
                 <Heading as='h3' size='lg' mt={5} mb={5} style={{cursor: "pointer"}}>Currently Reading</Heading>
             </Flex>
-            <SimpleGrid columns={4} spacingX='20px' spacingY='20px'>
+            <SimpleGrid columns={[2, 2, 3, 3, 4]} spacingX='20px' spacingY='20px'>
             {books.map((book, index) => {
-                console.log(book);
                         if(book.covers[0]) {
                             return (
                                 <Book 

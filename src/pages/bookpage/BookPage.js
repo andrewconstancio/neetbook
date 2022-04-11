@@ -3,6 +3,8 @@ import {
     Flex,
     Box,
     Text,
+    Button,
+    Collapse
 } from "@chakra-ui/react"
 import CoverImagePreview from '../../components/CoverImagePreview'
 import useBookSingleInfo from '../../Hooks/useBookSingleInfo';
@@ -24,9 +26,11 @@ const BookPage = (props) => {
     const { bookEditionKey } = props.location.state;
     const { coverId } = props.location.state;
     const [hasRead, setHasRead] = useState(false);
+    const [show, setShow] = useState(false)
     const dispatch = useDispatch();
     const { putBookKeyInState } = bindActionCreators(actionCreators, dispatch);
 
+    const handleToggle = () => setShow(!show)
 
     const {
         book,
@@ -66,18 +70,28 @@ const BookPage = (props) => {
                         <Text><b>{book.title}</b></Text>
                         <Author authorKey={book.authors[0].author.key} />
                     </Box>
-                    <Box>
-                    </Box>
-                    <Box>
-                        <Text mt={5} fontSize='sm'>
-                            {typeof book.description === 'object' ? book.description.value : book.description !== null ? book.description : "This edition doesn't have a description yet."}
-                        </Text>
-                        {book.subjects ? book.subjects.slice(0, 7).map((subject) => {
-                            return (
-                                <SubjectButton key={subject} subject={subject} />
-                            )
-                        }) : ""}
-                    </Box>
+                    <Flex direction="column">
+                        <Box>
+                            <Collapse startingHeight={100} in={show}>
+                                {typeof book.description === 'object' ? book.description.value : book.description !== null ? book.description : "This edition doesn't have a description yet."}
+                            </Collapse>
+                            <Button 
+                                colorScheme="purple" 
+                                size='sm' 
+                                onClick={handleToggle} mt='1rem' 
+                                style={{float: "right", marginBottom: "20px"}}
+                            >
+                                Show {show ? 'Less' : 'More'}
+                            </Button>
+                        </Box>
+                        <Box>
+                            {book.subjects ? book.subjects.slice(0, 7).map((subject) => {
+                                return (
+                                    <SubjectButton key={subject} subject={subject} />
+                                )
+                            }) : ""}
+                        </Box>
+                    </Flex>
                     <CommentSection bookEditionKey={bookEditionKey} />
                 </Box>
             </Flex>

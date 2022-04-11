@@ -47,9 +47,9 @@ const AllBooksBySubject = (props) => {
     }
 
     return (
-        <div className="center">
+        <div className="container">
             <Heading as='h3' size='lg' mt={5} mb={5}>{props.match.params.name.toUpperCase()}</Heading>
-            <SimpleGrid columns={4} spacingX='40px' spacingY='20px'>
+            <SimpleGrid columns={[2,2,3,4,5]} spacingX='40px' spacingY='20px'>
                     {books.map((book, index) => {
                         if(books.length === index + 1) {
                             return (
@@ -62,7 +62,7 @@ const AllBooksBySubject = (props) => {
                     })
                 }
                 <div style={{display: loading ? "block" : "none"}} >
-                <SimpleGrid columns={4} spacingX='40px' spacingY='20px'>
+                <SimpleGrid columns={5} spacingX='40px' spacingY='20px'>
                     {[...Array(8)].map((i) =>
                         <LoadingBook key={i} />
                     )}
