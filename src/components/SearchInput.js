@@ -38,6 +38,7 @@ const Search = ( {searchTerm} ) => {
                 size='lg' 
                 colorScheme="teal"
                 display={termStateLocal ? "block" : "none"}
+                onClick={search(termStateLocal)}
                 >Search
             </Button>
             {/* <Slide direction='bottom' in={isOpen} style={{ zIndex: 10 }}>
