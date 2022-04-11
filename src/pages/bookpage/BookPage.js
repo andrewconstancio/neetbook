@@ -43,6 +43,8 @@ const BookPage = (props) => {
         return <div>Loading</div>
     }
 
+    
+
     return (
         <div className='container'>
             <Flex direction={['column', 'column', 'column', 'row', 'row']}>
@@ -70,11 +72,11 @@ const BookPage = (props) => {
                         <Text mt={5} fontSize='sm'>
                             {typeof book.description === 'object' ? book.description.value : book.description !== null ? book.description : "This edition doesn't have a description yet."}
                         </Text>
-                        {book.subjects.slice(0, 7).map((subject) => {
+                        {book.subjects ? book.subjects.slice(0, 7).map((subject) => {
                             return (
                                 <SubjectButton key={subject} subject={subject} />
                             )
-                        })}
+                        }) : ""}
                     </Box>
                     <CommentSection bookEditionKey={bookEditionKey} />
                 </Box>

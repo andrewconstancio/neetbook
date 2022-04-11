@@ -11,7 +11,7 @@ import SignIn from './pages/SignIn/SignIn';;
 import { useSelector } from 'react-redux';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from './config/firebase-config'
-
+import CurrentlyReading from './pages/CurrentlyReading/CurrentlyReading'
 const App = () => {
     const webSiteName = "NEETBOOK";
     const [user] = useAuthState(auth);
@@ -26,6 +26,7 @@ const App = () => {
                         {user && curr_user ? <Route path="/" exact component={Home} /> : <SignIn websitename={webSiteName} />}
                     </Route>
                     <Route path="/explore" exact component={Explore} />
+                    <Route path="/currentlyreading" exact component={CurrentlyReading} />
                     <Route path="/mycollection" exact component={MyCollection} />
                     <Route path="/subject/:name" exact component={AllBooksBySubject} />
                     <Route path="/book/:edition" exact component={BookPage} />

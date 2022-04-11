@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import {useSelector, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators } from '../../redux';
@@ -13,6 +13,15 @@ import './ProfileSideBar.css'
 
 const ProfileSideBar = () => {
     const user = useSelector((state) => state.auth.user);
+    const dispatch = useDispatch();
+    const page = useSelector((state) => state.page.page);
+    const [pageLocal, setPageLocal] = useState(page ? page : 'explore');
+    const { setPage } = bindActionCreators(actionCreators, dispatch);
+
+    useEffect(() => {
+        setPage(pageLocal);
+    }, [pageLocal])
+
     return (
         <>
             <Stack className='user-info' direction={['row']} spacing='15px'>
@@ -30,31 +39,31 @@ const ProfileSideBar = () => {
             </Stack>
             <Stack className="nav-items-outer" style={{marginTop: "40px"}}>
                 <Box style={{marginTop: "15px"}}>
-                    <HStack className='nav-selction'>
+                    <HStack onClick={() => setPageLocal('explore')}  className='nav-selction'>
                         <Box><i className="fa fa-solid fa-house"></i></Box>
                         <Box style={{width: "90%"}}><Text>Explore</Text></Box>
-                        <Box><i class="fa-right fa-solid fa-chevron-right"></i></Box>
+                        <Box><i className="fa-right fa-solid fa-chevron-right"></i></Box>
                     </HStack>
                 </Box>
                 <Box>
-                    <HStack className='nav-selction'>
-                        <Box><i class="fa fa-solid fa-book"></i></Box>
+                    <HStack onClick={() => setPageLocal('currentlyreading')} className='nav-selction'>
+                        <Box><i className="fa fa-solid fa-book"></i></Box>
                         <Box style={{width: "90%"}}><Text>Currently Reading</Text></Box>
-                        <Box><i class="fa-right fa-solid fa-chevron-right"></i></Box>
+                        <Box><i className="fa-right fa-solid fa-chevron-right"></i></Box>
                     </HStack>
                 </Box>
                 <Box>
-                    <HStack className='nav-selction'>
-                        <Box><i class="fa fa-regular fa-heart"></i></Box>
+                    <HStack onClick={() => setPageLocal('wanttoread')}  className='nav-selction'>
+                        <Box><i className="fa fa-regular fa-heart"></i></Box>
                         <Box style={{width: "90%"}}><Text>Want To Read</Text></Box>
-                        <Box><i class="fa-right fa-solid fa-chevron-right"></i></Box>
+                        <Box><i className="fa-right fa-solid fa-chevron-right"></i></Box>
                     </HStack>
                 </Box>
                 <Box>
-                    <HStack className='nav-selction'>
-                        <Box><i class="fa fa-solid fa-check"></i></Box>
+                    <HStack onClick={() => setPageLocal('read')}  className='nav-selction'>
+                        <Box><i className="fa fa-solid fa-check"></i></Box>
                         <Box style={{width: "90%"}}><Text>Read</Text></Box>
-                        <Box><i class="fa-right fa-solid fa-chevron-right"></i></Box>
+                        <Box><i className="fa-right fa-solid fa-chevron-right"></i></Box>
                     </HStack>
                 </Box>
             </Stack>

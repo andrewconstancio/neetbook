@@ -54,6 +54,7 @@ const PopularBookSlider = () => {
         error
     } = useGetPopularBooks();
 
+
     if(loading) {
         return (
             <></>

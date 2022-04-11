@@ -6,6 +6,7 @@ import authReducer from './authReducer';
 import readRatingReducer from './readRatingReducer'
 import bookReducer from './bookReducer';
 import seachReducer from './searchReducer';
+import pageReducer from './pageReducer';
 
 export default combineReducers({
     form: formReducer,
@@ -14,5 +15,6 @@ export default combineReducers({
     auth: authReducer,
     readRating: readRatingReducer,
     book: bookReducer,
-    search: seachReducer
+    search: seachReducer,
+    page: pageReducer
 });

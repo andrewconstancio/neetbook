@@ -9,6 +9,8 @@ import './CoverImagePreview.css'
 
 const Book = ( {coverId, lastElemRef, edition, title, bookKey} ) => {
 
+    const [imageLoaded, setImageLoaded] = useState(false);
+
     return (
         <>
             <Link to={{pathname: `/book/${edition}`, state: {bookKey: bookKey, bookEditionKey: edition, coverId: coverId} }}>
@@ -21,7 +23,8 @@ const Book = ( {coverId, lastElemRef, edition, title, bookKey} ) => {
                         // w={[175, 250, 250]} 
                         alt={title} 
                         style={{borderRadius: "20px"}}
-                        className="cover-preview"
+                        className={imageLoaded ? "cover-preview" : "shimmmer"}
+                        onLoad={() => setImageLoaded(true)}
                     />
                 </Box>
             </Link>

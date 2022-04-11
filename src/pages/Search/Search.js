@@ -4,9 +4,12 @@ import {
     Box,
     Text,
     Heading,
-    HStack
+    HStack,
+    SimpleGrid
 } from "@chakra-ui/react"
 import useGetSearchResults from '../../Hooks/useGetSearchResults';
+import BookGrid from '../../components/BookGrid';
+import LoadingBook from '../../components/LoadingBook';
 
 const Search = ( {term} ) => {
 
@@ -15,6 +18,17 @@ const Search = ( {term} ) => {
         error,
         loading
     } = useGetSearchResults(term);
+
+
+    if(!results) {
+        return (
+            <SimpleGrid columns={{sm: 2, md: 3, lg: 4}} spacingX='20px' spacingY='20px'>
+                {[...Array(40)].map((i) =>
+                    <LoadingBook key={i} />
+                )}
+            </SimpleGrid>
+        )
+    }
 
     return (
         <>
@@ -27,7 +41,7 @@ const Search = ( {term} ) => {
                 </Box>
             </HStack>
             <Box>
-                {JSON.stringify(results)}
+                <BookGrid books={results} />
             </Box>
         </>
     )

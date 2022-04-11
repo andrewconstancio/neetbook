@@ -6,9 +6,6 @@ import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators } from '../redux';
 
-
-
-
 const Search = ( {searchTerm} ) => {
     const dispatch = useDispatch();
     const { search, clearSearch } = bindActionCreators(actionCreators, dispatch);

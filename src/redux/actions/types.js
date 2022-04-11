@@ -14,3 +14,4 @@ export const CLEAR_RATING = 'CLEAR_RATING';
 export const FETCH_RATING = 'CLEAR_RATING';
 export const FETCH_TRENDING_BOOKS = 'FETCH_TRENDING_BOOKS';
 export const SEARCH = 'SEARCH';
+export const SET_PAGE = 'SET_PAGE';

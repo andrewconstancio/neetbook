@@ -6,31 +6,12 @@ import {
     Heading
 } from "@chakra-ui/react"
 import './Home.css'
-import OpenLibrary from '../../apis/OpenLibrary';
 import ProfileSideBar from '../../components/ProfileSideBar/ProfileSideBar';
-// import HorizontalGallery from 'react-dynamic-carousel';
-import SearchInput from '../../components/SearchInput';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { actionCreators } from '../../redux';
-import Explore from '../Explore/Explore';
-import Search from '../Search/Search';
+import HomePages from './HomePages';
 
 
 
 const Home = () => {
-
-    const searchTerm = useSelector((state) => state.search.term);
-    const dispatch = useDispatch();
-    const { clearSearch } = bindActionCreators(actionCreators, dispatch);
-
-    useEffect(() => {
-        clearSearch();
-    }, [])
-
-    console.log(searchTerm);
-
 
     return (
         <div className='container'>
@@ -47,17 +28,7 @@ const Home = () => {
                     </Box>
                 </Box>
                 <Box w={["100%", "100%","100%", "100%", "70%"]} className="column-2">
-                    <Flex justify="space-between"> 
-                        <Heading as='h3' size='lg' mt={5} mb={5} style={{cursor: "pointer"}}>Explore</Heading>
-                    </Flex>
-                    <Flex>
-                        <SearchInput searchTerm={searchTerm} />
-                    </Flex>
-                    {searchTerm ? (
-                        <Search term={searchTerm} />
-                    ) : (
-                        <Explore />
-                    )}
+                    <HomePages />
                 </Box>
             </Flex>
         </div>
