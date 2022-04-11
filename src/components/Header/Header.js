@@ -70,9 +70,13 @@ const Header = (props) => {
                     spacing='20px'
                     >
                     <i onClick={() => setPageLocal('explore')} className="fa fa-solid fa-house"></i>
+                    {/* <Text>Home</Text> */}
                     <i onClick={() => setPageLocal('currentlyreading')} className="fa fa-solid fa-book"></i>
+                    {/* <Text>Reading</Text> */}
                     <i onClick={() => setPageLocal('wanttoread')} className="fa fa-regular fa-heart"></i>
+                    {/* <Text>Saved</Text> */}
                     <i  onClick={() => setPageLocal('read')}className="fa fa-solid fa-check"></i>
+                    {/* <Text>Completed</Text> */}
                 </Stack>
 
 
