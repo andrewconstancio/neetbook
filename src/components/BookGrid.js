@@ -11,7 +11,7 @@ const BookGrid = ( {books} ) => {
 
     return (
         <>
-            <SimpleGrid columns={[2,2,3,4,5]}  spacingX='20px' spacingY='20px'>
+            <SimpleGrid columns={[2,2,3,4,4]}  spacingX='20px' spacingY='20px'>
             {books.map((book, index) => {
                         // if(books.length === index + 1) {
                         //     return (

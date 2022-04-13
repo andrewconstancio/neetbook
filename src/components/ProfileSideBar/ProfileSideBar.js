@@ -38,14 +38,14 @@ const ProfileSideBar = () => {
                 </Box>
             </Stack>
             <Stack className="nav-items-outer" style={{marginTop: "40px"}}>
-                <Box style={{marginTop: "15px"}}>
+                <Box style={{marginTop: "15px"}} className={page == "explore" ? "page-selected" : ""}>
                     <HStack onClick={() => setPageLocal('explore')}  className='nav-selction'>
                         <Box><i className="fa fa-solid fa-house"></i></Box>
                         <Box style={{width: "90%"}}><Text>Explore</Text></Box>
                         <Box><i className="fa-right fa-solid fa-chevron-right"></i></Box>
                     </HStack>
                 </Box>
-                <Box>
+                <Box className={page == "currentlyreading" ? "page-selected" : ""}>
                     <HStack onClick={() => setPageLocal('currentlyreading')} className='nav-selction'>
                         <Box><i className="fa fa-solid fa-book"></i></Box>
                         <Box style={{width: "90%"}}><Text>Currently Reading</Text></Box>

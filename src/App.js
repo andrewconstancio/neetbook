@@ -2,8 +2,6 @@ import React from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Home from './pages/Home/Home';
-import Explore from './pages/Explore/Explore'
-import MyCollection from './pages/Collection/MyCollection'
 import AllBooksBySubject from './pages/AllBooksBySubject/AllBooksBySubject'
 import BookPage from './pages/BookPage/BookPage';
 import './App.css'
@@ -25,9 +23,7 @@ const App = () => {
                     <Route exact path="/">
                         {user && curr_user ? <Route path="/" exact component={Home} /> : <SignIn websitename={webSiteName} />}
                     </Route>
-                    <Route path="/explore" exact component={Explore} />
                     <Route path="/currentlyreading" exact component={CurrentlyReading} />
-                    <Route path="/mycollection" exact component={MyCollection} />
                     <Route path="/subject/:name" exact component={AllBooksBySubject} />
                     <Route path="/book/:edition" exact component={BookPage} />
                 </Switch>

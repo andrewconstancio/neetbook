@@ -62,21 +62,26 @@ const Header = (props) => {
 
                 <Stack
                     direction={{ base: "row"}}
-                    // display={{ base: "block", md: "none" }}
+                    display={{ base: "block", md: "none" }}
                     width={{ base: "auto"}}
                     alignItems="center"
                     flexGrow={1}
                     mt={{ base: 4, md: 0 }}
-                    spacing='20px'
+                    spacing='2px'
                     >
-                    <i onClick={() => setPageLocal('explore')} className="fa fa-solid fa-house"></i>
+                    <Link to="/">
+                        <i className="fa fa-solid fa-house"></i>
+                    </Link>
                     {/* <Text>Home</Text> */}
-                    <i onClick={() => setPageLocal('currentlyreading')} className="fa fa-solid fa-book"></i>
-                    {/* <Text>Reading</Text> */}
-                    <i onClick={() => setPageLocal('wanttoread')} className="fa fa-regular fa-heart"></i>
-                    {/* <Text>Saved</Text> */}
-                    <i  onClick={() => setPageLocal('read')}className="fa fa-solid fa-check"></i>
-                    {/* <Text>Completed</Text> */}
+                    <Link to="/currentlyreading">
+                        <i className="fa fa-solid fa-book"></i>
+                    </Link>
+                    <Link to="/wanttoread">
+                        <i className="fa fa-regular fa-heart"></i>
+                    </Link>
+                    <Link to="/read">
+                        <i className="fa fa-solid fa-check"></i>
+                    </Link>
                 </Stack>
 
 

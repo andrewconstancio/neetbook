@@ -13,7 +13,7 @@
 }
 
 .nav-items-outer {
-    background-color: #1d1d1d;
+
     padding-top: 15px;
     padding-bottom: 140px;
     border-radius: 30px;
@@ -27,4 +27,8 @@
 
 .fa-right {
     margin-right: 15px;
+}
+
+.page-selected {
+    background-color: #483f88;
 }

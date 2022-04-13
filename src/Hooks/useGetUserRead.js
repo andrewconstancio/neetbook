@@ -3,7 +3,7 @@ import OpenLibrary from '../apis/OpenLibrary';
 import { firestore } from '../config/firebase-config';
 import { useSelector } from 'react-redux';
 
-export default function useGetUserCurrentlyReading() {
+export default function useGetUserRead() {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
     const [books, setBooks] = useState([])
@@ -15,7 +15,7 @@ export default function useGetUserCurrentlyReading() {
         firestore
         .collection("UserBookRead")
         .where("uid", "==", user.uid)
-        .where("currentlyReading", "==", true)
+        .where("read", "==", true)
         .orderBy('createdAt', 'desc')
         .onSnapshot( async (snapshot) => {
             const bookArr = [];

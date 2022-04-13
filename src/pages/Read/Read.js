@@ -6,24 +6,27 @@ import {
     Heading,
     SimpleGrid
 } from "@chakra-ui/react"
-import useGetUserCurrentlyReading from '../../Hooks/useGetUserCurrentlyReading'
+import useGetUserRead from '../../Hooks/useGetUserRead'
 import Book from '../../components/Book'
 
-const CurrentlyReading = () => {
+
+const Read = () => {
     const {
         error,
         loading,
         books
-    } = useGetUserCurrentlyReading();
+    } = useGetUserRead();
 
     if(loading) {
         console.log("loading");
     }
 
+    console.log(books);
+
     return (
         <>
             <Flex justify="space-between"> 
-                <Heading as='h3' size='lg' mt={5} mb={5} style={{cursor: "pointer"}}>Currently Reading</Heading>
+                <Heading as='h3' size='lg' mt={5} mb={5} style={{cursor: "pointer"}}>Want to Read</Heading>
             </Flex>
             <SimpleGrid columns={[2, 2, 3, 3, 4]} spacingX='20px' spacingY='20px'>
             {books.map((book, index) => {
@@ -45,4 +48,4 @@ const CurrentlyReading = () => {
     )
 }
 
-export default CurrentlyReading
+export default Read

@@ -15,13 +15,17 @@ const Search = ( {searchTerm} ) => {
 
     const handleSearchChange = (e) => {
         const term = e.target.value;
-        if(term.length > 3) {
+        if(term.length > 1) {
             setTermStateLocal(term);
-            // search(term);
+            search(term);
         } else {
-            setTermStateLocal('');
-            // clearSearch();
+            clearOutSearch();
         }
+    }
+
+    const clearOutSearch = () => {
+        setTermStateLocal('');
+        clearSearch();
     }
 
     return (
@@ -36,23 +40,11 @@ const Search = ( {searchTerm} ) => {
             <Button
                 style={{marginTop: "15px", marginBottom: "30px", marginLeft: "20px"}}
                 size='lg' 
-                colorScheme="teal"
+                colorScheme="orange"
                 display={termStateLocal ? "block" : "none"}
-                onClick={search(termStateLocal)}
-                >Search
+                onClick={clearOutSearch}
+                ><i class="fa-regular fa-circle-xmark"></i>
             </Button>
-            {/* <Slide direction='bottom' in={isOpen} style={{ zIndex: 10 }}>
-                <Box
-                p='40px'
-                color='white'
-                mt='4'
-                bg='teal.500'
-                rounded='md'
-                shadow='md'
-                >
-                <Lorem count={2} />
-                </Box>
-            </Slide> */}
         </>
     )
 }

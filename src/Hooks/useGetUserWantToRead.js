@@ -15,7 +15,7 @@ export default function useGetUserCurrentlyReading() {
         firestore
         .collection("UserBookRead")
         .where("uid", "==", user.uid)
-        .where("currentlyReading", "==", true)
+        .where("wantsToRead", "==", true)
         .orderBy('createdAt', 'desc')
         .onSnapshot( async (snapshot) => {
             const bookArr = [];

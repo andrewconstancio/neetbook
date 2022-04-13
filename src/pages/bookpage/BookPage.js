@@ -51,7 +51,7 @@ const BookPage = (props) => {
 
     return (
         <div className='container'>
-            <Flex direction={['column', 'column', 'column', 'row', 'row']}>
+            <Flex direction={['column', 'column', 'column', 'row', 'row']} style={{marginTop: "80px"}}>
                 <Box 
                     flexShrink={0} 
                     w={["100%", "100%","100%", "auto", "30%"]} 
