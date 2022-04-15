@@ -33,6 +33,14 @@ const Search = ( {searchTerm} ) => {
 
     return (
         <>
+            <Button
+                style={{marginTop: "15px", marginBottom: "30px", marginRight: "20px"}}
+                size='lg' 
+                colorScheme="red"
+                display={termStateLocal ? "block" : "none"}
+                onClick={clearOutSearch}
+                ><i className="fa-solid fa-xmark"></i>
+            </Button>
             <Input 
                 variant='filled' 
                 size='lg'  
@@ -43,10 +51,10 @@ const Search = ( {searchTerm} ) => {
             <Button
                 style={{marginTop: "15px", marginBottom: "30px", marginLeft: "20px"}}
                 size='lg' 
-                colorScheme="orange"
+                colorScheme="teal"
                 display={termStateLocal ? "block" : "none"}
                 onClick={handleSearch}
-                >Search
+                >Go
             </Button>
         </>
     )
