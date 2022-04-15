@@ -28,7 +28,7 @@ const App = () => {
                     <Route path="/authors/:key" exact component={AuthorsBooks} />
                     <Route path="/currentlyreading" exact component={CurrentlyReading} />
                     <Route path="/subject/:name" exact component={AllBooksBySubject} />
-                    <Route path="/book/:edition" exact component={BookPage} />
+                    <Route path="/book/:id" exact component={BookPage} />
                 </Switch>
             </div>
         </BrowserRouter >

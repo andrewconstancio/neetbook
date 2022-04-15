@@ -17,7 +17,6 @@ const Search = ( {searchTerm} ) => {
         const term = e.target.value;
         if(term.length > 1) {
             setTermStateLocal(term);
-            search(term);
         } else {
             clearOutSearch();
         }
@@ -26,6 +25,10 @@ const Search = ( {searchTerm} ) => {
     const clearOutSearch = () => {
         setTermStateLocal('');
         clearSearch();
+    }
+
+    const handleSearch = () => {
+        search(termStateLocal);
     }
 
     return (
@@ -42,8 +45,8 @@ const Search = ( {searchTerm} ) => {
                 size='lg' 
                 colorScheme="orange"
                 display={termStateLocal ? "block" : "none"}
-                onClick={clearOutSearch}
-                ><i class="fa-regular fa-circle-xmark"></i>
+                onClick={handleSearch}
+                >Search
             </Button>
         </>
     )

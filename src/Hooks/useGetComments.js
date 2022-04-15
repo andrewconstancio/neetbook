@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react'
 import { firestore } from '../config/firebase-config';
 
-export default function getComments(bookEditionKey, showLoader) {
+export default function getComments(bookId, showLoader) {
     const [loading, setLoading] = useState(true);
     const [comments, setComments] = useState([]);
     const [error, setError] = useState(false)
@@ -13,7 +13,7 @@ export default function getComments(bookEditionKey, showLoader) {
         async function fetchData() {
             await firestore
             .collection("UserBookNotes")
-            .where("bookEditionKey", "==", bookEditionKey)
+            .where("bookId", "==", bookId)
             .orderBy('createdAt', 'desc')
             .get()
             .then(res => {

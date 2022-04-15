@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import OpenLibrary from '../apis/OpenLibrary';
 import axios from 'axios';
-import { auth, firestore } from '../config/firebase-config';
+import GoogleBooks from '../apis/GoogleBooks';
 
 
-export default function useBookSingleInfo(bookKey, bookEditionKey) {
+export default function useBookSingleInfo(bookId) {
     const [book, setBook] = useState(null)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(false)
@@ -13,9 +13,9 @@ export default function useBookSingleInfo(bookKey, bookEditionKey) {
         setLoading(true)
         setError(false)
         async function fetchData() {
-            await OpenLibrary.get(`${bookKey}.json`)
+            await GoogleBooks.get(`https://www.googleapis.com/books/v1/volumes/${bookId}`)
             .then(res => {
-                setBook(res.data)
+                setBook(res.data.volumeInfo)
                 setLoading(false)
             }).catch(e => {
                 if(axios.isCancel(e)) return

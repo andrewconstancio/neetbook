@@ -10,7 +10,7 @@ import CommentActionsPopover from './CommentActionsPopover';
 import LikeButton from './LikeButton';
 import DislikeButton from './DislikeButton';
 
-const Comment = ( {notes, profileURL, displayName, commentDocID, commentUID, docRef, bookEditionKey, likeCount, dislikeCount, createdAt} ) => {
+const Comment = ( {notes, profileURL, displayName, commentDocID, commentUID, docRef, bookId, likeCount, dislikeCount, createdAt} ) => {
     return (
         <div className='view-outer-container'>
             <Stack direction={['row']} spacing='15px'>
@@ -29,10 +29,10 @@ const Comment = ( {notes, profileURL, displayName, commentDocID, commentUID, doc
                         <Box>
                             <HStack spacing={4}>
                                 <Box>
-                                    <LikeButton docRef={docRef} likeCount={likeCount} bookEditionKey={bookEditionKey} />
+                                    <LikeButton docRef={docRef} likeCount={likeCount} bookId={bookId} />
                                 </Box>
                                 {/* <Box>
-                                    <DislikeButton docRef={docRef} dislikeCount={dislikeCount} bookEditionKey={bookEditionKey} />
+                                    <DislikeButton docRef={docRef} dislikeCount={dislikeCount} bookId={bookId} />
                                 </Box> */}
                             </HStack>
                         </Box>

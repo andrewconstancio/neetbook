@@ -16,7 +16,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators } from '../../redux'
 
-const CommentSection = ({ bookEditionKey}) => {
+const CommentSection = ({ bookId }) => {
 
     const [loading, setLoading] = useState(true);
     const [comments, setComments] = useState([]);
@@ -28,10 +28,10 @@ const CommentSection = ({ bookEditionKey}) => {
     // const comments = useSelector((state) => state.comments.comments)
 
     useEffect(() => {
-        // fetchComments(bookEditionKey);
+        // fetchComments(bookId);;
         firestore
         .collection("UserBookComments")
-        .where("bookEditionKey", "==", bookEditionKey)
+        .where("bookId", "==", bookId)
         .orderBy('createdAt', 'desc')
         .onSnapshot((snapshot) => {
             setComments(
@@ -51,7 +51,7 @@ const CommentSection = ({ bookEditionKey}) => {
         }
         firestore.collection('UserBookComments').add({
             notes: notes,
-            bookEditionKey: bookEditionKey,
+            bookId: bookId,
             uid: user.uid,
             displayName: user.displayName,
             profileURL: user.photoURL,
@@ -109,7 +109,7 @@ const CommentSection = ({ bookEditionKey}) => {
                         commentDocID={id}
                         commentUID={uid}
                         docRef={ref}
-                        bookEditionKey={bookEditionKey}
+                        bookId={bookId}
                         likeCount={likeCount}
                         dislikeCount={dislikeCount}
                         createdAt={createdAt}

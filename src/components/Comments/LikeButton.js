@@ -5,7 +5,7 @@ import {
 import { firestore } from '../../config/firebase-config';
 import { useSelector } from 'react-redux';
 
-const LikeButton = ( {docRef, bookEditionKey, likeCount } ) => {
+const LikeButton = ( {docRef, bookId, likeCount } ) => {
 
     const [userHasLiked, setUserHasLiked] = useState(false);
     const [likes, setLikes] = useState(likeCount);
@@ -19,7 +19,7 @@ const LikeButton = ( {docRef, bookEditionKey, likeCount } ) => {
         .add({
             commentID: docRef.id,
             uid: user.uid,
-            bookEditionKey: bookEditionKey,
+            bookId: bookId,
             createdAt: new Date()
         })
 

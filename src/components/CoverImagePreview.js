@@ -7,7 +7,7 @@ import {
     Heading
 } from "@chakra-ui/react"
 
-const CoverImagePreview = ({coverId, classType}) => {
+const CoverImagePreview = ({coverURL, classType}) => {
 
     return (
         <div>
@@ -16,7 +16,7 @@ const CoverImagePreview = ({coverId, classType}) => {
                     style={{borderRadius: "0px 20px 20px 0px"}} 
                     w={["90%", "90%", 225]} 
                     h={["90%", "90%", 375]}
-                    src={`https://covers.openlibrary.org/b/id/${coverId}.jpg`}
+                    src={coverURL}
                     alt="aye" 
                     className={classType}
                 />
