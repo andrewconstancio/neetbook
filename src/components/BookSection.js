@@ -72,20 +72,20 @@ const BookSection = ( {subject, limit, pageNumber} ) => {
 
     if(!books) {
         return (
-            <div>
-                <Heading as='h3' size='lg' mt={5} mb={5}>&nbsp;</Heading>
+            <>
+                {/* <Heading as='h3' size='lg' mt={5} mb={5}>&nbsp;</Heading>
                 <SimpleGrid columns={{sm: 2, md: 3, lg: 4}} spacingX='40px' spacingY='20px'>
                 {[...Array(limit)].map((i) =>
                     <LoadingBook key={i} />
                 )}
-                </SimpleGrid>
-            </div>
+                </SimpleGrid> */}
+            </>
         )
     }
     
     return (
-        <div>
-            <Flex justify="space-between"> 
+        <>
+            <Flex> 
                 <Link to={`/subject/${subject}`}>
                     <Heading as='h3' size='lg' mt={5} mb={5} style={{cursor: "pointer"}}>{capitalizeFirstLetter(subject)}</Heading>
                 </Link>
@@ -106,7 +106,7 @@ const BookSection = ( {subject, limit, pageNumber} ) => {
                 })
                 }
             </Slider>
-        </div>
+        </>
     )
 }
 

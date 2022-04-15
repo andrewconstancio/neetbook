@@ -8,7 +8,7 @@ import {
     Image,
     Avatar
 } from "@chakra-ui/react"
-import Loader from '../loader';
+import Loader from '../Loader';
 import {firestore } from '../../config/firebase-config';
 import ResizeTextarea from "react-textarea-autosize";
 import Comment from './Comment';

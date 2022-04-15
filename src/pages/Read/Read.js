@@ -26,7 +26,7 @@ const Read = () => {
     return (
         <>
             <Flex justify="space-between"> 
-                <Heading as='h3' size='lg' mt={5} mb={5} style={{cursor: "pointer"}}>Want to Read</Heading>
+                <Heading as='h3' size='lg' mt={5} mb={5} style={{cursor: "pointer"}}>Read</Heading>
             </Flex>
             <SimpleGrid columns={[2, 2, 3, 3, 4]} spacingX='20px' spacingY='20px'>
             {books.map((book, index) => {

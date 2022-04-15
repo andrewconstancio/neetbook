@@ -52,14 +52,14 @@ const ProfileSideBar = () => {
                         <Box><i className="fa-right fa-solid fa-chevron-right"></i></Box>
                     </HStack>
                 </Box>
-                <Box>
+                <Box className={page == "wanttoread" ? "page-selected" : ""}>
                     <HStack onClick={() => setPageLocal('wanttoread')}  className='nav-selction'>
                         <Box><i className="fa fa-regular fa-heart"></i></Box>
                         <Box style={{width: "90%"}}><Text>Want To Read</Text></Box>
                         <Box><i className="fa-right fa-solid fa-chevron-right"></i></Box>
                     </HStack>
                 </Box>
-                <Box>
+                <Box className={page == "read" ? "page-selected" : ""}>
                     <HStack onClick={() => setPageLocal('read')}  className='nav-selction'>
                         <Box><i className="fa fa-solid fa-check"></i></Box>
                         <Box style={{width: "90%"}}><Text>Read</Text></Box>

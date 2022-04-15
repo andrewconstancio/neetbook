@@ -49,17 +49,16 @@ const Header = (props) => {
                 padding={6}
                 {...props}
             >
+                {/* <Heading size="sm" letterSpacing={"tighter"}>
+                    {props.websitename}
+                </Heading> */}
                 <Flex align="center" mr={5}>
-                    {/* <Heading as="h1" size="lg" letterSpacing={"tighter"} style={{ color: '#FF004D'}}>
-                        {props.websitename}
-                    </Heading> */}
                     <Link 
                         to="/" 
                     >
                         <Logo />
                     </Link>
                 </Flex>
-
                 <Stack
                     direction={{ base: "row"}}
                     display={{ base: "block", md: "none" }}
@@ -83,38 +82,7 @@ const Header = (props) => {
                         <i className="fa fa-solid fa-check"></i>
                     </Link>
                 </Stack>
-
-
-                {/* <Stack
-                    direction={{ base: "column", md: "row" }}
-                    display={{ base: isOpen ? "block" : "none", md: "flex" }}
-                    width={{ base: "full", md: "auto" }}
-                    alignItems="center"
-                    flexGrow={1}
-                    mt={{ base: 4, md: 0 }}
-                >
-                    <Link 
-                        to="/mycollection" 
-                    > 
-                        <Text>My Collection</Text>
-                    </Link>
-                    <Link 
-                        to="/explore" 
-                    > 
-                        <Text>Explore</Text>
-                    </Link>
-                </Stack> */}
-
-                {/* <Box 
-                    mt={{ base: 4, md: 0 }} mr={5} ml={5} flexGrow={1} 
-                    display={{ base: "none", md: "flex" }}
-                >
-                    <Input variant='filled'  style={{ backgroundColor : "#232323"}}  placeholder='Search...' size='md' />
-                </Box> */}
-
-                <Box
-                    mt={{ base: 4, md: 0 }}
-                >
+                <Box mt={{ base: 4, md: 0 }}>
                     <Avatar name={user.displayName} onClick={signOut} boxSize='50px' src={user.photoURL} />
                 </Box>
             </Flex>

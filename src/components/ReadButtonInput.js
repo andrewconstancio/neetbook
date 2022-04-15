@@ -118,7 +118,7 @@ const ReadButton = ( {bookEditionKey, hasRead, setHasRead} ) => {
                 &nbsp;&nbsp;Want to Read
             </Button>
 
-            <Button onClick={checkButtonValCurrentlyReading} colorScheme={currentlyReading ? "whiteAlpha" : "grey"} mt={5} size='md' w={{ base: '100%' }} variant={currentlyReading ? "solid" : "outline"}>
+            <Button onClick={checkButtonValCurrentlyReading} colorScheme={currentlyReading ? "yellow" : "grey"} mt={5} size='md' w={{ base: '100%' }} variant={currentlyReading ? "solid" : "outline"}>
                 <i className="fa-solid fa-check" style={{display: currentlyReading ? "block" : "none"}}></i>
                 &nbsp;&nbsp;Currently Reading
             </Button>

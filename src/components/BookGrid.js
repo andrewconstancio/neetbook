@@ -18,7 +18,6 @@ const BookGrid = ( {books} ) => {
                         //         <Book key={book.cover_id} lastElemRef={lastBookElementRef} edition={book.cover_edition_key} title={book.title} bookKey={book.key} coverId={book.cover_id}></Book>
                         //     )
                         // } 
-                        console.log(books);
                         if(book.cover_i) {
                             return (
                                 <Book 

@@ -5,11 +5,13 @@ import Home from './pages/Home/Home';
 import AllBooksBySubject from './pages/AllBooksBySubject/AllBooksBySubject'
 import BookPage from './pages/BookPage/BookPage';
 import './App.css'
-import SignIn from './pages/SignIn/SignIn';;
+import SignIn from './pages/SignIn/SignIn';
 import { useSelector } from 'react-redux';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from './config/firebase-config'
-import CurrentlyReading from './pages/CurrentlyReading/CurrentlyReading'
+import { auth } from './config/firebase-config';
+import CurrentlyReading from './pages/CurrentlyReading/CurrentlyReading';
+import AuthorsBooks from './pages/AuthorsBooks/AuthorsBooks';
+
 const App = () => {
     const webSiteName = "NEETBOOK";
     const [user] = useAuthState(auth);
@@ -23,6 +25,7 @@ const App = () => {
                     <Route exact path="/">
                         {user && curr_user ? <Route path="/" exact component={Home} /> : <SignIn websitename={webSiteName} />}
                     </Route>
+                    <Route path="/authors/:key" exact component={AuthorsBooks} />
                     <Route path="/currentlyreading" exact component={CurrentlyReading} />
                     <Route path="/subject/:name" exact component={AllBooksBySubject} />
                     <Route path="/book/:edition" exact component={BookPage} />

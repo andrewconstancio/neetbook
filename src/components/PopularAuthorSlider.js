@@ -62,7 +62,6 @@ const PopularAuthorSlider = () => {
         )
     }
 
-
     return (
         <>
             <Flex justify="space-between"> 
@@ -70,10 +69,12 @@ const PopularAuthorSlider = () => {
             </Flex>
             <Slider {...settings}>
                 {authors.map((author) => {
+    
                     return (
                         <AuthorMainCoverImage 
+                            authorKey={author.key}
                             coverId={author.photos[0]}
-                            name={author.personal_name}
+                            name={author.name}
                         />
                     )
                 })

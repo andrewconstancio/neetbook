@@ -18,18 +18,8 @@ const RatingCustom = () => {
     const { fetchRating, handleRatingChange, uncheckRating } = bindActionCreators(actionCreators, dispatch);
 
     useEffect(() => {
-        console.log("USE EFFECT");
         fetchRating();
     }, []);
-
-
-    // if(!ratingChanged || !rating) {
-    //     return (
-    //         <></>
-    //     )
-    // }
-
-    console.log("ratingChanged: " + ratingChanged);
 
     return (
         <>
@@ -43,8 +33,8 @@ const RatingCustom = () => {
                 <Rating stop={5}
                     emptySymbol="fa fa-star-o fa-xl medium"
                     fullSymbol="fa fa-star fa-xl medium"
-                    fractions={2}
-                    style={{color: ratingChanged ? "#ffd600" : "white"}}
+                    fractions={4}
+                    style={{color: ratingChanged ? "#ffd600" : "#444444"}}
                     flexShrink={0}
                     onChange={handleRatingChange} 
                     initialRating={rating}

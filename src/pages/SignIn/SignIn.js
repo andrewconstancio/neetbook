@@ -14,7 +14,7 @@ const SignIn = ({websitename}) => {
     const [loading, setLoading] = useState(false)
     const history = useHistory();
     const dispatch = useDispatch();
-    const { signInWithGoogle } = bindActionCreators(actionCreators, dispatch)
+    const { signInWithGoogle, demoSignIn } = bindActionCreators(actionCreators, dispatch)
 
     return (
         <Flex height="100vh" alignItems="center" justifyContent="center">
@@ -28,6 +28,13 @@ const SignIn = ({websitename}) => {
                         mb={1}
                         color="black"
                     ><i className="fa-brands fa-google"></i>&nbsp;&nbsp;Sign in With Google
+                </Button>
+                <Button 
+                        onClick={demoSignIn} 
+                        disabled={loading} 
+                        mb={1}
+                        style={{backgroundColor: "black", color: "white", marginTop: "20px"}}
+                    >Demo Sign In
                 </Button>
             </Flex>
         </Flex>

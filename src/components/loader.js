@@ -3,7 +3,7 @@ import { TailSpin } from  'react-loader-spinner'
 import './loader.css'
 
 
-const loader = () => {
+const Loader = () => {
     return (
         <div className='outer-container'>
             <div className='inner-container'>
@@ -13,4 +13,4 @@ const loader = () => {
     )
 }
 
-export default loader
+export default Loader

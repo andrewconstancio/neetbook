@@ -18,6 +18,7 @@ import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators } from '../../redux';
 import { Redirect } from 'react-router-dom';
+import Loader from '../../components/Loader';
 
 
 const BookPage = (props) => {
@@ -44,7 +45,9 @@ const BookPage = (props) => {
 
 
     if(!book) {
-        return <div>Loading</div>
+        return <div className='container'>
+            <Loader />
+        </div>
     }
 
     
