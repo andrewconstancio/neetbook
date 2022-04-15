@@ -19,13 +19,13 @@ import { bindActionCreators } from 'redux';
 import { actionCreators } from '../../redux';
 import { Redirect } from 'react-router-dom';
 import Loader from '../../components/Loader';
+import Subjects from './Subjects';
 
 
 const BookPage = (props) => {
 
     const { bookId } = props.location.state;
     const [show, setShow] = useState(false)
-    const [subjects, setSubjects] = useState(null)
     const dispatch = useDispatch();
     const { putBookKeyInState } = bindActionCreators(actionCreators, dispatch);
     const handleToggle = () => setShow(!show)
@@ -37,17 +37,6 @@ const BookPage = (props) => {
         loading
     } = useBookSingleInfo(bookId);
 
-    const parseSubject = () => {
-        var subsArr= [];
-        book.categories.map((subject) => {
-            var sub  = subject.split("/");
-            sub.map((subs) => {
-                subsArr.push(subs.trim());
-            })
-        })
-        setSubjects(subsArr);
-    }
-
     useEffect(() => {
         putBookKeyInState(bookId);
     }, [])
@@ -58,7 +47,6 @@ const BookPage = (props) => {
         </div>
     }
 
-    parseSubject()
      
     return (
         <div className='container'>
@@ -98,11 +86,7 @@ const BookPage = (props) => {
                             </Button>
                         </Box>
                         <Box>
-                            {subjects.map((subject) => {
-                                return (
-                                    <SubjectButton key={subject} subject={subject} />
-                                )
-                            })}
+                            <Subjects categories={book.categories}/>
                         </Box>
                     </Flex>
                     <CommentSection bookId={bookId} />
