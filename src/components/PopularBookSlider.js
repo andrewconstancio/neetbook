@@ -75,6 +75,7 @@ const PopularBookSlider = () => {
                                 <Book
                                     bookId={book.id}
                                     coverURL={book.data.imageLinks.thumbnail}
+                                    title={book.title}
                                 />
                             )
                         }

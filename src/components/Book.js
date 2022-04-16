@@ -7,7 +7,7 @@ import '../pages/AllBooksBySubject/Book.css'
 import { Link } from 'react-router-dom'
 import './CoverImagePreview.css'
 
-const Book = ( {bookId, coverURL} ) => {
+const Book = ( {bookId, coverURL, title} ) => {
 
     const [imageLoaded, setImageLoaded] = useState(false);
 
@@ -19,7 +19,7 @@ const Book = ( {bookId, coverURL} ) => {
                         src={coverURL}
                         h={[300, 400, 300]}  
                         w={[175, 250, 175]} 
-                        alt={book.data.title} 
+                        alt={title} 
                         style={{borderRadius: "20px"}}
                     />
                 </Box>

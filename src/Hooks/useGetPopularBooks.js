@@ -22,7 +22,9 @@ export default function useGetPopularBooks() {
                 return GoogleBook.get(url).then(res => {
                     if(res.data) {
                         // console.log(res.data.items[0].volumeInfo);
-                        tBooks.push({id: item.id, data: res.data.items[0].volumeInfo});
+                        if(res.data.items) {
+                            tBooks.push({id: res.data.items[0].id, data: res.data.items[0].volumeInfo});
+                        }
                     }
                 });
             })

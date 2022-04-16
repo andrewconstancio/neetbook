@@ -1,12 +1,10 @@
 import React from 'react'
 import {
-    Flex,
     Box,
     Text,
     Heading,
     HStack,
     SimpleGrid,
-    Image
 } from "@chakra-ui/react"
 import useGetSearchResults from '../../Hooks/useGetSearchResults';
 import LoadingBook from '../../components/LoadingBook';
@@ -58,6 +56,7 @@ const Search = ( {term} ) => {
                                     <Book
                                         bookId={book.id}
                                         coverURL={book.data.imageLinks.thumbnail}
+                                        title={book.title}
                                     />
                                 )
                             }
