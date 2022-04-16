@@ -47,7 +47,8 @@ const BookPage = (props) => {
         </div>
     }
 
-     
+    console.log(book.categories);
+
     return (
         <div className='container'>
             <Flex direction={['column', 'column', 'column', 'row', 'row']} style={{marginTop: "80px"}}>
@@ -86,7 +87,7 @@ const BookPage = (props) => {
                             </Button>
                         </Box>
                         <Box>
-                            <Subjects categories={book.categories}/>
+                            {book.categories ? <Subjects categories={book.categories}/> : ""}
                         </Box>
                     </Flex>
                     <CommentSection bookId={bookId} />
@@ -94,83 +95,6 @@ const BookPage = (props) => {
             </Flex>
         </div>
     )
-
-    // const { bookKey } = props.location.state;
-    // const { bookEditionKey } = props.location.state;
-    // const { coverId } = props.location.state;
-    // const [hasRead, setHasRead] = useState(false);
-    // const [show, setShow] = useState(false)
-    // const dispatch = useDispatch();
-    // const { putBookKeyInState } = bindActionCreators(actionCreators, dispatch);
-    // const handleToggle = () => setShow(!show)
-
-    // const {
-    //     book,
-    //     error,
-    //     loading
-    // } = useBookSingleInfo(bookKey, bookEditionKey);
-
-    // useEffect(() => {
-    //     putBookKeyInState(bookEditionKey);
-    // }, [])
-
-
-    // if(!book) {
-    //     return <div className='container'>
-    //         <Loader />
-    //     </div>
-    // }
-
-    
-
-    // return (
-    //     <div className='container'>
-    //         <Flex direction={['column', 'column', 'column', 'row', 'row']} style={{marginTop: "80px"}}>
-    //             <Box 
-    //                 flexShrink={0} 
-    //                 w={["100%", "100%","100%", "auto", "30%"]} 
-    //                 pr={[0, 6]} 
-    //                 align="center" 
-    //                 className="column-1"
-    //             >
-    //                 <Box className="sticky-left-column">
-    //                     <CoverImagePreview coverId={coverId} classType="cover-preview-page" />
-    //                     <RatingInput bookEditionKey={bookEditionKey} hasRead={hasRead} setHasRead={setHasRead} />
-    //                     <ReadButtonInput bookEditionKey={bookEditionKey} hasRead={hasRead} setHasRead={setHasRead}  />
-    //                 </Box>
-    //             </Box>
-    //             <Box w={["100%", "100%","100%", "100%", "70%"]} className="column-2">
-    //                 <Box mt={["15px", "15px", "15px", "15px", "0px"]}>
-    //                     <Text><b>{book.title}</b></Text>
-    //                     <Author authorKey={book.authors[0].author.key} />
-    //                 </Box>
-    //                 <Flex direction="column">
-    //                     <Box>
-    //                         <Collapse startingHeight={100} in={show}>
-    //                             {typeof book.description === 'object' ? book.description.value : book.description !== null ? book.description : "This edition doesn't have a description yet."}
-    //                         </Collapse>
-    //                         <Button 
-    //                             colorScheme="purple" 
-    //                             size='sm' 
-    //                             onClick={handleToggle} mt='1rem' 
-    //                             style={{float: "right", marginBottom: "20px"}}
-    //                         >
-    //                             Show {show ? 'Less' : 'More'}
-    //                         </Button>
-    //                     </Box>
-    //                     <Box>
-    //                         {book.subjects ? book.subjects.slice(0, 7).map((subject) => {
-    //                             return (
-    //                                 <SubjectButton key={subject} subject={subject} />
-    //                             )
-    //                         }) : ""}
-    //                     </Box>
-    //                 </Flex>
-    //                 <CommentSection bookEditionKey={bookEditionKey} />
-    //             </Box>
-    //         </Flex>
-    //     </div>
-    // )
 }
 
 export default BookPage

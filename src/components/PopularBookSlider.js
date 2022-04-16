@@ -61,6 +61,8 @@ const PopularBookSlider = () => {
         )
     }
 
+    console.log(books);
+
     return (
         <>
             <Flex justify="space-between"> 
@@ -68,19 +70,15 @@ const PopularBookSlider = () => {
             </Flex>
             <Slider {...settings}>
                 {books.map((book) => {
-                    if(book.covers[0] !== null) {
-                        var coverEditionKey = book.key.slice(7);
-                        return (
-                            <Book 
-                                key={coverEditionKey} 
-                                edition={coverEditionKey}
-                                title={book.title}  
-                                bookKey={book.works[0].key}
-                                coverId={book.covers[0]}
-                            />
-                        )
-                    }
-                })
+                        if(book.data.imageLinks) {
+                            return (
+                                <Book
+                                    bookId={book.id}
+                                    coverURL={book.data.imageLinks.thumbnail}
+                                />
+                            )
+                        }
+                    })
                 }
             </Slider>
         </>

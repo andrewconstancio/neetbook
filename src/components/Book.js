@@ -7,13 +7,24 @@ import '../pages/AllBooksBySubject/Book.css'
 import { Link } from 'react-router-dom'
 import './CoverImagePreview.css'
 
-const Book = ( {coverId, lastElemRef, edition, title, bookKey} ) => {
+const Book = ( {bookId, coverURL} ) => {
 
     const [imageLoaded, setImageLoaded] = useState(false);
 
     return (
         <>
-            <Link to={{pathname: `/book/${edition}`, state: {bookKey: bookKey, bookEditionKey: edition, coverId: coverId} }}>
+            <Link to={{pathname: `/book/${bookId}`, state: {bookId: bookId, coverURL: coverURL} }}>
+                <Box className='book'>
+                    <Image
+                        src={coverURL}
+                        h={[300, 400, 300]}  
+                        w={[175, 250, 175]} 
+                        alt={book.data.title} 
+                        style={{borderRadius: "20px"}}
+                    />
+                </Box>
+            </Link>
+            {/* <Link to={{pathname: `/book/${edition}`, state: {bookKey: bookKey, bookEditionKey: edition, coverId: coverId} }}>
                 <Box ref={lastElemRef} className='book'>
                     <Image
                         src={`https://covers.openlibrary.org/b/id/${coverId}.jpg`}
@@ -27,7 +38,7 @@ const Book = ( {coverId, lastElemRef, edition, title, bookKey} ) => {
                         onLoad={() => setImageLoaded(true)}
                     />
                 </Box>
-            </Link>
+            </Link> */}
         </>
     )
 }

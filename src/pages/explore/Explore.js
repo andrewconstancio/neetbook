@@ -40,11 +40,11 @@ const Explore = () => {
             ) : (
                 <>
                     <PopularBookSlider />
-                    <PopularAuthorSlider />
+                    {/* <PopularAuthorSlider />
                     <BookSection subject={"space"} />
                     <BookSection subject={"habit"} />
                     <BookSection subject={"business"} />
-                    <BookSection subject={"history"} />
+                    <BookSection subject={"history"} /> */}
                 </>
             )}
         </>
