@@ -26,6 +26,7 @@ import { Logo } from '../Logo'
 import {useSelector, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators } from '../../redux';
+import LogoSmall from '../LogoSmall';
 
 const Header = (props) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -67,8 +68,17 @@ const Header = (props) => {
                     <Link 
                         to="/" 
                     >
-                        <Box onClick={() => setPage("explore")}>
+                        <Box
+                            onClick={() => setPage("explore")}
+                            display={{ base: "none", md: "block" }}
+                        >
                             <Logo />
+                        </Box>
+                        <Box
+                            onClick={() => setPage("explore")}
+                            display={{ base: "block", md: "none" }}
+                        >
+                            <LogoSmall />
                         </Box>
                     </Link>
                 </Flex>

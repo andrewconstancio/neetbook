@@ -34,7 +34,7 @@ const App = () => {
                         <Route path="/WantToRead" exact component={WantToRead} />
                         <Route path="/Read" exact component={Read} />
                         <Route path="/subject/:name" exact component={AllBooksBySubject} />
-                        <Route path="/book/:edition" exact component={BookPage} />
+                        {user && curr_user ? <Route path="/book/:edition" exact component={BookPage} /> : <SignIn websitename={webSiteName} />}
                 </div>
                 </Switch>
             </div>

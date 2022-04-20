@@ -29,7 +29,6 @@ export const signInWithGoogle = () => async (dispatch, getState, { getFirebase, 
 export const demoSignIn = () => async (dispatch, getState, { getFirebase, getFirestore}) =>{
 
     const firebase = getFirebase();
-    const provider = new firebase.auth();
 
     firebase.auth().signInWithEmailAndPassword("demo.neetbook@gmail.com", "8Cat!Dog8")
     .then((userCredential) => {
@@ -43,10 +42,8 @@ export const demoSignIn = () => async (dispatch, getState, { getFirebase, getFir
     .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(errorMessage);
     });
 
-    console.log("it got here");
 };
 
 export const checkProfileImage = (user, uid) => async (dispatch, getState, { getFirebase, getFirestore}) => {
