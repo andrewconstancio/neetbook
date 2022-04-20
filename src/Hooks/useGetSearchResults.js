@@ -12,7 +12,7 @@ export default function useGetSearchResults(term) {
             setLoading(true)
             setError(false)
             async function fetchData() {
-                await OpenLibrary.get(`/search.json?title=${term.toLowerCase()}`)
+                await OpenLibrary.get(`/search.json?q=${term.toLowerCase()}`)
                 .then(res => {
                     setResults(res.data.docs)
                     setLoading(false)
