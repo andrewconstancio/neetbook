@@ -16,7 +16,7 @@ export default function useGetUserCurrentlyReading() {
         .collection("UserBookRead")
         .where("uid", "==", user.uid)
         .where("wantsToRead", "==", true)
-        .orderBy('createdAt', 'desc')
+        .orderBy('modifiedAt', 'desc')
         .onSnapshot( async (snapshot) => {
             const bookArr = [];
             const request = snapshot.docs.map( async (doc) => {

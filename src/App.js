@@ -14,6 +14,7 @@ import CurrentlyReading from './pages/CurrentlyReading/CurrentlyReading';
 import WantToRead from './pages/WantToRead/WantToRead';
 import Read from './pages/Read/Read';
 import AuthorsBooks from './pages/AuthorsBooks/AuthorsBooks';
+import RouteRequiresLogin from './RouteRequiresLogin';
 
 const App = () => {
     const webSiteName = "NEETBOOK";
@@ -26,16 +27,14 @@ const App = () => {
                 {user && curr_user && <Header websitename={webSiteName} />}
                 <Switch>
                     <div className="container">
-                        <Route exact path="/">
-                            {user && curr_user ? <Route path="/" exact component={Explore} /> : <SignIn websitename={webSiteName} />}
-                        </Route>
-                        <Route path="/authors/:key" exact component={AuthorsBooks} />
-                        <Route path="/currentlyreading" exact component={CurrentlyReading} />
-                        <Route path="/WantToRead" exact component={WantToRead} />
-                        <Route path="/Read" exact component={Read} />
-                        <Route path="/subject/:name" exact component={AllBooksBySubject} />
-                        {user && curr_user ? <Route path="/book/:edition" exact component={BookPage} /> : <SignIn websitename={webSiteName} />}
-                </div>
+                        <RouteRequiresLogin path="/" exact component={Explore} />
+                        <RouteRequiresLogin path="/authors/:key" exact component={AuthorsBooks} />
+                        <RouteRequiresLogin path="/currentlyreading" exact component={CurrentlyReading} />
+                        <RouteRequiresLogin path="/WantToRead" exact component={WantToRead} />
+                        <RouteRequiresLogin path="/Read" exact component={Read} />
+                        <RouteRequiresLogin path="/subject/:name" exact component={AllBooksBySubject} />
+                        <RouteRequiresLogin path="/book/:edition" exact component={BookPage} />
+                    </div>
                 </Switch>
             </div>
         </BrowserRouter >

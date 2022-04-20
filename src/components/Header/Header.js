@@ -91,26 +91,18 @@ const Header = (props) => {
                     mt={{ base: 4, md: 0 }}
                     spacing='2px'
                     >
-                    <Link to="/">
-                        <i 
-                            className={"fa fa-solid fa-house " + (page == "explore" ? "fa-selected" : "")} 
-                            onClick={() => setPage("explore")}>
-                        </i>
+                    
+                    <Link to="/" onClick={() => setPage("explore")}>
+                        <i className={"fa fa-solid fa-house " + (page == "explore" ? "fa-selected" : "")}></i>
                     </Link>
-                    <Link to="/currentlyreading">
-                        <i className={"fa fa-solid fa-book " + (page == "currentlyreading" ? "fa-selected" : "")}
-                            onClick={() => setPage("currentlyreading")}>
-                        </i>
+                    <Link to="/currentlyreading" onClick={() => setPage("currentlyreading")}>
+                        <i className={"fa fa-solid fa-book " + (page == "currentlyreading" ? "fa-selected" : "")}></i>
                     </Link>
-                    <Link to="/wanttoread">
-                        <i className={"fa fa-regular fa-heart " + (page == "wanttoread" ? "fa-selected" : "")}
-                            onClick={() => setPage("wanttoread")}>
-                        </i>
+                    <Link to="/wanttoread" onClick={() => setPage("wanttoread")}>
+                        <i className={"fa fa-regular fa-heart " + (page == "wanttoread" ? "fa-selected" : "")}></i>
                     </Link>
-                    <Link to="/read">
-                        <i className={"fa fa-solid fa-check " + (page == "read" ? "fa-selected" : "")}
-                            onClick={() => setPage("read")}>
-                        </i>
+                    <Link to="/read" onClick={() => setPage("read")}>
+                        <i className={"fa fa-solid fa-check " + (page == "read" ? "fa-selected" : "")}></i>
                     </Link>
                 </Stack>
                 <Box mt={{ base: 4, md: 0 }}>

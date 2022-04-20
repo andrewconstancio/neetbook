@@ -35,7 +35,7 @@ const CurrentlyReading = () => {
             <Flex justify="space-between"> 
                 <Heading as='h3' size='lg' mt={5} mb={5} style={{cursor: "pointer"}}>Currently Reading</Heading>
             </Flex>
-            <SimpleGrid columns={[2, 2, 3, 3, 4]} spacingX='20px' spacingY='20px'>
+            <SimpleGrid columns={[2, 2, 3, 5, 5]} spacingX='20px' spacingY='20px'>
             {books.map((book, index) => {
                     if(book.data.covers[0]) {
                         return (

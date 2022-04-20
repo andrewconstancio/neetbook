@@ -81,6 +81,7 @@ const ReadButton = ( {bookEditionKey, hasRead, setHasRead} ) => {
                     currentlyReading: currReading,
                     bookEditionKey: bookEditionKey,
                     uid: user.uid,
+                    modifiedAt: new Date(),
                     createdAt: new Date()
                 })
             }
