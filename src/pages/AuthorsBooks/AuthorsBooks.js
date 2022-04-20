@@ -50,7 +50,7 @@ const AuthorBooks = (props) => {
     }
 
     return (
-        <div className="container">
+        <>
             <Heading as='h5' size='sm' mt={5} mb={5} mr={5} style={{color: "grey", display: "inline-block"}}>Author: </Heading>
             <Heading as='h3' size='lg' mt={5} mb={5} style={{display: "inline-block"}}>{name}</Heading>
             <SimpleGrid columns={[2,2,3,4,5]} spacingX='40px' spacingY='20px'>
@@ -81,14 +81,14 @@ const AuthorBooks = (props) => {
                     })
                 }
                 <div style={{display: loading ? "block" : "none"}} >
-                <SimpleGrid columns={5} spacingX='40px' spacingY='20px'>
-                    {[...Array(8)].map((i) =>
-                        <LoadingBook key={i} />
-                    )}
+                    <SimpleGrid columns={[2,2,3,4,5]} spacingX='40px' spacingY='20px'>
+                        {[...Array(8)].map((i) =>
+                            <LoadingBook key={i} />
+                        )}
                     </SimpleGrid>
                 </div>
             </SimpleGrid>
-        </div>
+        </>
     )
 }
 

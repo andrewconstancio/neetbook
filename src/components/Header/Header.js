@@ -8,7 +8,16 @@ import {
     useDisclosure,
     Image,
     Input,
-    Avatar
+    Avatar,
+    Popover,
+    PopoverTrigger,
+    PopoverContent,
+    PopoverHeader,
+    PopoverBody,
+    PopoverFooter,
+    PopoverArrow,
+    PopoverCloseButton,
+    PopoverAnchor,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import './Header.css'
@@ -35,6 +44,8 @@ const Header = (props) => {
         auth.signOut();
     }
 
+    console.log(page);
+
     return (
         <Flex
             // color="white" 
@@ -56,12 +67,14 @@ const Header = (props) => {
                     <Link 
                         to="/" 
                     >
-                        <Logo />
+                        <Box onClick={() => setPage("explore")}>
+                            <Logo />
+                        </Box>
                     </Link>
                 </Flex>
                 <Stack
                     direction={{ base: "row"}}
-                    display={{ base: "block", md: "none" }}
+                    // display={{ base: "block", md: "none" }}
                     width={{ base: "auto"}}
                     alignItems="center"
                     flexGrow={1}
@@ -69,21 +82,41 @@ const Header = (props) => {
                     spacing='2px'
                     >
                     <Link to="/">
-                        <i className="fa fa-solid fa-house"></i>
+                        <i 
+                            className={"fa fa-solid fa-house " + (page == "explore" ? "fa-selected" : "")} 
+                            onClick={() => setPage("explore")}>
+                        </i>
                     </Link>
-                    {/* <Text>Home</Text> */}
                     <Link to="/currentlyreading">
-                        <i className="fa fa-solid fa-book"></i>
+                        <i className={"fa fa-solid fa-book " + (page == "currentlyreading" ? "fa-selected" : "")}
+                            onClick={() => setPage("currentlyreading")}>
+                        </i>
                     </Link>
                     <Link to="/wanttoread">
-                        <i className="fa fa-regular fa-heart"></i>
+                        <i className={"fa fa-regular fa-heart " + (page == "wanttoread" ? "fa-selected" : "")}
+                            onClick={() => setPage("wanttoread")}>
+                        </i>
                     </Link>
                     <Link to="/read">
-                        <i className="fa fa-solid fa-check"></i>
+                        <i className={"fa fa-solid fa-check " + (page == "read" ? "fa-selected" : "")}
+                            onClick={() => setPage("read")}>
+                        </i>
                     </Link>
                 </Stack>
                 <Box mt={{ base: 4, md: 0 }}>
-                    <Avatar name={user.displayName} onClick={signOut} boxSize='50px' src={user.photoURL} />
+                    <Popover>
+                        <PopoverTrigger>
+                            <Avatar name={user.displayName} boxSize='50px' src={user.photoURL} />
+                        </PopoverTrigger>
+                        <PopoverContent style={{paddingLeft: "0px"}}>
+                            <PopoverArrow />
+                            <PopoverBody style={{border: "none", paddingLeft: "0px", paddingRight: "0px"}}>
+                                <Box onClick={signOut} className="popout-item-selection">
+                                    Log out
+                                </Box>
+                            </PopoverBody>
+                        </PopoverContent>
+                    </Popover>
                 </Box>
             </Flex>
             <div className="wave">

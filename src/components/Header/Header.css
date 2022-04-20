@@ -67,3 +67,27 @@
     /* fill: #1d1d1d; */
     fill: white;
 }
+
+.popout-item-selection{
+    padding: 10px 5px 10px 5px;
+}
+
+.popout-item-selection:hover {
+    background-color:rgb(240, 240, 240);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.popout-body-header {
+    border: none;
+    /* padding: 10px 0px 10px 0px; */
+    padding-left: 0px;
+}
+
+.fa {
+    color: rgb(255, 255, 255);
+}
+
+.fa-selected {
+    color: rgb(0, 0, 0);
+}

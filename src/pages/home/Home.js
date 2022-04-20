@@ -17,7 +17,7 @@ const Home = () => {
         <div className='container'>
             <Flex direction={'row'}
             >
-                <Box 
+                {/* <Box 
                     flexShrink={0} 
                     w={["100%", "100%","100%", "auto", "30%"]} 
                     pr={[0, 6]} 
@@ -28,9 +28,9 @@ const Home = () => {
                     <Box className="sticky-left-column-home">
                         <ProfileSideBar />
                     </Box>
-                </Box>
-                <Box w={["100%", "100%","100%", "100%", "70%"]} className="column-2">
-                {/* <Box w={["100%", "100%","100%", "100%", "100%"]} className="column-2"> */}
+                </Box> */}
+                {/* <Box w={["100%", "100%","100%", "100%", "70%"]} className="column-2"> */}
+                <Box w={["100%", "100%","100%", "100%", "100%"]} className="column-2">
                     <HomePages />
                 </Box>
             </Flex>

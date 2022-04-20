@@ -9,7 +9,10 @@ import SignIn from './pages/SignIn/SignIn';
 import { useSelector } from 'react-redux';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from './config/firebase-config';
+import Explore from './pages/Explore/Explore';
 import CurrentlyReading from './pages/CurrentlyReading/CurrentlyReading';
+import WantToRead from './pages/WantToRead/WantToRead';
+import Read from './pages/Read/Read';
 import AuthorsBooks from './pages/AuthorsBooks/AuthorsBooks';
 
 const App = () => {
@@ -22,13 +25,17 @@ const App = () => {
             <div>
                 {user && curr_user && <Header websitename={webSiteName} />}
                 <Switch>
-                    <Route exact path="/">
-                        {user && curr_user ? <Route path="/" exact component={Home} /> : <SignIn websitename={webSiteName} />}
-                    </Route>
-                    <Route path="/authors/:key" exact component={AuthorsBooks} />
-                    <Route path="/currentlyreading" exact component={CurrentlyReading} />
-                    <Route path="/subject/:name" exact component={AllBooksBySubject} />
-                    <Route path="/book/:edition" exact component={BookPage} />
+                    <div className="container">
+                        <Route exact path="/">
+                            {user && curr_user ? <Route path="/" exact component={Explore} /> : <SignIn websitename={webSiteName} />}
+                        </Route>
+                        <Route path="/authors/:key" exact component={AuthorsBooks} />
+                        <Route path="/currentlyreading" exact component={CurrentlyReading} />
+                        <Route path="/WantToRead" exact component={WantToRead} />
+                        <Route path="/Read" exact component={Read} />
+                        <Route path="/subject/:name" exact component={AllBooksBySubject} />
+                        <Route path="/book/:edition" exact component={BookPage} />
+                </div>
                 </Switch>
             </div>
         </BrowserRouter >

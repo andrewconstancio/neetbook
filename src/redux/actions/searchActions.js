@@ -1,7 +1,6 @@
 import { 
     SEARCH
 } from "./types";
-import OpenLibrary from '../../apis/OpenLibrary';
 
 
 export const search = (term) => async (dispatch, getState, {getFirebase, getFirestore}) => {

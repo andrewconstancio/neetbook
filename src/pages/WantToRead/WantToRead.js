@@ -8,6 +8,7 @@ import {
 } from "@chakra-ui/react"
 import useGetUserWantToRead from '../../Hooks/useGetUserWantToRead'
 import Book from '../../components/Book'
+import Loader from '../../components/Loader'
 
 
 const WantToRead = () => {
@@ -18,7 +19,9 @@ const WantToRead = () => {
     } = useGetUserWantToRead();
 
     if(loading) {
-        console.log("loading");
+        return (
+            <Loader />
+        )
     }
 
     return (
@@ -28,21 +31,22 @@ const WantToRead = () => {
             </Flex>
             <SimpleGrid columns={[2, 2, 3, 3, 4]} spacingX='20px' spacingY='20px'>
             {books.map((book, index) => {
-                        if(book.covers[0]) {
-                            return (
-                                <Book 
-                                    key={book.cover_id} 
-                                    edition={book.cover_edition_key} 
-                                    title={book.title} 
-                                    bookKey={book.key} 
-                                    coverId={book.covers[0]}
-                                />
-                            )
-                        }
-                    })
-                }
+                    if(book.data.covers[0]) {
+                        return (
+                            <Book 
+                                key={book.data.cover_id} 
+                                bookKey={book.data.works[0].key} 
+                                edition={book.bookKey} 
+                                title={book.data.title} 
+                                coverId={book.data.covers[0]}
+                            />
+                        )
+                    }
+                })
+            }
             </SimpleGrid>
-    </>
+            {books.length < 1 ? <Heading as='h5' size='md' mt={5} mb={5} mr={5} style={{color: "grey"}}>Nothing to see here! </Heading> : ""}
+        </>
     )
 }
 

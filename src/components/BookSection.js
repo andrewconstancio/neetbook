@@ -12,12 +12,19 @@ import Book from './Book';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useDispatch } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { actionCreators } from '../redux';
+import LoadingSlider from './LoadingSlider';
 
 
 const BookSection = ( {subject, limit, pageNumber} ) => {
 
     const [data, setData] = useState('');
     const [books, setBooks] = useState(null);
+
+    const dispatch = useDispatch();
+    const { setPage } = bindActionCreators(actionCreators, dispatch);
 
     var settings = {
         dots: false,
@@ -71,23 +78,16 @@ const BookSection = ( {subject, limit, pageNumber} ) => {
     }, []);
 
     if(!books) {
-        return (
-            <>
-                {/* <Heading as='h3' size='lg' mt={5} mb={5}>&nbsp;</Heading>
-                <SimpleGrid columns={{sm: 2, md: 3, lg: 4}} spacingX='40px' spacingY='20px'>
-                {[...Array(limit)].map((i) =>
-                    <LoadingBook key={i} />
-                )}
-                </SimpleGrid> */}
-            </>
-        )
+        return <LoadingSlider />
     }
     
     return (
         <>
             <Flex> 
                 <Link to={`/subject/${subject}`}>
-                    <Heading as='h3' size='lg' mt={5} mb={5} style={{cursor: "pointer"}}>{capitalizeFirstLetter(subject)}</Heading>
+                    <Heading onClick={() => setPage('subject')} as='h3' size='lg' mt={5} mb={5} style={{cursor: "pointer"}}>
+                        {capitalizeFirstLetter(subject)}
+                    </Heading>
                 </Link>
             </Flex>
             <Slider {...settings}>

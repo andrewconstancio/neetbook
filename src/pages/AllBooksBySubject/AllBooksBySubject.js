@@ -33,21 +33,21 @@ const AllBooksBySubject = (props) => {
     if (node) observer.current.observe(node)
     }, [loading, hasMore])
 
-    if(!books) {
+    if(loading) {
         return (
-            <div className='center'>
-            <Heading as='h3' size='lg' mt={5} mb={5}>{props.match.params.name.toUpperCase()}</Heading>
-                <SimpleGrid columns={4} spacingX='40px' spacingY='20px'>
-                {[...Array(8)].map((i) =>
-                    <LoadingBook key={i} />
-                )}
+            <div className="container">
+                <Heading as='h3' size='lg' mt={5} mb={5}>{props.match.params.name.toUpperCase()}</Heading>
+                <SimpleGrid columns={[2,2,3,4,5]} spacingX='40px' spacingY='20px'>
+                    {[...Array(40)].map((i) =>
+                        <LoadingBook key={i} />
+                    )}
                 </SimpleGrid>
             </div>
         )
     }
 
     return (
-        <div className="container">
+        <>
             <Heading as='h3' size='lg' mt={5} mb={5}>{props.match.params.name.toUpperCase()}</Heading>
             <SimpleGrid columns={[2,2,3,4,5]} spacingX='40px' spacingY='20px'>
                     {books.map((book, index) => {
@@ -61,15 +61,9 @@ const AllBooksBySubject = (props) => {
                         )
                     })
                 }
-                <div style={{display: loading ? "block" : "none"}} >
-                <SimpleGrid columns={5} spacingX='40px' spacingY='20px'>
-                    {[...Array(8)].map((i) =>
-                        <LoadingBook key={i} />
-                    )}
-                    </SimpleGrid>
-                </div>
             </SimpleGrid>
-        </div>
+            {books.length < 1 ? <Heading as='h5' size='md' mt={5} mb={5} mr={5} style={{color: "grey"}}>No results! </Heading> : ""}
+        </>
     )
 }
 

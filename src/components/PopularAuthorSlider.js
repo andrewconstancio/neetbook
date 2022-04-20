@@ -11,6 +11,7 @@ import {
 import useGetPopularBooks from "../Hooks/useGetPopularBooks";
 import AuthorMainCoverImage from "./AuthorMainCoverImage";
 import useGetPopularAuthors from "../Hooks/useGetPopularAuthors";
+import LoadingSlider from "./LoadingSlider";
 
 const PopularAuthorSlider = () => {
 
@@ -57,9 +58,7 @@ const PopularAuthorSlider = () => {
     } = useGetPopularAuthors();
 
     if(loading) {
-        return (
-            <></>
-        )
+        return <LoadingSlider />
     }
 
     return (

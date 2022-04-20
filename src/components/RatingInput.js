@@ -7,6 +7,7 @@ import { auth, firestore } from '../config/firebase-config';
 import { useSelector, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators } from '../redux';
+import './RatingInput.css';
 
 const RatingCustom = () => {
 
@@ -31,10 +32,9 @@ const RatingCustom = () => {
                     onClick={uncheckRating}
                 ></i>
                 <Rating stop={5}
-                    emptySymbol="fa fa-star-o fa-xl medium"
-                    fullSymbol="fa fa-star fa-xl medium"
+                    emptySymbol={"fa fa-star-o fa-xl medium " + (ratingChanged ? "fa-star-rated" : "fa-star-o-unrated")}
+                    fullSymbol={"fa fa-star fa-xl medium "  + (ratingChanged ? "fa-star-rated" : "fa-star-unrated")}
                     fractions={4}
-                    style={{color: ratingChanged ? "#ffd600" : "#444444"}}
                     flexShrink={0}
                     onChange={handleRatingChange} 
                     initialRating={rating}

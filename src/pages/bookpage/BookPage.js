@@ -30,7 +30,6 @@ const BookPage = (props) => {
     const [show, setShow] = useState(false)
     const dispatch = useDispatch();
     const { putBookKeyInState } = bindActionCreators(actionCreators, dispatch);
-
     const handleToggle = () => setShow(!show)
 
     const {
@@ -45,15 +44,13 @@ const BookPage = (props) => {
 
 
     if(!book) {
-        return <div className='container'>
+        return <>
             <Loader />
-        </div>
+        </>
     }
 
-    
-
     return (
-        <div className='container'>
+        <>
             <Flex direction={['column', 'column', 'column', 'row', 'row']} style={{marginTop: "80px"}}>
                 <Box 
                     flexShrink={0} 
@@ -98,7 +95,7 @@ const BookPage = (props) => {
                     <CommentSection bookEditionKey={bookEditionKey} />
                 </Box>
             </Flex>
-        </div>
+        </>
     )
 }
 

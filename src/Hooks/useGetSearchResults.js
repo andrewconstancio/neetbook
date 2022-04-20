@@ -14,7 +14,6 @@ export default function useGetSearchResults(term) {
             async function fetchData() {
                 await OpenLibrary.get(`/search.json?title=${term.toLowerCase()}`)
                 .then(res => {
-                    console.log(res.data)
                     setResults(res.data.docs)
                     setLoading(false)
                 }).catch(e => {

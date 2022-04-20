@@ -9,6 +9,7 @@ import {
     Flex
 } from "@chakra-ui/react"
 import useGetPopularBooks from "../Hooks/useGetPopularBooks";
+import LoadingSlider from "./LoadingSlider";
 
 const PopularBookSlider = () => {
 
@@ -56,9 +57,7 @@ const PopularBookSlider = () => {
 
 
     if(loading) {
-        return (
-            <></>
-        )
+        return <LoadingSlider />
     }
 
     return (

@@ -9,6 +9,8 @@ export default function useBookSingleInfo(bookKey, bookEditionKey) {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(false)
 
+    console.log(bookKey);
+
     useEffect(() =>{
         setLoading(true)
         setError(false)

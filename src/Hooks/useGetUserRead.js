@@ -22,8 +22,7 @@ export default function useGetUserRead() {
             const request = snapshot.docs.map( async (doc) => {
                 const url = `books/${doc.data().bookEditionKey}.json`;
                 return OpenLibrary.get(url).then(res => {
-                    bookArr.push(res.data);
-                    // bookArr.push({bookEditionKey: doc.data().bookEditionKey, data: res.data});
+                    bookArr.push({bookKey: doc.data().bookEditionKey, data: res.data});
                 });
             })
             await Promise.all(request);
