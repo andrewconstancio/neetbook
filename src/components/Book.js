@@ -22,8 +22,8 @@ const Book = ( {coverId, lastElemRef, edition, title, bookKey} ) => {
                 <Box ref={lastElemRef} className='book' onClick={() => setPage('book')}>
                     <Image
                         src={`https://covers.openlibrary.org/b/id/${coverId}.jpg`}
-                        w={[175, 150, 175]}
-                        h={[275, 275, 300]}  
+                        w={[160, 150, 175]}
+                        h={[250, 275, 300]}  
                         alt={title} 
                         style={{borderRadius: "20px"}}
                         className={imageLoaded ? "cover-preview" : "shimmmer"}

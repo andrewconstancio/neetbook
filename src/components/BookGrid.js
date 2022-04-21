@@ -10,7 +10,7 @@ import Book from './Book'
 const BookGrid = ( {books} ) => {
     return (
         <div className="center">
-            <SimpleGrid columns={[2,2,3,5,5]}  spacingX='20px' spacingY='20px'>
+            <SimpleGrid columns={[2,3,5,5,5]}  spacingX='20px' spacingY='20px'>
             {books.map((book, index) => {
                         if(book.cover_i) {
                             return (

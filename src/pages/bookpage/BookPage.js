@@ -19,6 +19,7 @@ import { bindActionCreators } from 'redux';
 import { actionCreators } from '../../redux';
 import { Redirect } from 'react-router-dom';
 import Loader from '../../components/Loader';
+import ErrorPage from '../../components/ErrorPage'
 
 
 const BookPage = (props) => {
@@ -43,18 +44,25 @@ const BookPage = (props) => {
     }, [])
 
 
-    if(!book) {
+
+    if(loading) {
         return <>
             <Loader />
         </>
     }
 
+    if(error) {
+        return <>
+            <ErrorPage />
+        </>
+    }
+
     return (
         <>
-            <Flex direction={['column', 'column', 'column', 'row', 'row']} style={{marginTop: "80px"}}>
+            <Flex direction={['column', 'column', 'row', 'row', 'row']} style={{marginTop: "80px"}}>
                 <Box 
                     flexShrink={0} 
-                    w={["100%", "100%","100%", "auto", "30%"]} 
+                    w={["100%", "100%","30%", "30%", "30%"]} 
                     pr={[0, 6]} 
                     align="center" 
                     className="column-1"
@@ -65,7 +73,7 @@ const BookPage = (props) => {
                         <ReadButtonInput bookEditionKey={bookEditionKey} hasRead={hasRead} setHasRead={setHasRead}  />
                     </Box>
                 </Box>
-                <Box w={["100%", "100%","100%", "100%", "70%"]} className="column-2">
+                <Box w={["100%", "100%","70%", "70%", "70%"]} className="column-2">
                     <Box mt={["15px", "15px", "15px", "15px", "0px"]}>
                         <Text><b>{book.title}</b></Text>
                         <Author authorKey={book.authors[0].author.key} />

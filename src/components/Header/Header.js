@@ -45,8 +45,6 @@ const Header = (props) => {
         auth.signOut();
     }
 
-    console.log(page);
-
     return (
         <Flex
             // color="white" 
@@ -61,9 +59,6 @@ const Header = (props) => {
                 padding={6}
                 {...props}
             >
-                {/* <Heading size="sm" letterSpacing={"tighter"}>
-                    {props.websitename}
-                </Heading> */}
                 <Flex align="center" mr={5}>
                     <Link 
                         to="/" 

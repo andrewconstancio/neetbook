@@ -11,8 +11,8 @@ const LoadingBook = ( {total} ) => {
         <div  className='shimmer'>
             <Box  
                 style={{borderRadius: "20px", backgroundColor: "rgb(59, 59, 59)", margin: "10px"}}
-                w={[175, 150, 175]}
-                h={[275, 275, 300]} 
+                w={[160, 150, 175]}
+                h={[250, 275, 300]}  
             >
             </Box>
         </div>

@@ -30,7 +30,7 @@ export const demoSignIn = () => async (dispatch, getState, { getFirebase, getFir
 
     const firebase = getFirebase();
 
-    firebase.auth().signInWithEmailAndPassword("demo.neetbook@gmail.com", "8Cat!Dog8")
+    firebase.auth().signInWithEmailAndPassword(process.env.REACT_APP_DEMO_EMAIL, process.env.REACT_APP_DEMO_PASSWORD)
     .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
@@ -40,10 +40,11 @@ export const demoSignIn = () => async (dispatch, getState, { getFirebase, getFir
         })
     })
     .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
+        dispatch({
+            type: SIGN_IN_ERROR, 
+            payload: "Something went wrong, we couldn't sign you in. Please try again."
+        })
     });
-
 };
 
 export const checkProfileImage = (user, uid) => async (dispatch, getState, { getFirebase, getFirestore}) => {

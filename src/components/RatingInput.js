@@ -26,7 +26,7 @@ const RatingCustom = () => {
         <>
             <Box align="center" mt={5}>
                 <i 
-                    style={{display: ratingChanged ? "inline-block" : "none", marginRight: "10px"}} 
+                    style={{display: ratingChanged ? "inline-block" : "none"}} 
                     p={5} 
                     className="fa-solid fa-xmark fa-lg"
                     onClick={uncheckRating}

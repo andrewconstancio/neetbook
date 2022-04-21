@@ -24,7 +24,7 @@ const Search = ( {term} ) => {
     if(loading) {
         return (
             <div className="center">
-                <SimpleGrid columns={{sm: 2, md: 3, lg: 5}} spacingX='20px' spacingY='20px'>
+                <SimpleGrid columns={[2,3,5,5,5]} spacingX='20px' spacingY='20px'>
                     {[...Array(40)].map((i) =>
                         <LoadingBook key={i} />
                     )}
@@ -40,8 +40,6 @@ const Search = ( {term} ) => {
             </div>
         )
     }
-
-    console.log(results)
 
     return (
         <>

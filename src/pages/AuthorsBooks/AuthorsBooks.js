@@ -55,8 +55,7 @@ const AuthorBooks = (props) => {
             <Heading as='h3' size='lg' mt={5} mb={5} style={{display: "inline-block"}}>{name}</Heading>
             <SimpleGrid columns={[2,2,3,4,5]} spacingX='40px' spacingY='20px'>
                     {books.map((book, index) => {
-                        console.log(books.cover_edition_key);
-                        if(book.covers) {
+                        if(book.covers && book.key) {
                             if(books.length === index + 1) {
                                 return (
                                     <Book 
