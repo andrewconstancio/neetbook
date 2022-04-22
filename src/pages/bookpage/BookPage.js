@@ -20,6 +20,7 @@ import { actionCreators } from '../../redux';
 import { Redirect } from 'react-router-dom';
 import Loader from '../../components/Loader';
 import ErrorPage from '../../components/ErrorPage'
+import { Link } from 'react-router-dom';
 
 
 const BookPage = (props) => {

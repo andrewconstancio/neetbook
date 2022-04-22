@@ -34,9 +34,15 @@ export const demoSignIn = () => async (dispatch, getState, { getFirebase, getFir
     .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
+        const userUse = {
+            displayName: "Demo User", 
+            photoURL: user.photoURL, 
+            uid: user.uid,
+            email: user.email
+        }
         dispatch({
             type: SIGN_IN_SUCCESS, 
-            payload: user
+            payload: userUse
         })
     })
     .catch((error) => {

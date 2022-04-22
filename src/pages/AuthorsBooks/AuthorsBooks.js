@@ -49,6 +49,8 @@ const AuthorBooks = (props) => {
         )
     }
 
+    console.log(books);
+
     return (
         <>
             <Heading as='h5' size='sm' mt={5} mb={5} mr={5} style={{color: "grey", display: "inline-block"}}>Author: </Heading>
@@ -87,6 +89,7 @@ const AuthorBooks = (props) => {
                     </SimpleGrid>
                 </div>
             </SimpleGrid>
+            {books.length < 1 ? <Heading as='h5' size='md' mt={5} mb={5} mr={5} style={{color: "grey"}}>Nothing to see here! </Heading> : ""}
         </>
     )
 }

@@ -8,6 +8,7 @@ import {
     Spacer,
     Image
 } from "@chakra-ui/react"
+import { Link } from 'react-router-dom';
 
 const Author = ( {authorKey} ) => {
     const [authorInfo, setAuthorInfo] = useState(null)
@@ -35,7 +36,9 @@ const Author = ( {authorKey} ) => {
 
     return (
         <Text>
-            <i>{authorInfo.name}</i>
+            <Link to={{pathname: authorKey, state: {authorKey: authorKey, name: authorInfo.name}}}>
+                <i>{authorInfo.name}</i>
+            </Link>
         </Text>
     )
 }
