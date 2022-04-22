@@ -27,7 +27,7 @@ const App = () => {
                 {user && curr_user && <Header websitename={webSiteName} />}
                 <Switch>
                     <div className="container">
-                        <RouteRequiresLogin path="/" exact component={Explore} />
+                        <RouteRequiresLogin path="/" exact component={Home} />
                         <RouteRequiresLogin path="/authors/:key" exact component={AuthorsBooks} />
                         <RouteRequiresLogin path="/currentlyreading" exact component={CurrentlyReading} />
                         <RouteRequiresLogin path="/WantToRead" exact component={WantToRead} />

@@ -8,33 +8,37 @@ import {
 import './Home.css'
 import ProfileSideBar from '../../components/ProfileSideBar/ProfileSideBar';
 import HomePages from './HomePages';
+import { Logo } from '../../components/Logo';
 
 
 
 const Home = () => {
 
     return (
-        <div className='container'>
-            <Flex direction={'row'}
+        <>
+            <Flex direction={['column', 'column', 'row', 'row', 'row']}
             >
-                {/* <Box 
+                <Box 
                     flexShrink={0} 
-                    w={["100%", "100%","100%", "auto", "30%"]} 
-                    pr={[0, 6]} 
+                    w={["100%", "100%","30%", "30%", "30%"]} 
                     align="center" 
                     className="column-1"
-                    display={{ base: "none", md: "block" }}
+                    // display={{ base: "none", md: "block" }}
+                
                 >
+                    {/* <Box>
+                        <Logo />
+                    </Box> */}
                     <Box className="sticky-left-column-home">
                         <ProfileSideBar />
                     </Box>
-                </Box> */}
-                {/* <Box w={["100%", "100%","100%", "100%", "70%"]} className="column-2"> */}
-                <Box w={["100%", "100%","100%", "100%", "100%"]} className="column-2">
+                </Box>
+                <Box w={["100%", "100%","70%", "70%", "70%"]} className="column-2">
+                {/* <Box w={["100%", "100%","100%", "100%", "100%"]} className="column-2"> */}
                     <HomePages />
                 </Box>
             </Flex>
-        </div>
+        </>
     )
 }
 

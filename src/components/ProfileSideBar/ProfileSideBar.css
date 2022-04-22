@@ -13,7 +13,6 @@
 }
 
 .nav-items-outer {
-
     padding-top: 15px;
     padding-bottom: 140px;
     border-radius: 30px;
@@ -23,6 +22,7 @@
     background-color: #322c60;
     cursor: pointer;
     transition: 0.4s;
+    border-radius: 30px;
 }
 
 .fa-right {
@@ -31,4 +31,16 @@
 
 .page-selected {
     background-color: #483f88;
+    border-radius: 30px;
+}
+
+@media screen and (max-width: 890px) {
+    .profile-side-text {
+        display: none;
+    }
+
+    .fa {
+        margin: 0px 0px 0px 15px;
+    }
+
 }

@@ -7,7 +7,8 @@ import {
     Stack,
     Box,
     Text,
-    HStack
+    HStack,
+    Spacer
 } from "@chakra-ui/react"
 import './ProfileSideBar.css'
 
@@ -24,49 +25,80 @@ const ProfileSideBar = () => {
 
     return (
         <>
-            <Stack className='user-info' direction={['row']} spacing='15px'>
-                <Box style={{maxWidth: "50px", minWidth: "50px"}}>
-                    <Avatar src={user.photoURL} name={user.displayName}  />
-                </Box>
-                <Box>
-                    <Stack>
-                        <Box>
-                            <Text style={{display: "inline"}}>{user.displayName}</Text><br />
-                            <Text fontSize='s' as='i'>Basic Plan</Text>
-                        </Box>
-                    </Stack>
-                </Box>
-            </Stack>
-            <Stack className="nav-items-outer" style={{marginTop: "40px"}}>
-                <Box style={{marginTop: "15px"}} className={page == "explore" ? "page-selected" : ""}>
-                    <HStack onClick={() => setPageLocal('explore')}  className='nav-selction'>
-                        <Box><i className="fa fa-solid fa-house"></i></Box>
-                        <Box style={{width: "90%"}}><Text>Explore</Text></Box>
-                        <Box><i className="fa-right fa-solid fa-chevron-right"></i></Box>
-                    </HStack>
-                </Box>
-                <Box className={page == "currentlyreading" ? "page-selected" : ""}>
-                    <HStack onClick={() => setPageLocal('currentlyreading')} className='nav-selction'>
-                        <Box><i className="fa fa-solid fa-book"></i></Box>
-                        <Box style={{width: "90%"}}><Text>Currently Reading</Text></Box>
-                        <Box><i className="fa-right fa-solid fa-chevron-right"></i></Box>
-                    </HStack>
-                </Box>
-                <Box className={page == "wanttoread" ? "page-selected" : ""}>
-                    <HStack onClick={() => setPageLocal('wanttoread')}  className='nav-selction'>
-                        <Box><i className="fa fa-regular fa-heart"></i></Box>
-                        <Box style={{width: "90%"}}><Text>Want To Read</Text></Box>
-                        <Box><i className="fa-right fa-solid fa-chevron-right"></i></Box>
-                    </HStack>
-                </Box>
-                <Box className={page == "read" ? "page-selected" : ""}>
-                    <HStack onClick={() => setPageLocal('read')}  className='nav-selction'>
-                        <Box><i className="fa fa-solid fa-check"></i></Box>
-                        <Box style={{width: "90%"}}><Text>Read</Text></Box>
-                        <Box><i className="fa-right fa-solid fa-chevron-right"></i></Box>
-                    </HStack>
-                </Box>
-            </Stack>
+                <Stack className='user-info' direction={['row', 'row', 'column', 'column', 'column']} spacing='15px'>
+                    <Box>
+                        <HStack>
+                            <Box>
+                                <Avatar src={user.photoURL} name={user.displayName}  />
+                            </Box>
+                            <Stack>
+                                <Box className="profile-side-text">
+                                    <Text style={{display: "inline"}}>{user.displayName}</Text><br />
+                                    <Text fontSize='s' as='i'>Basic Plan</Text>
+                                </Box>
+                            </Stack>
+                        </HStack>
+
+                    </Box>
+                    <Box className={page == "explore" ? "page-selected" : ""}>
+                        <HStack onClick={() => setPageLocal('explore')}  className='nav-selction'>
+                            <Box><i className="fa fa-solid fa-house"></i></Box>
+                            <Box style={{width: "90%"}}><Text className="profile-side-text">Explore</Text></Box>
+                            <Box><i className="fa-right fa-solid fa-chevron-right profile-side-text"></i></Box>
+                        </HStack>
+                    </Box>
+                    <Box className={page == "currentlyreading" ? "page-selected" : ""}>
+                        <HStack onClick={() => setPageLocal('currentlyreading')} className='nav-selction'>
+                            <Box><i className="fa fa-solid fa-book"></i></Box>
+                            <Box style={{width: "90%"}}><Text className="profile-side-text">Currently Reading</Text></Box>
+                            <Box><i className="fa-right fa-solid fa-chevron-right profile-side-text"></i></Box>
+                        </HStack>
+                    </Box>
+                    <Box className={page == "wanttoread" ? "page-selected" : ""}>
+                        <HStack onClick={() => setPageLocal('wanttoread')}  className='nav-selction'>
+                            <Box><i className="fa fa-regular fa-heart"></i></Box>
+                            <Box style={{width: "90%"}}><Text className="profile-side-text">Want To Read</Text></Box>
+                            <Box><i className="fa-right fa-solid fa-chevron-right profile-side-text"></i></Box>
+                        </HStack>
+                    </Box>
+                    <Box className={page == "read" ? "page-selected" : ""}>
+                        <HStack onClick={() => setPageLocal('read')}  className='nav-selction'>
+                            <Box><i className="fa fa-solid fa-check"></i></Box>
+                            <Box style={{width: "90%"}}><Text className="profile-side-text">Read</Text></Box>
+                            <Box><i className="fa-right fa-solid fa-chevron-right profile-side-text"></i></Box>
+                        </HStack>
+                    </Box>
+                </Stack>
+                {/* <Stack direction={['row']} className="nav-items-outer" style={{marginTop: "40px"}}>
+                    <Box style={{marginTop: "15px"}} className={page == "explore" ? "page-selected" : ""}>
+                        <HStack onClick={() => setPageLocal('explore')}  className='nav-selction'>
+                            <Box><i className="fa fa-solid fa-house"></i></Box>
+                            <Box style={{width: "90%"}}><Text className="profile-side-text">Explore</Text></Box>
+                            <Box><i className="fa-right fa-solid fa-chevron-right profile-side-text"></i></Box>
+                        </HStack>
+                    </Box>
+                    <Box className={page == "currentlyreading" ? "page-selected" : ""}>
+                        <HStack onClick={() => setPageLocal('currentlyreading')} className='nav-selction'>
+                            <Box><i className="fa fa-solid fa-book"></i></Box>
+                            <Box style={{width: "90%"}}><Text className="profile-side-text">Currently Reading</Text></Box>
+                            <Box><i className="fa-right fa-solid fa-chevron-right profile-side-text"></i></Box>
+                        </HStack>
+                    </Box>
+                    <Box className={page == "wanttoread" ? "page-selected" : ""}>
+                        <HStack onClick={() => setPageLocal('wanttoread')}  className='nav-selction'>
+                            <Box><i className="fa fa-regular fa-heart"></i></Box>
+                            <Box style={{width: "90%"}}><Text className="profile-side-text">Want To Read</Text></Box>
+                            <Box><i className="fa-right fa-solid fa-chevron-right profile-side-text"></i></Box>
+                        </HStack>
+                    </Box>
+                    <Box className={page == "read" ? "page-selected" : ""}>
+                        <HStack onClick={() => setPageLocal('read')}  className='nav-selction'>
+                            <Box><i className="fa fa-solid fa-check"></i></Box>
+                            <Box style={{width: "90%"}}><Text className="profile-side-text">Read</Text></Box>
+                            <Box><i className="fa-right fa-solid fa-chevron-right profile-side-text"></i></Box>
+                        </HStack>
+                    </Box>
+                </Stack> */}
         </>
     )
 }

@@ -87,7 +87,7 @@ const Header = (props) => {
                     spacing='2px'
                     >
                     
-                    <Link to="/" onClick={() => setPage("explore")}>
+                    {/* <Link to="/" onClick={() => setPage("explore")}>
                         <i className={"fa fa-solid fa-house " + (page == "explore" ? "fa-selected" : "")}></i>
                     </Link>
                     <Link to="/currentlyreading" onClick={() => setPage("currentlyreading")}>
@@ -98,7 +98,7 @@ const Header = (props) => {
                     </Link>
                     <Link to="/read" onClick={() => setPage("read")}>
                         <i className={"fa fa-solid fa-check " + (page == "read" ? "fa-selected" : "")}></i>
-                    </Link>
+                    </Link> */}
                 </Stack>
                 <Box mt={{ base: 4, md: 0 }}>
                     <Popover>
