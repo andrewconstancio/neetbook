@@ -14,12 +14,11 @@ const Book = ( {coverId, lastElemRef, edition, title, bookKey} ) => {
 
     const [imageLoaded, setImageLoaded] = useState(false);
     const dispatch = useDispatch();
-    const { setPage } = bindActionCreators(actionCreators, dispatch);
 
     return (
         <>
             <Link to={{pathname: `/book/${edition}`, state: {bookKey: bookKey, bookEditionKey: edition, coverId: coverId} }}>
-                <Box ref={lastElemRef} className='book' onClick={() => setPage('book')}>
+                <Box ref={lastElemRef} className='book'>
                     <Image
                         src={`https://covers.openlibrary.org/b/id/${coverId}.jpg`}
                         w={[160, 150, 175]}

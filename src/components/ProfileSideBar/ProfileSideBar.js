@@ -40,7 +40,7 @@ const ProfileSideBar = () => {
                         </HStack>
 
                     </Box>
-                    <Box className={page == "explore" ? "page-selected" : ""}>
+                    <Box className={"top-nav " + (page == "explore" ? "page-selected" : "")}>
                         <HStack onClick={() => setPageLocal('explore')}  className='nav-selction'>
                             <Box><i className="fa fa-solid fa-house"></i></Box>
                             <Box style={{width: "90%"}}><Text className="profile-side-text">Explore</Text></Box>

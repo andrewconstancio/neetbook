@@ -42,5 +42,10 @@
     .fa {
         margin: 0px 0px 0px 15px;
     }
+}
 
+@media screen and (min-width: 890px) {
+    .top-nav {
+        margin-top: 90px !important;
+    }
 }

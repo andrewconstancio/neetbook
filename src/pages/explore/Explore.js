@@ -36,7 +36,9 @@ const Explore = () => {
                 <SearchInput searchTerm={searchTerm} />
             </Flex>
             {searchTerm ? (
-                <Search term={searchTerm} />
+                <>
+                    <Search term={searchTerm} />
+                </>
             ) : (
                 <>
                     <PopularBookSlider />

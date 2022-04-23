@@ -23,13 +23,13 @@ const Search = ( {term} ) => {
 
     if(loading) {
         return (
-            <div className="center">
+            <>
                 <SimpleGrid columns={[2,2,3,3,4]} spacingX='20px' spacingY='20px'>
                     {[...Array(40)].map((i) =>
                         <LoadingBook key={i} />
                     )}
                 </SimpleGrid>
-            </div>
+            </>
         )
     }
 

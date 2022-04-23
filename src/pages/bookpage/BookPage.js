@@ -14,10 +14,9 @@ import ReadButtonInput from '../../components/ReadButtonInput';
 import Author from '../../components/Author';
 import SubjectButton from '../../components/SubjectButton';
 import CommentSection from '../../components/Comments/CommentSection';
-import { useDispatch } from 'react-redux';
+import { useSelector,  useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators } from '../../redux';
-import { Redirect } from 'react-router-dom';
 import Loader from '../../components/Loader';
 import ErrorPage from '../../components/ErrorPage'
 import { Link } from 'react-router-dom';
@@ -60,7 +59,14 @@ const BookPage = (props) => {
 
     return (
         <>
-            <Flex direction={['column', 'column', 'row', 'row', 'row']} style={{marginTop: "80px"}}>
+            <Flex direction={['column', 'column', 'row', 'row', 'row']} style={{marginTop: "40px"}}>
+            <Box>
+                <Link to="/">
+                    <Button>
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </Button>
+                </Link>
+            </Box>
                 <Box 
                     flexShrink={0} 
                     w={["100%", "100%","30%", "30%", "30%"]} 

@@ -18,6 +18,7 @@ import {
     PopoverArrow,
     PopoverCloseButton,
     PopoverAnchor,
+    Button
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import './Header.css'
@@ -27,6 +28,7 @@ import {useSelector, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators } from '../../redux';
 import LogoSmall from '../LogoSmall';
+import ThemeSelector from "./ThemeSelector";
 
 const Header = (props) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -35,9 +37,19 @@ const Header = (props) => {
     const page = useSelector((state) => state.page.page);
     const [pageLocal, setPageLocal] = useState(page ? page : 'explore');
     const { setPage } = bindActionCreators(actionCreators, dispatch);
+    const [ headerColor, setHeaderColor ] = useState('header-top');
+
+    const listenScrollEvent = e => {
+        if (window.scrollY > 400) {
+            setHeaderColor('header-bottom');
+        } else {
+            setHeaderColor('header-top');
+        }
+    }
 
     useEffect(() => {
         setPage(pageLocal);
+        window.addEventListener('scroll', listenScrollEvent)
     }, [pageLocal])
 
 
@@ -48,7 +60,7 @@ const Header = (props) => {
     return (
         <Flex
             // color="white" 
-            className="sticky header"
+            className={"sticky header " + headerColor}
         >
             <Flex 
                 className="center"
@@ -65,16 +77,16 @@ const Header = (props) => {
                     >
                         <Box
                             onClick={() => setPage("explore")}
-                            display={{ base: "none", md: "block" }}
+                            // display={{ base: "none", md: "block" }}
                         >
                             <Logo />
                         </Box>
-                        <Box
+                        {/* <Box
                             onClick={() => setPage("explore")}
                             display={{ base: "block", md: "none" }}
                         >
                             <LogoSmall />
-                        </Box>
+                        </Box> */}
                     </Link>
                 </Flex>
                 <Stack
@@ -108,19 +120,24 @@ const Header = (props) => {
                         <PopoverContent style={{paddingLeft: "0px"}}>
                             <PopoverArrow />
                             <PopoverBody style={{border: "none", paddingLeft: "0px", paddingRight: "0px"}}>
-                                <Box onClick={signOut} className="popout-item-selection">
-                                    Log out
+                                <Box className="popout-item-selection">
+                                    <ThemeSelector />
+                                </Box>
+                                <Box className="popout-item-selection">
+                                    <Button onClick={signOut}>
+                                        Log out
+                                    </Button>
                                 </Box>
                             </PopoverBody>
                         </PopoverContent>
                     </Popover>
                 </Box>
             </Flex>
-            <div className="wave">
+            {/* <div className="wave">
                 <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
                     <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" className="shape-fill"></path>
                 </svg>
-            </div>
+            </div> */}
         </Flex>
     );
 };

@@ -9,7 +9,7 @@ import Book from './Book'
 
 const BookGrid = ( {books} ) => {
     return (
-        <div className="center">
+        <>
             <SimpleGrid columns={[2,2,3,3,4]}  spacingX='20px' spacingY='20px'>
             {books.map((book, index) => {
                         if(book.cover_i) {
@@ -26,7 +26,7 @@ const BookGrid = ( {books} ) => {
                     })
                 }
             </SimpleGrid>
-        </div>
+        </>
     )
 }
 
