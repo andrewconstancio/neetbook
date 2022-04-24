@@ -22,7 +22,7 @@ const AuthorBooks = (props) => {
         hasMore,
         loading,
         error
-    } = useGetBooksByAuthor(authorKey, offset)
+    } = useGetBooksByAuthor(name, authorKey, offset)
 
     const observer = useRef()
     const lastBookElementRef = useCallback(node => {
@@ -49,33 +49,32 @@ const AuthorBooks = (props) => {
         )
     }
 
-    console.log(books);
-
     return (
         <>
             <Heading as='h5' size='sm' mt={5} mb={5} mr={5} style={{color: "grey", display: "inline-block"}}>Author: </Heading>
             <Heading as='h3' size='lg' mt={5} mb={5} style={{display: "inline-block"}}>{name}</Heading>
             <SimpleGrid columns={[2,2,3,4,5]} spacingX='40px' spacingY='20px'>
                     {books.map((book, index) => {
-                        if(book.covers && book.key) {
+                        if(book.cover_i && book.key) {
                             if(books.length === index + 1) {
                                 return (
                                     <Book 
-                                        key={book.covers[0]} 
+                                        key={book.cover_i} 
                                         lastElemRef={lastBookElementRef} 
                                         edition={book.cover_edition_key} 
-                                        title={book.title} bookKey={book.key} 
-                                        coverId={book.covers[0]}
+                                        title={book.title} 
+                                        bookKey={book.key} 
+                                        coverId={book.cover_i}
                                     />
                                 )
                             }
                             return (
                                 <Book 
-                                    key={book.covers[0]} 
+                                    key={book.cover_i} 
                                     edition={book.cover_edition_key} 
                                     title={book.title} 
                                     bookKey={book.key} 
-                                    coverId={book.covers[0]} 
+                                    coverId={book.cover_i} 
                                 />
                             )
                         }

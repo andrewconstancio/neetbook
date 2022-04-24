@@ -123,10 +123,10 @@ const Header = (props) => {
                                 <Box className="popout-item-selection">
                                     <ThemeSelector />
                                 </Box>
-                                <Box className="popout-item-selection">
-                                    <Button onClick={signOut}>
+                                <Box className="popout-item-selection" onClick={signOut}>
+                                    {/* <Button onClick={signOut}> */}
                                         Log out
-                                    </Button>
+                                    {/* </Button> */}
                                 </Box>
                             </PopoverBody>
                         </PopoverContent>

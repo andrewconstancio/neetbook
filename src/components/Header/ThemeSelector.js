@@ -9,9 +9,9 @@ import {
 const ThemeSelector = () => {
     const { colorMode, toggleColorMode } = useColorMode()
     return (
-        <Button onClick={toggleColorMode}>
+        <Box onClick={toggleColorMode}>
             {colorMode === 'light' ? 'Dark Mode' : 'Light Mode'}
-        </Button>
+        </Box>
     )
 }
 

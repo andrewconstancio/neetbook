@@ -62,7 +62,7 @@ const BookPage = (props) => {
             <Flex direction={['column', 'column', 'row', 'row', 'row']} style={{marginTop: "40px"}}>
             <Box>
                 <Link to="/">
-                    <Button>
+                    <Button className="back-button">
                         <i class="fa-solid fa-arrow-left"></i>
                     </Button>
                 </Link>
