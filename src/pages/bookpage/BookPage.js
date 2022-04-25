@@ -4,7 +4,8 @@ import {
     Box,
     Text,
     Button,
-    Collapse
+    Collapse,
+    HStack
 } from "@chakra-ui/react"
 import CoverImagePreview from '../../components/CoverImagePreview'
 import useBookSingleInfo from '../../Hooks/useBookSingleInfo';
@@ -59,7 +60,6 @@ const BookPage = (props) => {
     return (
         <>
             <Flex direction={['column', 'column', 'row', 'row', 'row']} style={{marginTop: "40px"}}>
-                <BackButton className="back-button" />
                 <Box 
                     flexShrink={0} 
                     w={["100%", "100%","30%", "30%", "30%"]} 
@@ -68,7 +68,14 @@ const BookPage = (props) => {
                     className="column-1"
                 >
                     <Box className="sticky-left-column">
-                        <CoverImagePreview coverId={coverId} classType="cover-preview-page" />
+                        <HStack direction={["row","column"]}>
+                            <Box>
+                                <BackButton className= "back-botton" />
+                            </Box>
+                            <Box>
+                                <CoverImagePreview coverId={coverId} classType="cover-preview-page" />  
+                            </Box>
+                        </HStack>
                         <RatingInput bookEditionKey={bookEditionKey} hasRead={hasRead} setHasRead={setHasRead} />
                         <ReadButtonInput bookEditionKey={bookEditionKey} hasRead={hasRead} setHasRead={setHasRead}  />
                     </Box>
