@@ -10,6 +10,7 @@ import {
 import LoadingBook from '../../components/LoadingBook';
 import { Oval } from  'react-loader-spinner'
 import Book from '../../components/Book';
+import BackButton from '../../components/BackButton';
 
 const AllBooksBySubject = (props) => {
     const [offset, setOffset] = useState(12)
@@ -48,6 +49,7 @@ const AllBooksBySubject = (props) => {
 
     return (
         <>
+            <BackButton />
             <Heading as='h3' size='lg' mt={5} mb={5}>{props.match.params.name.toUpperCase()}</Heading>
             <SimpleGrid columns={[2,2,3,4,5]} spacingX='40px' spacingY='20px'>
                     {books.map((book, index) => {

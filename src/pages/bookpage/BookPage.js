@@ -20,6 +20,7 @@ import { actionCreators } from '../../redux';
 import Loader from '../../components/Loader';
 import ErrorPage from '../../components/ErrorPage'
 import { Link } from 'react-router-dom';
+import BackButton from '../../components/BackButton';
 
 
 const BookPage = (props) => {
@@ -43,8 +44,6 @@ const BookPage = (props) => {
         putBookKeyInState(bookEditionKey);
     }, [])
 
-
-
     if(loading) {
         return <>
             <Loader />
@@ -60,13 +59,7 @@ const BookPage = (props) => {
     return (
         <>
             <Flex direction={['column', 'column', 'row', 'row', 'row']} style={{marginTop: "40px"}}>
-            <Box>
-                <Link to="/">
-                    <Button className="back-button">
-                        <i class="fa-solid fa-arrow-left"></i>
-                    </Button>
-                </Link>
-            </Box>
+                <BackButton className="back-button" />
                 <Box 
                     flexShrink={0} 
                     w={["100%", "100%","30%", "30%", "30%"]} 

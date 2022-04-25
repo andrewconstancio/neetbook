@@ -60,7 +60,7 @@ const Header = (props) => {
     return (
         <Flex
             // color="white" 
-            className={"sticky header " + headerColor}
+            className={"sticky header header-bottom"}
         >
             <Flex 
                 className="center"
@@ -77,16 +77,16 @@ const Header = (props) => {
                     >
                         <Box
                             onClick={() => setPage("explore")}
-                            // display={{ base: "none", md: "block" }}
+                            display={{ base: "none", md: "block" }}
                         >
                             <Logo />
                         </Box>
-                        {/* <Box
+                        <Box
                             onClick={() => setPage("explore")}
                             display={{ base: "block", md: "none" }}
                         >
                             <LogoSmall />
-                        </Box> */}
+                        </Box>
                     </Link>
                 </Flex>
                 <Stack

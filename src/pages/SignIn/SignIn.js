@@ -25,8 +25,9 @@ const SignIn = ({websitename}) => {
                 <Button 
                         onClick={signInWithGoogle} 
                         disabled={loading} 
+                        mt={50}
                         mb={1}
-                        color="black"
+                        style={{backgroundColor: "black", color: "white", marginTop: "20px"}}
                     ><i className="fa-brands fa-google"></i>&nbsp;&nbsp;Sign in With Google
                 </Button>
                 <Button 

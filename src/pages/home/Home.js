@@ -22,7 +22,7 @@ const Home = () => {
                     flexShrink={0} 
                     w={["100%", "100%","30%", "30%", "30%"]} 
                     align="center" 
-                    pr={5}
+                    // pr={5}
                     className="column-1"
                     // display={{ base: "none", md: "block" }}
                 

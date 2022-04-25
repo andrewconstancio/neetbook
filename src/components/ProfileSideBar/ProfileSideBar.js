@@ -34,12 +34,14 @@ const ProfileSideBar = () => {
                             <Stack>
                                 <Box className="profile-side-text">
                                     <Text style={{display: "inline"}}>{user.displayName}</Text><br />
-                                    <Text fontSize='s' as='i'>Basic Plan</Text>
+                                    &nbsp;
+                                    {/* <Text fontSize='s' as='i'>Basic Plan</Text> */}
                                 </Box>
                             </Stack>
                         </HStack>
 
                     </Box>
+                    {/* <Spacer /> */}
                     <Box className={"top-nav " + (page == "explore" ? "page-selected" : "")}>
                         <HStack onClick={() => setPageLocal('explore')}  className='nav-selction'>
                             <Box><i className="fa fa-solid fa-house"></i></Box>

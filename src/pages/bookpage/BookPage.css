@@ -3,6 +3,10 @@
     .lower{
         float: left;
     }
+
+    .back-button {
+        margin-bottom: 20px
+    }
 }
 
 .sticky-left-column {
@@ -10,6 +14,6 @@
     top: 110px;
 }
 
-.back-button {
+/* .back-button {
     position: fixed;
-}
+} */
