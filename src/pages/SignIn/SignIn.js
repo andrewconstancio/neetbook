@@ -30,13 +30,6 @@ const SignIn = ({websitename}) => {
                         style={{backgroundColor: "black", color: "white", marginTop: "20px"}}
                     ><i className="fa-brands fa-google"></i>&nbsp;&nbsp;Sign in With Google
                 </Button>
-                <Button 
-                        onClick={demoSignIn} 
-                        disabled={loading} 
-                        mb={1}
-                        style={{backgroundColor: "black", color: "white", marginTop: "20px"}}
-                    >Demo Sign In
-                </Button>
             </Flex>
         </Flex>
     )

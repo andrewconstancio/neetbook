@@ -26,32 +26,32 @@ export const signInWithGoogle = () => async (dispatch, getState, { getFirebase, 
     }) 
 };
 
-export const demoSignIn = () => async (dispatch, getState, { getFirebase, getFirestore}) =>{
+// export const demoSignIn = () => async (dispatch, getState, { getFirebase, getFirestore}) =>{
 
-    const firebase = getFirebase();
+//     const firebase = getFirebase();
 
-    firebase.auth().signInWithEmailAndPassword(process.env.REACT_APP_DEMO_EMAIL, process.env.REACT_APP_DEMO_PASSWORD)
-    .then((userCredential) => {
-        // Signed in 
-        const user = userCredential.user;
-        const userUse = {
-            displayName: "Demo User", 
-            photoURL: user.photoURL, 
-            uid: user.uid,
-            email: user.email
-        }
-        dispatch({
-            type: SIGN_IN_SUCCESS, 
-            payload: userUse
-        })
-    })
-    .catch((error) => {
-        dispatch({
-            type: SIGN_IN_ERROR, 
-            payload: "Something went wrong, we couldn't sign you in. Please try again."
-        })
-    });
-};
+//     firebase.auth().signInWithEmailAndPassword(process.env.REACT_APP_DEMO_EMAIL, process.env.REACT_APP_DEMO_PASSWORD)
+//     .then((userCredential) => {
+//         // Signed in 
+//         const user = userCredential.user;
+//         const userUse = {
+//             displayName: "Demo User", 
+//             photoURL: user.photoURL, 
+//             uid: user.uid,
+//             email: user.email
+//         }
+//         dispatch({
+//             type: SIGN_IN_SUCCESS, 
+//             payload: userUse
+//         })
+//     })
+//     .catch((error) => {
+//         dispatch({
+//             type: SIGN_IN_ERROR, 
+//             payload: "Something went wrong, we couldn't sign you in. Please try again."
+//         })
+//     });
+// };
 
 export const checkProfileImage = (user, uid) => async (dispatch, getState, { getFirebase, getFirestore}) => {
 
