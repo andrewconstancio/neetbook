@@ -33,11 +33,10 @@
     display: block;
 }
 
-/* .header {
+.header {
     background: rgb(255,0,246);
     background: linear-gradient(90deg, rgba(255,0,246,1) 0%, rgba(255,139,6,1) 100%);
-    transition-duration: 1s;
-} */
+}
 
 @media screen and (max-width: 600px) {
     .center {
@@ -63,8 +62,12 @@
     height: 33px;
 }
 
-.wave .shape-fill {
+.wave .shape-fill-dark {
     fill: #1b1b1b;
+}
+
+.wave .shape-fill-light {
+    fill: #f3f3f3;
 }
 
 .popout-item-selection{
