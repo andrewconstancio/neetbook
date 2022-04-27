@@ -3,7 +3,8 @@ import {
     Flex,
     Box,
     Text,
-    Heading
+    Heading,
+    useColorModeValue
 } from "@chakra-ui/react"
 import './Home.css'
 import ProfileSideBar from '../../components/ProfileSideBar/ProfileSideBar';
@@ -13,6 +14,10 @@ import { Logo } from '../../components/Logo';
 
 
 const Home = () => {
+
+    const bg = useColorModeValue('side-panel-bg-light', 'side-panel-bg-dark');
+
+    console.log("bg: " + bg);
 
     return (
         <>
@@ -30,7 +35,7 @@ const Home = () => {
                     {/* <Box>
                         <Logo />
                     </Box> */}
-                    <Box className="sticky-left-column-home">
+                    <Box className={"sticky-left-column-home " + bg}>
                         <ProfileSideBar />
                     </Box>
                 </Box>
