@@ -2,23 +2,13 @@ import React, { useState, useEffect } from "react";
 import {
     Box,
     Stack,
-    Heading,
     Flex,
-    Text,
-    useDisclosure,
-    Image,
-    Input,
     Avatar,
     Popover,
     PopoverTrigger,
     PopoverContent,
-    PopoverHeader,
     PopoverBody,
-    PopoverFooter,
     PopoverArrow,
-    PopoverCloseButton,
-    PopoverAnchor,
-    Button,
     useColorModeValue
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
@@ -32,29 +22,11 @@ import LogoSmall from '../LogoSmall';
 import ThemeSelector from "./ThemeSelector";
 
 const Header = (props) => {
-    const { isOpen, onOpen, onClose } = useDisclosure();
     const user = useSelector((state) => state.auth.user);
     const dispatch = useDispatch();
     const page = useSelector((state) => state.page.page);
-    const [pageLocal, setPageLocal] = useState(page ? page : 'explore');
     const { setPage } = bindActionCreators(actionCreators, dispatch);
-    const [ headerColor, setHeaderColor ] = useState('header-top');
-
     const headerFillClass = useColorModeValue('shape-fill-light', 'shape-fill-dark')
-
-    const listenScrollEvent = e => {
-        if (window.scrollY > 400) {
-            setHeaderColor('header-bottom');
-        } else {
-            setHeaderColor('header-top');
-        }
-    }
-
-    useEffect(() => {
-        setPage(pageLocal);
-        window.addEventListener('scroll', listenScrollEvent)
-    }, [pageLocal])
-
 
     const signOut = () => {
         auth.signOut();
@@ -62,7 +34,6 @@ const Header = (props) => {
 
     return (
         <Flex
-            // color="white" 
             className={"sticky header"}
         >
             <Flex 
@@ -94,26 +65,12 @@ const Header = (props) => {
                 </Flex>
                 <Stack
                     direction={{ base: "row"}}
-                    // display={{ base: "block", md: "none" }}
                     width={{ base: "auto"}}
                     alignItems="center"
                     flexGrow={1}
                     mt={{ base: 4, md: 0 }}
                     spacing='2px'
                     >
-                    
-                    {/* <Link to="/" onClick={() => setPage("explore")}>
-                        <i className={"fa fa-solid fa-house " + (page == "explore" ? "fa-selected" : "")}></i>
-                    </Link>
-                    <Link to="/currentlyreading" onClick={() => setPage("currentlyreading")}>
-                        <i className={"fa fa-solid fa-book " + (page == "currentlyreading" ? "fa-selected" : "")}></i>
-                    </Link>
-                    <Link to="/wanttoread" onClick={() => setPage("wanttoread")}>
-                        <i className={"fa fa-regular fa-heart " + (page == "wanttoread" ? "fa-selected" : "")}></i>
-                    </Link>
-                    <Link to="/read" onClick={() => setPage("read")}>
-                        <i className={"fa fa-solid fa-check " + (page == "read" ? "fa-selected" : "")}></i>
-                    </Link> */}
                 </Stack>
                 <Box mt={{ base: 4, md: 0 }}>
                     <Popover>
@@ -127,9 +84,7 @@ const Header = (props) => {
                                     <ThemeSelector />
                                 </Box>
                                 <Box className="popout-item-selection" onClick={signOut}>
-                                    {/* <Button onClick={signOut}> */}
-                                        Log out
-                                    {/* </Button> */}
+                                    Log out
                                 </Box>
                             </PopoverBody>
                         </PopoverContent>

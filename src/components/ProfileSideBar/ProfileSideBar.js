@@ -8,7 +8,7 @@ import {
     Box,
     Text,
     HStack,
-    Spacer
+    useColorModeValue
 } from "@chakra-ui/react"
 import './ProfileSideBar.css'
 
@@ -18,6 +18,9 @@ const ProfileSideBar = () => {
     const page = useSelector((state) => state.page.page);
     const [pageLocal, setPageLocal] = useState(page ? page : 'explore');
     const { setPage } = bindActionCreators(actionCreators, dispatch);
+    const pageSelectedClass = useColorModeValue('page-selected-light', 'page-selected-dark')
+
+    console.log("pageSelectedClass: " + pageSelectedClass);
 
     useEffect(() => {
         setPage(pageLocal);
@@ -42,28 +45,28 @@ const ProfileSideBar = () => {
 
                     </Box>
                     {/* <Spacer /> */}
-                    <Box className={"top-nav " + (page == "explore" ? "page-selected" : "")}>
+                    <Box className={"top-nav " + (page == "explore" ? pageSelectedClass : "")}>
                         <HStack onClick={() => setPageLocal('explore')}  className='nav-selction'>
                             <Box><i className="fa fa-solid fa-house"></i></Box>
                             <Box style={{width: "90%"}}><Text className="profile-side-text">Explore</Text></Box>
                             <Box><i className="fa-right fa-solid fa-chevron-right profile-side-text"></i></Box>
                         </HStack>
                     </Box>
-                    <Box className={page == "currentlyreading" ? "page-selected" : ""}>
+                    <Box className={page == "currentlyreading" ? pageSelectedClass : ""}>
                         <HStack onClick={() => setPageLocal('currentlyreading')} className='nav-selction'>
                             <Box><i className="fa fa-solid fa-book"></i></Box>
                             <Box style={{width: "90%"}}><Text className="profile-side-text">Currently Reading</Text></Box>
                             <Box><i className="fa-right fa-solid fa-chevron-right profile-side-text"></i></Box>
                         </HStack>
                     </Box>
-                    <Box className={page == "wanttoread" ? "page-selected" : ""}>
+                    <Box className={page == "wanttoread" ? pageSelectedClass : ""}>
                         <HStack onClick={() => setPageLocal('wanttoread')}  className='nav-selction'>
                             <Box><i className="fa fa-regular fa-heart"></i></Box>
                             <Box style={{width: "90%"}}><Text className="profile-side-text">Want To Read</Text></Box>
                             <Box><i className="fa-right fa-solid fa-chevron-right profile-side-text"></i></Box>
                         </HStack>
                     </Box>
-                    <Box className={page == "read" ? "page-selected" : ""}>
+                    <Box className={page == "read" ? pageSelectedClass : ""}>
                         <HStack onClick={() => setPageLocal('read')}  className='nav-selction'>
                             <Box><i className="fa fa-solid fa-check"></i></Box>
                             <Box style={{width: "90%"}}><Text className="profile-side-text">Read</Text></Box>

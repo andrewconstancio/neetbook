@@ -1,9 +1,17 @@
-.fa-star-o-unrated {
+.fa-star-o-unrated-light {
     color: black;
 }
 
-.fa-star-unrated {
+.fa-star-unrated-light {
     color: black;
+}
+
+.fa-star-o-unrated-dark {
+    color: white;
+}
+
+.fa-star-unrated-dark {
+    color: white;
 }
 
 .fa-star-rated {

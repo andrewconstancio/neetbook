@@ -29,8 +29,13 @@
     margin-right: 15px;
 }
 
-.page-selected {
+.page-selected-dark {
     background-color: #483f88;
+    border-radius: 30px;
+}
+
+.page-selected-light {
+    background-color: #222222;
     border-radius: 30px;
 }
 

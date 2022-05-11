@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Rating from 'react-rating';
 import {
-    Box
+    Box,
+    useColorModeValue
 } from "@chakra-ui/react";
 import { auth, firestore } from '../config/firebase-config';
 import { useSelector, useDispatch } from 'react-redux';
@@ -18,6 +19,11 @@ const RatingCustom = () => {
     const dispatch = useDispatch();
     const { fetchRating, handleRatingChange, uncheckRating } = bindActionCreators(actionCreators, dispatch);
 
+    const unratedHalfStar = useColorModeValue('fa-star-o-unrated-light', 'fa-star-o-unrated-dark')
+    const unratedWholeStar = useColorModeValue('fa-star-unrated-light', 'fa-star-unrated-dark')
+
+
+
     useEffect(() => {
         fetchRating();
     }, []);
@@ -32,8 +38,8 @@ const RatingCustom = () => {
                     onClick={uncheckRating}
                 ></i>
                 <Rating stop={5}
-                    emptySymbol={"fa fa-star-o fa-xl medium " + (ratingChanged ? "fa-star-rated" : "fa-star-o-unrated")}
-                    fullSymbol={"fa fa-star fa-xl medium "  + (ratingChanged ? "fa-star-rated" : "fa-star-unrated")}
+                    emptySymbol={"fa fa-star-o fa-xl medium " + (ratingChanged ? "fa-star-rated" : unratedHalfStar)}
+                    fullSymbol={"fa fa-star fa-xl medium "  + (ratingChanged ? "fa-star-rated" : unratedWholeStar)}
                     fractions={4}
                     flexShrink={0}
                     onChange={handleRatingChange} 
