@@ -77,7 +77,7 @@ const BookPage = (props) => {
                             </Box>
                         </HStack>
                         <RatingInput bookEditionKey={bookEditionKey} hasRead={hasRead} setHasRead={setHasRead} />
-                        <ReadButtonInput bookEditionKey={bookEditionKey} hasRead={hasRead} setHasRead={setHasRead}  />
+                        <ReadButtonInput bookEditionKey={bookEditionKey} coverId={book.covers[0]} hasRead={hasRead} setHasRead={setHasRead}  />
                     </Box>
                 </Box>
                 <Box w={["100%", "100%","70%", "70%", "70%"]} className="column-2">

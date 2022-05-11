@@ -6,7 +6,7 @@ import { auth, firestore } from '../config/firebase-config';
 import '../pages/Explore/Explore.css'
 import { useSelector } from 'react-redux';
 
-const ReadButton = ( {bookEditionKey, hasRead, setHasRead} ) => {
+const ReadButton = ( {bookEditionKey, coverId, hasRead, setHasRead} ) => {
 
 
     const [loading, setLoading] = useState(false);
@@ -80,6 +80,7 @@ const ReadButton = ( {bookEditionKey, hasRead, setHasRead} ) => {
                     wantsToRead: wantRead,
                     currentlyReading: currReading,
                     bookEditionKey: bookEditionKey,
+                    coverId: coverId,
                     uid: user.uid,
                     modifiedAt: new Date(),
                     createdAt: new Date()
